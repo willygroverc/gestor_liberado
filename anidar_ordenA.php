@@ -1,0 +1,285 @@
+<?php
+include ("conexion.php");
+include("top.php");
+$sqlid="SELECT * FROM ordenes WHERE id_orden=$id_orden";
+$resultid=mysql_db_query($db, $sqlid, $link);
+$rowid=mysql_fetch_array($resultid);
+
+if ($lista) header("location: lista_titulares.php");
+ini_set("error_reporting", "E_ALL & ~E_NOTICE & ~E_WARNING");
+if (isset($reg_form)) 
+{	session_start();
+	$login=$_SESSION["login"];
+	$sql8="SELECT * FROM users WHERE login_usr='$login'";
+	$result8=mysql_db_query($db,$sql8,$link);
+	$row8=mysql_fetch_array($result8);
+	$nombre="$row8[nom_usr] $row8[apa_usr] $row8[ama_usr]";
+	$sql6="SELECT tmp_conf FROM control_parametros";
+	$result6=mysql_db_query($db,$sql6,$link);
+	$row6=mysql_fetch_array($result6);
+	$tiemp=0;
+	$sql7="SELECT * FROM ordenes WHERE cod_usr='$login'";
+	$result7=mysql_db_query($db,$sql7,$link);
+	while($row7=mysql_fetch_array($result7))
+	{	$sql3="SELECT id_orden FROM conformidad WHERE id_orden='$row7[id_orden]'";
+		$result3=mysql_db_query($db,$sql3,$link);
+		$row3=mysql_fetch_array($result3);
+		if (!$row3[id_orden])
+		{$a1=substr($row7[fecha],0,4); $m1=substr($row7[fecha],5,2); $d1=substr($row7[fecha],8,2);
+		$hoy=date("Y-m-d");
+		$a2=substr($hoy,0,4); $m2=substr($hoy,5,2); $d2=substr($hoy,8,2);
+		$d3=$d2-$d1; $m3=$m2-$m1; $a3=$a2-$a1;
+		if ($a3 >= "0") 
+		{if ($m3 >= "0")
+	 		{if ($d3 >= "0")
+			    {$a3=$a3; $m3=$m3; $d3=$d3;}
+			 elseif ($d3<"0") 
+			 	{$m3=$m3-1; $d3=30+$d3;
+				 if ($m3 < "0"){$a3=$a3-1; $m3=12+$m3;}}}
+		else {$a3=$a3-1; $m3=12+$m3;
+				if ($d3 >= "0"){
+				 $a3=$a3; $m3=$m3; $d3=$d3;}}}
+		else
+	 			{$a3="0"; $m3="0"; $d3="0";}
+
+		if ($a3<>"0") {$a3=$a3*360;} else {$a3="";}
+		if ($m3<>"0") {$m3=$m3*30;} else {$m3="";}
+		$d4=$d3+$a3+$m3;
+		if ($d4 > $row6[tmp_conf]) {$tiemp=tiemp+1;}
+}}
+/*if ($tiemp>="1")
+{$desc="El usuario ".$nombre." no puede insertar mas ordenes de trabajo, debido a que tiene una orden que en ".$row6[tmp_conf]." dias no recibio conformidad ";
+$sql="INSERT INTO ordenes (fecha, time, cod_usr, desc_inc, tipo, id_anidacion) ".
+"VALUES('".date("Y-m-d")."','".date("H:i:s")."','SISTEMA','$desc','$tipo1','$id_orden')";
+mysql_db_query($db,$sql,$link); 
+$msg="USTED NO PUEDE INSERTAR MAS ORDENES DE TRABAJO, DEBIDO A QUE UNA DE ELLAS EXCEDIO\\n EN ".$row6[tmp_conf]." DIAS SIN CONFORMIDAD";}
+else
+{*/	$sql3="SELECT COUNT(id_orden) AS num1 FROM ordenes WHERE cod_usr='$login'";
+	$result3=mysql_db_query($db,$sql3,$link);
+	$row3=mysql_fetch_array($result3);
+	$sql4="SELECT COUNT(id_orden) AS num2 FROM conformidad WHERE reg_conf='$login'";
+	$result4=mysql_db_query($db,$sql4,$link);
+	$row4=mysql_fetch_array($result4);
+	$sql5="SELECT * FROM control_parametros";
+	$result5=mysql_db_query($db,$sql5,$link);
+	$row5=mysql_fetch_array($result5);
+		
+/*	if (($row3[num1]-$row4[num2])>=$row5[cant_ordenes])
+	{
+	$desc="El usuario ".$nombre." no puede insertar mas ordenes de trabajo, debido a que tiene ".$row5[cant_ordenes]." ordenes de trabajo sin conformidad ";
+	$sql="INSERT INTO ordenes (fecha, time, cod_usr, desc_inc, tipo, id_anidacion) ".
+	"VALUES('".date("Y-m-d")."','".date("H:i:s")."','SISTEMA','$desc','$tipo1','$id_orden')"; 
+	mysql_db_query($db,$sql,$link); 
+	$msg="USTED NO PUEDE INSERTAR MAS ORDENES DE TRABAJO, DEBIDO A QUE EXCEDIO EN ".$row5[cant_ordenes]."\\nORDENES SIN CONFORMIDAD";
+	}
+	else
+	{
+	*/if (strlen($desc_inc)<=10) {$msg="LA DESCRIPCION DEL INCIDENTE DEBE SER MAYOR A 10 CARACTERES";}
+	else{
+			if (!isset($login)) {  header("location: lista.php");}
+			$tipo1=$tipo0.$tipo1;
+			if ($archivo_name=="")				
+				{	//echo "g";
+				$sql="INSERT INTO ordenes (fecha, time, cod_usr, desc_inc, tipo,ci_ruc, id_anidacion) ".
+				"VALUES('".date("Y-m-d")."','".date("H:i:s")."','".$rowid[cod_usr]."','$desc_inc','$tipo1','$rowid[ci_ruc]','$id_orden')"; 
+				mysql_db_query($db,$sql,$link); 
+				$systemData=$row5;
+				if($systemData["conf_mail"]==1 || $systemData["conf_mail"]==3 || $systemData["conf_sms"]==1 || $systemData["conf_sms"]==3){
+					//ENVIAR MSG
+					$sql1="SELECT MAX(id_orden) AS id_or FROM ordenes"; 								
+					$row1=mysql_fetch_array(mysql_db_query($db,$sql1,$link));
+					if($row5["conf_sms"]==1 || $row5["conf_sms"]==3)
+					{
+								$sqlMovil="SELECT id_dat_tel_movil, direccion FROM dat_tel_movil";
+								$movilRs=mysql_db_query($db, $sqlMovil, $link);
+								while($tmp=mysql_fetch_array($movilRs)){
+										$movilLst[$tmp[id_dat_tel_movil]]=$tmp[direccion];
+								}
+								$systemData[movilEmail]="591".$systemData[telefono_movil]."@".$movilLst[$systemData[id_dat_tel_movil]];												
+								//if (!mail($systemData[movilEmail],$systemData[mail],"Nro".$row1[id_or]."-Nuevo Requerimiento de Orden de Trabajo. $systemData[nombre]"))
+								if(strlen($desc_inc)>150) $mail_sms=substr($desc_inc,0,150)." ...";
+								else $mail_sms=$desc_inc;
+								if (!mail($systemData[movilEmail],"Gestor TI","Nuevo Requerimiento: $mail_sms. $systemData[nombre]"))
+								{$msg ="Precaucion, no se ha podido enviar la orden por correo electronico.";}										
+					}
+					//Enviar mail al administrador de mesa de ayuda
+					if($row5["conf_mail"]==1 || $row5["conf_mail"]==3)						
+					{	$asunto = "Nro.$row1[id_or]. Nuevo Requerimiento de Trabajo de Mesa de Ayuda";	
+						$mail = $systemData[mail];
+						$mensaje = "
+Nuevo Requerimiento de Mesa de Ayuda: Nro. $row1[id_or] <br>
+Cliente/Tecnico: $nombre <br>
+Descripcion: $desc_inc <br><br>
+Para mayores detalles, consulte el Sistema GesTor F1. <br>
+$systemData[nombre]";						
+						$tunombre = $row5[nombre];		
+						$tuemail = $row5[mail_institucion];						
+						$headers = "MIME-Version: 1.0\r\n"; 
+						$headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+						$headers .= "From: $tunombre <$tuemail>\r\n"; 						
+						if(!mail($mail,$asunto,$mensaje,$headers)){$msg ="Precaucion, no se ha podido enviar la orden por correo electronico.";}																
+					}									
+				}
+				?>
+				<script language="JavaScript">
+						self.location="lista.php?Naveg=Ordenes%20de%20Trabajo";
+				</script>
+				<?php
+				header("location: lista.php?msg=$msg");
+				}		
+			elseif ($archivo_name<>"")
+				{	$extension = explode(".",$archivo_name); 
+					$num = count($extension)-1; 
+					//if($extension[$num]=="gif" OR $extension[$num]=="jpg" OR $extension[$num]=="doc") 
+						//{
+							$tam_max=1048576*$row5[tam_archivo];
+							if($archivo_size < $tam_max)
+							{
+								$sql="INSERT INTO ordenes (fecha, time, cod_usr, desc_inc, tipo,ci_ruc, id_anidacion) ".
+								"VALUES('".date("Y-m-d")."','".date("H:i:s")."','".$rowid[cod_usr]."','$desc_inc','$tipo1','$rowid[ci_ruc]', $id_orden)"; 
+								mysql_db_query($db,$sql,$link); 
+						
+								$sql1="SELECT MAX(id_orden) AS id_or FROM ordenes"; 
+								$result1=mysql_db_query($db,$sql1,$link);
+								$row1=mysql_fetch_array($result1);
+						
+								$arch_nomb=$row1[id_or].".".$extension[$num];
+								$sql2="UPDATE ordenes SET nomb_archivo='$arch_nomb' WHERE id_orden='$row1[id_or]'";
+								mysql_db_query($db,$sql2,$link);	
+								copy($archivo,"archivos adjuntos/".$arch_nomb);
+								//Enviar mail y sms  al administrador de mesa de ayuda
+								$systemData=$row5;
+								if($systemData["conf_mail"]==2 || $systemData["conf_mail"]==3 || $systemData["conf_sms"]==2 || $systemData["conf_sms"]==3){
+								//ENVIAR MSG
+							if($row5["conf_sms"]==1 || $row5["conf_sms"]==3)
+							{
+											$sqlMovil="SELECT id_dat_tel_movil, direccion FROM dat_tel_movil";
+											$movilRs=mysql_db_query($db, $sqlMovil, $link);
+											while($tmp=mysql_fetch_array($movilRs)){
+												$movilLst[$tmp[id_dat_tel_movil]]=$tmp[direccion];
+											}
+											$systemData[movilEmail]="591".$systemData[telefono_movil]."@".$movilLst[$systemData[id_dat_tel_movil]];												
+											//if (!mail($systemData[movilEmail],$systemData[mail],"Nro".$row1[id_or]."-Nuevo Requerimiento de Orden de Trabajo. $systemData[nombre]"))
+											if(strlen($desc_inc)>150) $mail_sms=substr($desc_inc,0,150)." ...";
+											else $mail_sms=$desc_inc;
+											if (!mail($systemData[movilEmail],"Gestor TI","Nuevo Requerimiento: $mail_sms. $systemData[nombre]"))
+											{$msg ="Precaucion, no se ha podido enviar la orden por correo electronico.";}										
+							}
+							//Enviar mail al administrador de mesa de ayuda
+							if($row5["conf_mail"]==1 || $row5["conf_mail"]==3)						
+							{	$asunto = "Nro.$row1[id_or]. Nuevo Requerimiento de Trabajo de Mesa de Ayuda";	
+								$mail = $systemData[mail];
+								$mensaje = "
+Nuevo Requerimiento de Mesa de Ayuda: Nro. $row1[id_or] <br>
+Cliente/Tecnico: $nombre <br>
+Descripcion: $desc_inc <br><br>
+Para mayores detalles, consulte el Sistema GesTor F1. <br>
+$systemData[nombre]";
+
+								$tunombre = $row5[nombre];		
+								$tuemail = $row5[mail_institucion];						
+								$headers = "MIME-Version: 1.0\r\n"; 
+								$headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+								$headers .= "From: $tunombre <$tuemail>\r\n"; 						
+								if(!mail($mail,$asunto,$mensaje,$headers)){$msg ="Precaucion, no se ha podido enviar la orden por correo electronico.";}																
+							}																																						
+						}
+									header("location: lista.php");
+							}
+							else{$msg="EL TAMAÑO DEL ARCHIVO ADJUNTO NO DEBE SER MAYOR A ".$row5[tam_archivo]." Mb";}
+				}
+		}
+	}
+/*  }
+}*/
+?>
+<script language="JavaScript">
+<!--
+function Form () {
+	var key = window.event.keyCode;
+	if (key==13) return false;
+	else return true; 
+}
+-->
+</script>
+<link href="general.css" rel="stylesheet" type="text/css">
+
+<title>Anidar Orden</title><form name="form1" method="post" enctype="multipart/form-data" onKeyPress="return Form()">
+  <br>
+<font color="#FF0000" face="Arial, Helvetica, sans-serif"><strong><?php //echo $msg; ?></strong></font>
+  <table width="60%" border="1" align="center" cellpadding="0" cellspacing="0" background="images/fondo.jpg" >
+    <tr> 
+      <td> 
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="4" bordercolor="#006699">
+          <tr bgcolor="#006699"> 
+            <th colspan="2"><font face="Arial, Helvetica, sans-serif" color="#FFFFFF">INGRESE 
+              SU CONSULTA O RECLAMO</font></th>
+          </tr>
+          <tr> 
+            <td colspan="2" align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">FECHA 
+              : <?php echo date("d/m/Y");?></font></strong><strong><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp; 
+              HORA : <?php echo date("H:i:s");?></font></strong></td>
+          </tr>
+          <tr> 
+            <td colspan="2" class="normal"><div align="left"> 
+                <p align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">Descripcion 
+                  de la Incidencia :</font></strong> <br>
+                  <strong><font size="2" face="Arial, Helvetica, sans-serif">Viene 
+                  de la orden <?php echo $id_orden?></strong> </div></td>
+          </tr>
+          <tr> 
+            <td colspan="2"> <div align="center"><strong> 
+                <textarea name="desc_inc" cols="80" rows="4" id="desc_inc"><?php echo $rowid[desc_inc]; ?></textarea>
+                </strong> </div></td>
+          </tr>
+          <br>
+          <tr> 
+            <td width="7%" align="center"><br> </td>
+            <?php 
+			$sql5="SELECT * FROM control_parametros";
+			$result5=mysql_db_query($db,$sql5,$link);
+			$row5=mysql_fetch_array($result5);
+			?>
+            <td width="93%" align="center"><div align="left"><b><font size="2" face="Arial, Helvetica, sans-serif"><br>
+                Enviar Archivo Adjunto <br>
+                </font></b><font size="2" face="Arial, Helvetica, sans-serif">( 
+                tipo : .gif &nbsp;&nbsp;.jpg&nbsp;&nbsp; .doc &nbsp;&nbsp;&nbsp;&nbsp;y 
+                &nbsp;&nbsp;tamano maximo : <?php echo $row5[tam_archivo];?> Mb ) 
+                : </font> </div></td>
+          </tr>
+          <tr> 
+            <td colspan="2" align="center"> <div align="center"> 
+                <input name="archivo" type="file" size="60" value="<?php print $archivo ?>" onClick="msgFile()">
+                <br>
+              </div></td>
+          </tr>
+          <tr> 
+            <td height="43" colspan="2" align="center"><br>
+              <input name="reg_form" type="submit" value="ENVIAR" onClick="return validateConsulta()"></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+</form>
+<script language="JavaScript">
+		<!-- 
+		<?php
+		 print "function msgFile () {\n
+				alert (\"Atencion, solamente puede enviar archivos menor o igual a $row5[tam_archivo] Mb de tamano.\\n \\nMensaje generado por GesTor F1.\");\n
+				}\n";
+			if ($msg) {
+			print "var msg=\"$msg\";\n";
+			print "alert ( msg + \"\\n \\nMensaje generado por GesTor F1.\");\n";
+			
+		} ?>
+		function validateConsulta () {
+			var form=document.form1;
+			if (form.desc_inc.value.length < 10 || form.desc_inc.value.length > 500){
+				alert ("Descripcion de la incidencia, debe ser mayor a 10 caracteres y menor a 500.\nSi la descripcion es demasiado extensa, adjunte en un archivo \n\nMensaje generado por GesTor F1.");
+				return false;
+			}
+			return true;
+		}
+//-->
+</script>
+<?php include ("top_.php");?>

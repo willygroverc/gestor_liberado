@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>FusionCharts v3 Documentation</title>
+<link rel="stylesheet" href="../Contents/Style.css" type="text/css" />
+<script language="JavaScript" src="../JSClass/FusionCharts.js"></script>
+</head>
+
+<body>
+<table width="98%" border="0" cellspacing="0" cellpadding="3" align="center">
+  <tr> 
+    <td valign="top" class="text" align="center"> <div id="chartdiv" align="center"> 
+        FusionCharts. </div>
+      <script type="text/javascript">
+		   var chart = new FusionCharts("../Charts/DragColumn2D.swf", "ChartId", "580", "350", "0", "0");
+		   chart.setDataURL("Data/DragCol2.xml");		   
+		   chart.render("chartdiv");
+		</script> </td>
+  </tr>
+  <tr>
+    <td valign="top" class="text" align="center">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td valign="top" class="text" align="center"><a href="Data/DragCol2.xml" target="_blank"><img src="../Contents/Images/BtnViewXML.gif" alt="View XML for the above chart" width="75" height="25" border="0" /></a></td>
+  </tr>
+  <tr>
+    <td valign="top" class="text" align="center"><p>Shown above is a "Revenue &amp; Profit Simulation" chart. There are two datasets on the chart - first  representing revenue and the other representing profit. The user can visually drag and adjust both these values to simulate the figures.</p>
+      <p>Since revenue cannot be less than 0 in any case, we do not allow the revenue columns to go beyond 0 value by setting <span class="codeInline">allowNegativeDrag</span> property to 0. Also, we've assumed that the profit in fourth quarter cannot be negative. So, we've set its individual <span class="codeInline">allowNegativeDrag</span> property to 0 too. The rest of profit columns can however go into negative zone. </p>
+    <p>You can also adjust the axis upper and lower limits using the context menu. This is particularly useful, if you want any column to assume a value that is not covered within the current y-axis range of chart.</p></td>
+  </tr>
+  <tr>
+    <td valign="top" class="text" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="top" class="text" align="center">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

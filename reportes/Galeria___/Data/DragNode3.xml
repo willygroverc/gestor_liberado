@@ -1,0 +1,74 @@
+<chart xAxisMinValue='0' xAxisMaxValue='100' yAxisMinValue='0' yAxisMaxValue='100' bubbleScale='3' is3D='1' numDivLines='0' showFormBtn='0'>
+<dataset plotborderAlpha='100' >
+<set x='50' y='90' width='110' height='90' color='FFFFFF' name='Mr. Harry Sawyer, CEO' alpha='100' toolText='CEO' id='CEO' imageNode='1' imageurl='Resources/CEO.jpg' imageAlign='bottom' labelAlign='top' imageHeight='65' imageWidth='108' />
+<set x='20' y='70' width='130' height='40' name='Name:Tom McQuin &lt;BR&gt;Age: 54yrs &lt;BR&gt;Designation:CTO' color='62D0FE' id='CTO' />
+
+<set x='51' y='70' width='130' height='40' name='Name:Jim Kerry &lt;BR&gt;Age: 46yrs &lt;BR&gt;Designation:CFO' color='62D0FE' link='n-http://www.InfoSoftGlobal.com' id='CFO' />
+
+<set x='80' y='70' width='130' height='40' name='Name:Michelle Saler &lt;BR&gt;Age: 58yrs &lt;BR&gt;Designation:COO' color='62D0FE' link='n-http://www.InfoSoftGlobal.com' id='COO' />
+
+<set x='10' y='60' width='60' height='40' name='GM1' color='FE9191' link='n-http://www.InfoSoftGlobal.com' id='GM1'/>
+
+<set x='30' y='60' width='60' height='40' name='GM2' color='FE9191' link='n-http://www.InfoSoftGlobal.com' id='GM2'/>
+
+<set x='43' y='57' width='60' height='40' name='AM1' color='FE9191' link='n-http://www.InfoSoftGlobal.com' id='AM1' />
+<set x='59' y='57' width='60' height='40' name='AM2' color='FE9191' link='n-http://www.InfoSoftGlobal.com' id='AM2' />
+
+<set x='70' y='50' width='60' height='40' name='FO1' color='FE9191' link='n-http://www.InfoSoftGlobal.com' id='FO1' />
+<set x='90' y='50' width='60' height='40' name='FO2' color='FE9191' link='n-http://www.InfoSoftGlobal.com' id='FO2' />
+
+<set x='5'  y='47' width='60' height='40' name='M1'  color='33CC66' link='n-http://www.InfoSoftGlobal.com' id='M1'  />
+<set x='15' y='37' width='60' height='40' name='M2'  color='33CC66' link='n-http://www.InfoSoftGlobal.com' id='M2'  />
+
+<set x='53' y='46' width='60' height='40' name='AC1' color='33CC66' link='n-http://www.InfoSoftGlobal.com' id='AC1' />
+<set x='42' y='32' width='60' height='40' name='AC2' color='33CC66' link='n-http://www.InfoSoftGlobal.com' id='AC2' />
+
+<set x='8'  y='22' shape='circle'  radius='30' name='Team A'  color='FFBC79' link='n-http://www.InfoSoftGlobal.com' id='TMA'/>
+<set x='15.5' y='14' shape='circle'  radius='30' name='Team B'  color='FFBC79' link='n-http://www.InfoSoftGlobal.com' id='TMB'/>
+<set x='22' y='22' shape='circle'  radius='30' name='Team C'  color='FFBC79' link='n-http://www.InfoSoftGlobal.com' id='TMC'/>
+
+<set x='70'  y='32' shape='circle'  radius='30' name='Group A'  color='FFBC79' link='n-http://www.InfoSoftGlobal.com' id='GRPA'/>
+<set x='80' y='24' shape='circle'  radius='30'  name='Group B'  color='FFBC79' link='n-http://www.InfoSoftGlobal.com' id='GRPB'/>
+<set x='91' y='32' shape='circle'  radius='30'  name='Group C'  color='FFBC79' link='n-http://www.InfoSoftGlobal.com' id='GRPC'/>
+</dataset>
+<connectors color='000000' stdThickness='8'>
+	<connector strength='0.55' from='CEO' to='CTO' color='33ccff' arrowAtStart='0' arrowAtEnd='0'/>
+	<connector strength='0.55' from='CEO' to='CFO' color='33ccff' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.55' from='CEO' to='COO' color='33ccff' arrowAtStart='0' arrowAtEnd='0' />
+
+	<connector strength='0.45' from='CFO' to='AM1' color='FE9191' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.45' from='CFO' to='AM2' color='FE9191' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.45' from='CTO' to='GM1' color='FE9191' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.45' from='CTO' to='GM2' color='FE9191' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.45' from='COO' to='FO1' color='FE9191' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.45' from='COO' to='FO2' color='FE9191' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.35' from='GM1' to='M1' color='66cc99'  arrowAtStart='0' arrowAtEnd='0' />
+
+	<connector strength='0.35' from='GM1' to='M2' color='66cc99' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.35' from='AM1' to='AM2' color='FE9191' arrowAtStart='1' arrowAtEnd='1' />
+	<connector strength='0.35' from='AM1' to='AC1' color='66cc99' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.35' from='AM1' to='AC2' color='66cc99' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.35' from='AM2' to='AC1' color='66cc99' arrowAtStart='0' arrowAtEnd='0' />
+	<connector strength='0.35' from='AC2' to='AC1' color='66cc99' arrowAtStart='0' arrowAtEnd='0' />
+
+	<connector strength='0.35' from='M2' to='TMA' color='FFBC79' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.35' from='M2' to='TMB' color='FFBC79' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.35' from='M2' to='TMC' color='FFBC79' arrowAtStart='0' arrowAtEnd='1' />
+
+	<connector strength='0.25' Label='Field Accountant' from='FO2' to='AC2' color='FF5904' arrowAtStart='0' arrowAtEnd='0' />
+
+	<connector strength='0.25' Label='Mining' from='FO2' to='GRPA' color='FFBC79' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.25' Label='Filtering' from='FO2' to='GRPB' color='FFBC79' arrowAtStart='0' arrowAtEnd='1' />
+	<connector strength='0.25' Label='Drying' from='FO2' to='GRPC' color='FFBC79' arrowAtStart='0' arrowAtEnd='1' />
+
+</connectors>
+  <styles>
+      <definition>
+         <style name='myHTMLFont' type='font' isHTML='1' />
+      </definition>
+      <application>
+         <apply toObject='DATALABELS' styles='myHTMLFont' />
+         <apply toObject='TOOLTIP' styles='myHTMLFont' />
+      </application>
+   </styles>
+</chart>

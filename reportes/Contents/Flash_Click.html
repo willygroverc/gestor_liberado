@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>FusionCharts v3 Documentation</title>
+<link rel="stylesheet" href="Style.css" type="text/css" />
+</head>
+
+<body>
+<table width="98%" border="0" cellspacing="0" cellpadding="3" align="center">
+  <tr> 
+    <td><h2 class="pageHeader">FusionGadgets and Flash &gt; Handling Click Events </h2></td>
+  </tr>
+  <tr> 
+    <td valign="top" class="text"><p>You can easily handle the click events for data points on the chart in your Flash movies. That is, whenever a user clicks on a clickable element of chart, you can be notified of the same in your Flash movie. Here we'll see how to do this. </p>    </td>
+  </tr>
+  <tr>
+    <td valign="top" class="text">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="top" class="header">Using <span class="codeInline">asfunction</span> to attain this </td>
+  </tr>
+  <tr>
+    <td valign="top" class="text"><p>To notify your flash code from FusionGadgets, you need to use the <span class="codeInline">asfunction</span> command in Flash. The <span class="codeInline">asfunction</span> protocol is an additional protocol that is specific to Flash, which causes the link to invoke an ActionScript function. It takes the following parameters:</p>
+      <ul>
+        <li><span class="codeInline">function</span>:String - An identifier for a function.</li>
+        <li><span class="codeInline">parameter</span>:String - A string that is passed to the function named in the function parameter.</li>
+      </ul>
+    <p>So, if you wish to call a function <span class="codeInline">myFunction()</span> when a column is clicked, you need to define the link for the same as under:</p>
+    <p class="codeInline">&lt;dial id='CPU1' value='49' link='asfunction:myFunction'/&gt;</p>
+    <p>The above dial when clicked would now invoke the <span class="codeInline">myFunction</span> function defined in your Flash code.  </p></td>
+  </tr>
+  <tr>
+    <td valign="top" class="text">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="top" class="header">Passing parameters using asfunction </td>
+  </tr>
+  <tr>
+    <td valign="top" class="text"><p>You can also pass 1 (one) string parameter using <span class="codeInline">asfunction</span> to your  function as under: </p>
+    <p><span class="codeInline">&lt;set name='John' value='49' link='asfunction:myFunction,myPassedValue'/&gt;</span></p>
+    <p>When you now trace the value within the function as under, you'll see <span class="codeInline">myPassedValue</span> as output: </p>
+    <p class="codeInline">function myFunction(strParam:String){<br />
+      &nbsp;&nbsp;&nbsp;trace(strParam); //traces myPassedValue <br />
+    }</p>
+    <p class="highlightBlock">If you need to pass multiple parameters, one way would be to use a comma to separate each new value. Then <span class="codeInline">String.split </span>the parameter into individual values in the called function. This is a simple method that would only work with string values. </p>    </td>
+  </tr>
+</table>
+</body>
+</html>

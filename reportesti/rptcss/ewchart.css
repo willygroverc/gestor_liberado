@@ -1,0 +1,83 @@
+/*
+Flash Chart StyleSheet for Report Maker
+(C)2006 e.World Technology Ltd.
+
+NOTES:
+
+1. The rotated text uses embedded font (Arial). DO NOT change the
+   font-family, font-weight, font-style, etc. or the rotated text will not be
+   displayed by Flash Player.
+	 
+2. The embedded font (Arial) does not support non-ASCII characters (non-English
+   languages). Do not use rotated text if your text contains non-ASCII
+	 characters. 
+
+*/
+
+.ewcCaption {
+	font-family: Verdana;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.ewcAxisNameX {
+	font-family: Verdana;
+	font-weight: bold;	
+	font-size: 11px;
+	text-align: center;
+}
+
+.ewcAxisNameY {
+	font-family: Verdana;
+	font-weight: bold;	
+	font-size: 11px;
+	text-align: center;
+}
+
+.ewcAxisNameRotatedY {
+	font-family: Arial; /* embedded font, DO NOT CHANGE */
+	font-size: 14px;
+	text-align: center;
+}
+
+.ewcAxisValueY {
+	font-family: Verdana;	
+	font-size: 10px;
+	text-align: right;
+}
+
+.ewcAxisValueX {
+	font-family: Verdana;	
+	font-size: 10px;
+	text-align: center;
+}
+
+.ewcAxisValueRotatedX {
+	font-family: Arial; /* embedded font, DO NOT CHANGE */ 	
+	font-size: 10px;
+	text-align: right;
+}
+
+.ewcValueY {
+	font-family: Verdana;	
+	font-size: 10px;
+	text-align: center;
+}
+
+.ewcValueX {
+	font-family: Verdana;	
+	font-size: 10px;
+	text-align: left;
+}
+
+.ewcHoverBoxText {
+	font-family: Verdana;	
+	font-size: 10px;
+	text-align: center;
+}
+
+.ewcLegend {
+	font-family: Verdana;	
+	font-size: 10px;
+	text-align: left;
+}

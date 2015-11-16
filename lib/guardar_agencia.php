@@ -1,0 +1,1 @@
+<?phprequire ('../conexion.php');$nombre_agencia=$_POST['cmb_agencia'];$sql="INSERT INTO datos_adicionales (id_dadicional, tipo_dadicional, nombre_dadicional, estado) VALUES (null, 'agencia', '$nombre_agencia' ,'0')";if (mysql_query($sql))	echo 0;else	echo -1;?>

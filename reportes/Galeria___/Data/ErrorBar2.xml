@@ -1,0 +1,48 @@
+<graph Caption='Half error bars with custom animation &amp; same width as columns' halfErrorBar='1' xaxisname='Formulations' yaxisname='Relative to Control' errorBarWidthPercent='100' palette='1'  >
+
+<categories>
+<category name='A' />
+<category name='B' />
+<category name='C' />
+<category name='D' />
+<category name='E' />
+<category name='F' />
+<category name='G' />
+<category name='H' />
+</categories>
+
+<dataset seriesName='Knockdown' showValues='0' color='00ff00' errorBarColor='000000' >
+	<set value='0.211076' errorValue='0.067802' />
+	<set value='0.150276' errorValue='0.042295' />
+	<set value='0.368874' errorValue='0.07787' />
+	<set value='0.545044' errorValue='0.0438' />
+	<set value='0.109661' errorValue='0.026219' />
+	<set value='0.614319' errorValue='0.041522' />
+	<set value='1.039887' errorValue='0.104881' />
+	<set value='0.614319' errorValue='0.041522' />
+</dataset>
+
+<dataset seriesName='Total Protein' color='0000ff' showValues='0' errorBarColor='000000' errorBarAlpha='100' errorBarThickness='0' >
+	<set value='0.413691' errorValue='0.092655' />
+	<set value='0.805719' errorValue='0.12089' />
+	<set value='1.104506' errorValue='0.162548' />
+	<set value='1.364124' errorValue='0.175192' />
+	<set value='0.060436' errorValue='0.008757' />
+	<set value='1.099421' errorValue='0.131748' />
+	<set value='1.607908' errorValue='0.153635' />
+	<set value='1.591121' errorValue='0.138404' />
+</dataset>
+ <styles>
+ <definition>
+  <style name="myCaptionFont" type="font" font="Arial" size="14" color="666666" bold="1" underline="1" /> 
+  <style name="myErrorAnim" type="animation" param="_yScale" start="0" duration="1" /> 
+
+  </definition>
+ <application>
+  <apply toObject="Caption" styles="myCaptionFont" /> 
+  <apply toObject="ERRORBARS" styles="myErrorAnim" /> 
+
+  </application>
+  </styles>
+
+</graph>

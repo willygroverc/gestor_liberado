@@ -1,0 +1,12 @@
+VARIABLES DE SESION:
+
+	$_SESSION['login']
+	$_SESSION['tipo']= (A, T, C)
+	$_SESSION['puerto']
+	$_SESSION['servidor']
+	$_SESSION['path_backup_db']		
+	$_SESSION['path']
+	$_SESSION['path_trash']
+	$_SESSION['path_replica']
+	$_SESSION['path_backup']
+	$_SESSION['path_pistas']

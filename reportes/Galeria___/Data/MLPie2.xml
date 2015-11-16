@@ -1,0 +1,57 @@
+<chart palette='4' piefillAlpha='34' pieBorderThickness='1' hoverFillColor='FDCEDA' pieBorderColor='666666' baseFontSize='9' useHoverColor='1' showLabels='1' caption='Keywords Analysis - Snapshot' showShadow='0'>
+	<category label='Keywords' tooltext='&lt;B&gt;Name: Keywords&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 15038&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt;$9260.544' >
+		<category value='20' label='Google Adwords' tooltext='&lt;B&gt;Name: Google Adword&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt; 3564&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;27,757&lt;BR&gt;&lt;B&gt;CTR:&lt;/B&gt; 1.1421%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$1.71&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$8.97' >
+			<category label='Campaign #1' tooltext='&lt;B&gt;Name:  Campaign #1&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt; 1673&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;23,945&lt;BR&gt;&lt;B&gt;CTR:&lt;/B&gt; 0.07%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.60&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$7.05' value='1673'>
+				<category label='Flash Chart' tooltext='&lt;B&gt;Name: Flash Charts&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;319&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;2,984&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.106%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.12&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$1.41'/>
+				<category label='Flash Charting' tooltext='&lt;B&gt;Name: Flash Charting&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;152&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;6,545&lt;BR&gt;&lt;B&gt;CTR:&lt;/B&gt; 0.023%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.12&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$1.41'/>
+				<category label='Animated Chart' tooltext='&lt;B&gt;Name: Animated Charts&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;142&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;6,735&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.021%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.12&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$1.43'/>
+				<category label='swf Chart' tooltext='&lt;B&gt;Name: swf Charts&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt; 472&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;535&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.882%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.13&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$1.40'/>
+				<category label='Animated&lt;BR&gt;Charting' tooltext='&lt;B&gt;Name: Animated Charting&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt; 588&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;7146&lt;BR&gt;&lt;B&gt;CTR:&lt;/B&gt; 0.082%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.11&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$1.40'/>
+			</category>
+			<category label='Campaign #2' tooltext='&lt;B&gt;Name: Campaign #2&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Clicks: &lt;/B&gt;&lt;/B&gt; 989&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;2459&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.4021%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.20&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$0.67' value='989'>
+				<category label='PHP&lt;BR&gt;Chart' tooltext='&lt;B&gt;Name: &lt;/B&gt;PHP Charts&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;241&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;651&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.37%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.073&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$0.255' />
+				<category label='PHP&lt;BR&gt;Charting' tooltext='&lt;B&gt;Name: &lt;/B&gt;PHP Charting&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt; 302&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;456&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.662%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.012&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$0.25' value='1.5'  />
+				<category label='PHP Chart&lt;BR&gt;Component' tooltext='&lt;B&gt;Name: &lt;/B&gt;PHP Chart Component&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt; 446&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;1352&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.329%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.13&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$0.15' value='2' />
+			</category>
+			<category label='Campaign #3' tooltext='&lt;B&gt;Name: Campaign #3&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;902&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt; 1353&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.67%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.91&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$1.25' value='1353'>
+				<category label='.Net Chart' tooltext='&lt;B&gt;Name:&lt;/B&gt; .NET Charts&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;536&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;852&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.629%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.13&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$2.15' />
+				<category label='ASP Net Chart'  tooltext='&lt;B&gt;Name:&lt;/B&gt; ASP NET Charts&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;353&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;422&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.8364%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.11&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$3.25'/>
+				<category label='ASP Net Charts' tooltext='&lt;B&gt;Name: &lt;/B&gt;ASP NET Charts&lt;BR&gt;&lt;B&gt;Clicks: &lt;/B&gt;13&lt;BR&gt;&lt;B&gt;Impression: &lt;/B&gt;79&lt;BR&gt;&lt;B&gt;CTR: &lt;/B&gt;0.164%&lt;BR&gt;&lt;B&gt;Avg. CPC: &lt;/B&gt;$0.61&lt;BR&gt;&lt;B&gt;Cost Conv.: &lt;/B&gt;$0.25'/>
+			</category>
+		</category>
+		<category value='20'  label='Yahoo' tooltext='&lt;B&gt;Name: Yahoo Adword&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 240145&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 10826&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.28&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $2882.28&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 348&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $8.28'>
+			<category label='Sponsored&lt;BR&gt;Search' tooltext='&lt;B&gt;Name: Sponsored Search&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Impression: &lt;/B&gt;&lt;/B&gt; 104310&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; &lt;/B&gt;4668&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; 0.38&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $1773.84&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 272&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $6.521' >
+				<category label='Flash Chart' tooltext='&lt;B&gt;Name: Flash Chart&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 39455&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 1400&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.38&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $532&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 6&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $88.67'  />
+				<category label='Flash Charts' tooltext='&lt;B&gt;Name: Flash Charts&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 56545&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 1456&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.38&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $532.28&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 256&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $2.161'  />
+				<category label='Animated&lt;BR&gt;Chart' tooltext='&lt;B&gt;Name: Animated Chart&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 6745&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 1456&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.38&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $553.28&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 5&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $110.65'  />
+				<category label='Flash Graph' tooltext='&lt;B&gt;Name: Flash Graph&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 1565&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 356&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.38&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $135.28&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 5&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $27.056'  />
+			</category>
+			<category label='Content Search'  tooltext='&lt;B&gt;Name: Content Search&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 135835&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 6158&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.18&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $1108.44&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 76&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $14.584'>
+				<category label='Flash Graphing' tooltext='&lt;B&gt;Name: Flash Graphing&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 53945&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 2986&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.18&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $537.4&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 63&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $8.531' />
+				<category label='Web Charting'  tooltext='&lt;B&gt;Name: Web Charting&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 37945&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 3086&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.18&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $555.48&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 7&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $79.35'/>
+				<category label='Charting Component' tooltext='&lt;B&gt;Name: Charting Component&lt;/B&gt;&lt;BR&gt;&lt;B&gt;Total Impression: &lt;/B&gt; 43945&lt;BR&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; 86&lt;BR&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; $0.18&lt;BR&gt;&lt;B&gt;Total Cost: &lt;/B&gt; $15.48&lt;BR&gt;&lt;B&gt;Total Conversion: &lt;/B&gt; 6&lt;BR&gt;&lt;B&gt;Cost Per Conversion: &lt;/B&gt; $2.58' />
+			</category>
+		</category>
+		<category value='10' label='AdCentre' tooltext='&lt;B&gt;Name: Flash Graphing&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Impression: &lt;/B&gt; &lt;/B&gt;2475&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; &lt;/B&gt;648&lt;BR&gt;&lt;B&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; &lt;/B&gt;$0.438'  >
+			<category label='Base Campaign' tooltext='&lt;B&gt;Name: Flash Graphing&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Impression: &lt;/B&gt; &lt;/B&gt;2475&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; &lt;/B&gt;648&lt;BR&gt;&lt;B&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; &lt;/B&gt;$0.438'  >
+				<category label='Flash Graphing' tooltext='&lt;B&gt;Name: Flash Graphing&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Impression: &lt;/B&gt; &lt;/B&gt;1565&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; &lt;/B&gt;356&lt;BR&gt;&lt;B&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; &lt;/B&gt;$4.17'  />
+				<category label='Web Charting'  tooltext='&lt;B&gt;Name: Web Charting&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Impression: &lt;/B&gt; &lt;/B&gt;455&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; &lt;/B&gt;256&lt;BR&gt;&lt;B&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; &lt;/B&gt;$1.17'  />
+				<category label='Charting&lt;BR&gt;Component'  tooltext='&lt;B&gt;Name: Charting Component&lt;/B&gt;&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Impression: &lt;/B&gt; &lt;/B&gt;455&lt;BR&gt;&lt;B&gt;&lt;B&gt;Total Clicks: &lt;/B&gt; &lt;/B&gt;36&lt;BR&gt;&lt;B&gt;&lt;B&gt;Cost Per Click: &lt;/B&gt; &lt;/B&gt;$0.45'  />
+			</category>
+		</category>
+	</category>
+   <styles>
+      <definition>
+         <style name='myHTMLFont' type='font' isHTML='1' />
+         <style name='myBevel' type='bevel' distance='8'/>
+         <style name='captionFont' type='font' size='16'/>
+
+      </definition>
+      <application>
+         <apply toObject='TOOLTIP' styles='myHTMLFont' />
+	 <apply toObject='DATALABELS' styles='myHTMLFont' />
+	 <apply toObject='DATAPLOT' styles='myBevel' />
+	 <apply toObject='CAPTION' styles='captionFont' />
+      </application>
+   </styles>
+</chart>

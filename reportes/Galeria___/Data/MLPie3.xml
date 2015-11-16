@@ -1,0 +1,26 @@
+<chart palette='1' piefillAlpha='24' hoverFillColor='EEEEEE' plotborderColor='CCCCCC' showPlotBorder='1' baseFontSize='9' useHoverColor='1' showLabels='1' caption="Tom's Friend List" >
+	<category label='Friends' >
+		<category label='His Friends' value='10'>
+			<category label='Best Friends' hoverText='&lt;LI&gt;Lorraine Allen Hughes&lt;BR&gt;Glenda Mason&lt;BR&gt;Peter Charles&lt;BR&gt;Akhil Dhanuka&lt;/LI&gt;' />
+			<category label='Good Friends' hoverText='&lt;LI&gt;Patrick Xavier&lt;BR&gt;Claire Taylor&lt;BR&gt;Rebecca Coggins&lt;BR&gt;Kate Finning&lt;/LI&gt;' />
+			<category label='friends' hoverText='&lt;LI&gt;Candy Ashbury&lt;BR&gt;Marlene Greenwood-Streeter&lt;BR&gt;Ruth Bahnuik&lt;BR&gt;Cathy Daly &lt;/LI&gt;' />
+			<category label='Acquaintances' hoverText='&lt;LI&gt;Lucille Grading&lt;BR&gt;Garry Brookes&lt;BR&gt;Joan Borrowscale&lt;BR&gt;Ann Kavanagh &lt;/LI&gt;'/>
+			<category label="haven't met" hoverText='&lt;LI&gt;Blanche Charles&lt;BR&gt;Alan Hamer&lt;BR&gt;Rosalind Dunning&lt;BR&gt;Edna Ellis &lt;/LI&gt;'/>
+		</category>
+		<category label='Our Mutual Friends' value='5'>
+			<category label='Best Friends' hoverText='&lt;LI&gt;John Beddows&lt;BR&gt;Susan Mills&lt;BR&gt;Mike Parker&lt;BR&gt;Claire Taylor&lt;/LI&gt;'/>
+			<category label='Good Friends' hoverText='&lt;LI&gt;Sue Weighell&lt;BR&gt;Ruth Bahnuik&lt;BR&gt;Janice Deverick&lt;BR&gt;Gwen Walker&lt;/LI&gt;'/>
+			<category label='friends' hoverText='&lt;LI&gt;Barbara Barker&lt;BR&gt;Janet Sorfleet&lt;BR&gt;Joan Jones&lt;BR&gt;Carol Patricia Nichols&lt;/LI&gt;'/>
+			<category label='Acquaintances' hoverText='&lt;LI&gt;William Marner&lt;BR&gt;Lindsay Harwood&lt;BR&gt;Milton Gray&lt;BR&gt;Tony Houghton &lt;/LI&gt;'/>
+			<category label="haven't met" hoverText='&lt;LI&gt;Susan Curtis&lt;BR&gt;Ian Holland&lt;BR&gt;Margaret Mckeown&lt;BR&gt;Vivian Simmonds&lt;/LI&gt;'/>
+		</category>
+	</category>
+   <styles>
+      <definition>
+         <style name='myHTMLFont' type='font' isHTML='1' />
+      </definition>
+      <application>
+         <apply toObject='TOOLTIP' styles='myHTMLFont' />
+      </application>
+   </styles>
+</chart>

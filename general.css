@@ -1,0 +1,128 @@
+/* Hojas de estilo general.php */
+
+.titulo {
+	font-size:12px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.titulo2 {
+	font-size:11px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.titulo3 {
+	font-size:11px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+	/*text-transform: uppercase;*/
+	font-weight: bold;
+}
+.titulo4 {
+	font-size:11px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+}
+.titulo5 {
+	font-size:12px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+	font-weight: bold;
+}
+.titulo6 {
+	font-size:11px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+	text-transform: uppercase;
+}
+.tit_form {
+	font-size:10px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.tit_form2 {
+	font-size:10px;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+}
+.tit_form3 {
+	font-size:8px;
+	font-family:"ARIAL", Courier, mono;
+	text-transform: uppercase;
+	color:#000000;
+}
+.tit_form4 {
+	font-size:9px;
+	height:15;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+}
+
+.tit_form5 {
+	font-size:11px;
+	height:15;
+	font-family:"ARIAL", Courier, mono;
+	color:#000000;
+}
+
+.boton {
+	color:#000000;
+	width:75;
+	font-family: "arial", Courier, mono;
+	font-size: 12px;
+	font-weight: bold;
+}
+.boton2 {
+	color:#000000;
+	width:150;
+	font-family: "arial", Courier, mono;
+	font-size: 12px;
+	/*background-image: url(../eli5.jpg);*/
+	font-weight: bold;
+}
+.boton3 {
+	color:#000000;
+	width:15;
+	font-family: "arial", Courier, mono;
+	font-size: 12px;
+	/*background-image: url(../eli5.jpg);*/
+	font-weight: bold;
+}
+.check1 {
+	width:11;
+	font-family: "arial", Courier, mono;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.texto {
+	color:#000000;
+	height:20;
+	font-family: "arial", Courier, mono;
+	font-size: 11px; text-transform: uppercase;
+	/*background-image: url(../eli5.jpg);*/
+}
+.texto1 {
+	color:#000000;
+	height:20;
+	font-family: "arial", Courier, mono;
+	font-size: 11px; 
+}
+.texto3 {
+	color:#000000;
+	height:20;
+	width:700;
+	font-family: "arial", Courier, mono;
+	font-size: 11px; 
+}
+.tit_formcli {
+	font-size:6px;
+	font-family:"ARIAL", Courier, mono;
+	text-transform: uppercase;
+	color:#000000;
+}

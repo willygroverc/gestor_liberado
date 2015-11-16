@@ -1,0 +1,1 @@
+<?phprequire ('../conexion.php');header('Content-Type: text/html; charset=iso-8859-1');$nombre_area=$_POST['cmb_area'];$sql="INSERT INTO datos_adicionales (id_dadicional, tipo_dadicional, nombre_dadicional, estado) VALUES (null, 'area', '$nombre_area', '0')";if (mysql_query($sql))	echo 0;else	echo -1;?>

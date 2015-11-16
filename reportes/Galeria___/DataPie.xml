@@ -1,0 +1,18 @@
+<graph  wallThickness='40' cameraY='40' startRotationAngle='160' endRotationAngle='200' baseFontColor='FFFFFF' outCnvBaseFontSize='13' showLegend='1' legendMax='5' 
+legendHorPadding='40' showValues='0' showNames='1'  showPercentageValues='0' 
+caption='Product wise sales for July' captionFontSize='22' subcaption='Figures in $'
+playMode='' navRefresh='1' navPrint='1' 
+chartLeftMargin='0' chartRightMargin='0' chartTopMargin='0' chartBottomMargin='0' legendPercentageHDText='% of Total Sales' 
+showLegendPosition='0' showLegendColumn='0' navJog='1' radius='150' numberPrefix='$' BrightnessLine='10' BrightnessFill='-10' legendValuesHDText='Sales' formatNumberScale='0' decimalPrecision='0' percentageDecimalPrecision='2'>
+
+	 <set value='15134' name='Item 1' isSliced='1' alpha='75'/>
+	 <set value='8290' name='Item 2' isSliced='1' alpha='75'/>
+	 <set value='14280' name='Item 3' isSliced='1' alpha='75'/>
+	 <set value='18800' name='Item 4' isSliced='1' alpha='75'/>
+	 <set value='9750' name='Item 5' isSliced='1' alpha='75'/>
+	 <set value='13200' name='Item 6' isSliced='1' alpha='75'/>
+	 <set value='8100' name='Item 7' isSliced='1' alpha='75'/>
+	 <set value='20800' name='Item 8' isSliced='1' alpha='75'/>
+	 <set value='12600' name='Item 9' isSliced='1' alpha='75'/>
+	 
+</graph>

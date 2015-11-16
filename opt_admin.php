@@ -1,0 +1,3 @@
+<?php
+include ("lista.php");
+?>

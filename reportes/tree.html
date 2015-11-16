@@ -1,0 +1,243 @@
+<div class='tb'>
+<span class='btn' onclick='window.top.min(1)' title='Minimizar'>Min</span>
+<span class='btn' onclick='window.top.res()' title='Restaurar'>Res</span>
+</div>
+<html>
+<head>
+	<title>JavaScript Tree Menu</title>
+	<meta name="description" content="Free Cross Browser Javascript DHTML Tree Menu Navigation">
+	<meta name="keywords" content="JavaScript tree menu, DHTML tree menu, client side tree menu, table of contents, site map, web authoring, scripting, freeware, download, shareware, free software, DHTML, Free Tree Menu, site, navigation, html, web, netscape, explorer, IE, opera, DOM, control, cross browser, support, frames, target, download">
+	<meta name="robots" content="index,follow">
+<style>
+.btn {
+  margin:2px 4px 2px 0px; padding:1px;
+  font-size:10px; font-weight:bold;
+  color:#000; background:#ccc;
+  border:1px solid #999;
+  width:26px; height:'16px';
+  cursor:pointer;
+}
+.tb {
+  text-align:right;
+  margin:0; padding:0;
+  background:#333333;
+  width:'100%'; height:'22px';
+}
+.bdy {
+  margin:4px; padding:6px;
+  color:#000; background:#fff;
+}
+h1 {
+  font-size:14px;
+  color:#009;
+}
+a {
+  color:#000; background:transparent;
+}
+a:hover {
+  color:#009; background:#ccc;
+}
+pre {
+  color:#009; background:transparent;
+  font-size:12px;
+  font-family:monospace;
+}
+	a, A:link, a:visited, a:active, A:hover
+		{color: #FFFFFF; text-decoration: none; font-family: Tahoma, Verdana; font-size: 12px }
+.Estilo3 {	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	background-color:#FFFFFF
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
+
+<body bottommargin="0" topmargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0" bgcolor="#333333">
+<script language="JavaScript" src="tree.js"></script>
+<script language="JavaScript" type="text/javascript">
+var TREE_ITEMS = [
+['Principal', null,
+	['Panel Principal', 'panel.php'],
+	['Auditoria', 'auditoria/inicio.php'],
+],
+['Estadisticas', 'panel.php',
+	['Simples', null,
+		['Columnas 2D', 'Galeria/Column2D.html'],
+		['Columnas 3D', 'Galeria/Column3D.html'],
+		['Torta 3D', 'Galeria/Pie3D.html'],
+		['Torta 2D', 'Galeria/Pie2D.html'],
+		['Linea 2D', 'Galeria/Line2D.html'],
+		['Barras 2D', 'Galeria/Bar2D.html'],
+		['Area 2D', 'Galeria/Area2D.html'],
+		['Dona 2D', 'Galeria/Doughnut2D.html'],
+		['Dona 3D', 'Galeria/Doughnut3D.html']
+		],
+	['Multi-Serie', null,
+		['Columnas 2D', 'Galeria/MSColumn2D.html'],
+		['Columnas 3D', 'Galeria/MSColumn3D.html'],
+		['Linea', 'Galeria/MSLine.html'],
+		['Area 2D', 'Galeria/MSArea2D.html'],
+		['Barras 2D', 'Galeria/MSBar2D.html'],
+		['Barras 3D', 'Galeria/MSBar3D.html']
+		],
+	['Apilamiento', null,
+		['Columnas 2D', 'Galeria/StCol2D.html'],
+		['Columnas 3D', 'Galeria/StCol3D.html'],
+		['Area 2D', 'Galeria/StArea2D.html'],
+		['Barras 2D', 'Galeria/StBar2D.html'],
+		['Barras 3D', 'Galeria/StBar3D.html'],
+		['Columnas 3D - Multiserie', 'Galeria/StMsCol2D.html'],
+		],
+	['Combinadas', null,
+		['2D Simple en Y', 'Galeria/Combi2D.html'],
+		['Columnas 3D + Simple en Y', 'Galeria/Col3DLine.html'],
+		['2D Dual en Y', 'Galeria/Combi2DDY.html'],
+		['Columnas 3D + Dual en Y', 'Galeria/Col3DLineDY.html'],
+		['Columnas Apiladas 3D + Dual en Y', 'Galeria/StCol3DLineDY.html'],
+		['Columnas Apiladas 2D Multiserie + Dual en Y', 'Galeria/StMsCol2DLineDY.html'],
+		],
+	['Graficas XY', null,
+		['Disperso', 'Galeria/Scatter.html'],
+		['Burbujas', 'Galeria/Bubble.html'],
+		],
+	['Con Scroll', null,
+		['Columnas 2D', 'Galeria/StCol2D.html'],
+		['Linea 3D', 'Galeria/StCol3D.html'],
+		['Area 2D', 'Galeria/StArea2D.html'],
+		['Columna 2D Apilada', 'Galeria/StBar2D.html'],
+		['Combinacion 2D', 'Galeria/StBar3D.html'],
+		['Combinacion 2D dual', 'Galeria/StMsCol2D.html'],
+		],
+],
+['Indicadores', 'panel.php',
+ 	['Angular', null,
+		['Efecto de Pluma', 'Galeria/Angular16.html'],
+		['Efecto Metalico', 'Galeria/Angular10.html'],
+		['Metronomo', 'Galeria/Angular9.html'],
+		['Gasolina', 'Galeria/Angular13.html'],
+		['Gasolina 2', 'Galeria/Angular12.html'],
+		['RPM', 'Galeria/Angular14.html'],
+		['Ganancias', 'Galeria/Angular7.html'],
+		['KPH', 'Galeria/Angular6.html'],
+		['Reloj', 'Galeria/Angular1.html'],
+		['Editable', 'Galeria/Angular4.html'],
+		['Gradientes', 'Galeria/Angular17.html'],
+		['Estilo Hierro', 'Galeria/Angular15.html'],
+		['Con ', 'Galeria/Angular3.html'],
+		['Dona 3D', 'Galeria/Angular8.html'],
+		],
+	['Lineal', null,
+		['Ejemplo Basico', 'Galeria/Linear1.html'],
+		['Puntero', 'Galeria/Linear2.html'],
+		['Puntero Editable', 'Galeria/Linear3.html'],
+		['Escala Richter', 'Galeria/Linear4.html'],
+		['Con Anotaciones', 'Galeria/Linear5.html'],
+		['Gradiente', 'Galeria/Linear6.html'],
+		],
+	['Otros', null,
+		['LED Horizontal', 'Galeria/HLED1.html'],
+		['LED Vertical', 'Galeria/VLED1.html'],
+		['Cilindro', 'Galeria/Cylinder2.html'],
+		['Termometro', 'Galeria/Thm3.html'],
+		['Burbuja', 'Galeria/Bulb2.html'],
+		],
+	['Gantt', null,
+		['Contruccion Residencial', 'Galeria/Gantt5.html'],
+		['Tareas Grupales', 'Galeria/Gantt6.html'],
+		['Basado en Tiempo', 'Galeria/Gantt11.html'],
+		['Calendario Empleados', 'Galeria/Gantt7.html'],
+		['Proyecto Gantt', 'Galeria/Gantt1.html'],
+		['Ciclo de Vida - Desarrollo', 'Galeria/Gantt3.html'],
+		['Operacion de Maquinas', 'Galeria/Gantt4.html'],
+		['Lineas - Zonas', 'Galeria/Gantt12.html'],
+		],
+	['Conicas', null,
+		['Ancho Variable', 'Galeria/Funnel1.html'],
+		['Mismo Angulo', 'Galeria/Funnel2.html'],
+		['Seccionado', 'Galeria/Funnel3.html'],
+		['Cono 2D', 'Galeria/Funnel4.html'],
+		],
+	['Piramides', null,
+		['Piramide 1', 'Galeria/Pyramid1.html'],
+		['Piramide 2', 'Galeria/Pyramid2.html'],
+		['Piramide 3', 'Galeria/Pyramid3.html'],
+		['Piramide 4', 'Galeria/Pyramid4.html']
+		],
+],
+['Diagramas', 'panel.php',
+ 	['Nodos', null,
+		['Basico', 'Galeria/DragNode1.html'],
+		['Simulacion de Red', 'Galeria/DragNode2.html'],
+		['Organigrama', 'Galeria/DragNode3.html'],
+		],
+	['Prediccion', null,
+		['Plan de Ventas', 'Galeria/DragCol1.html'],
+		['Plan de Ventas - Lineal', 'Galeria/DragLine.html'],
+		['Plan de Ventas - Area', 'Galeria/DragArea.html'],
+		],
+	['Dispersion', null,
+		['Ejemplo Basico', 'Galeria/SelectScatter1.html'],
+		['Analisis de Inversion', 'Galeria/SelectScatter2.html'],
+		],
+	['Torta Multi Nivel', null,
+		['Organizacion', 'Galeria/MLPie1.html'],
+		['Analisis de Palabras', 'Galeria/MLPie2.html'],
+		['Grupos de Amigos', 'Galeria/MLPie3.html'],
+		],
+	['Radar', null,
+		['Radar 1', 'Galeria/Radar.html'],
+		['Radar 2', 'Galeria/Radar2.html'],
+		['Radar 3', 'Galeria/Radar3.html'],
+		],
+	['Kagi', null,
+		['Kagi', 'Galeria/Kagi.html'],
+		],
+],
+['Animados', 'panel.php',
+ 	['Estadisticos', null,
+		['Area', 'Galeria/MyFirstAreaChart.html'],
+		['Columna', 'Galeria/MyFirstColumnChart.html'],
+		['Linea', 'Galeria/MyFirstLineChart.html'],
+		],
+	['Torta', null,
+		['Torta', 'Galeria/PieChart.html'],
+		['Dona', 'Galeria/DoughnutChart.html'],
+		],
+],
+['Reportes', null,
+	['Reporte 1', 'panel.php',
+		['Reporte 1a', null],
+		['Reporte 1b', null],
+		['Reporte 1c', null],
+		['Reporte 1d', null],
+		['Reporte 1e', null],
+		],
+	['Reporte 2', 'panel.php',
+		['Reporte 2a', null],
+		['Reporte 2b', null],
+		['Reporte 2c', null],
+		['Reporte 2d', null],
+		['Reporte 2e', null],
+		],
+],
+];
+</script>
+<script language="JavaScript" src="tree_tpl.js"></script>
+
+<table cellpadding="5" cellspacing="0" cellpadding="10" border="0" width="100%">
+<tr>
+	<td>
+	<script language="JavaScript">
+	<!--//
+		new tree (TREE_ITEMS, TREE_TPL);
+	//-->
+	</script>
+	</td>
+	
+</tr>
+</table>
+<br>
+</body>
+</html>
+

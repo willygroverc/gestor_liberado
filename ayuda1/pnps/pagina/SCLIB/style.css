@@ -1,0 +1,255 @@
+/* Demo Gestores */
+
+
+* {
+   padding:0;
+   margin:0;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	text-align: left;
+	margin:0 auto;
+	padding:0;
+	color:#000;
+	font-style:normal; 
+	font-variant:normal;
+	font-weight:normal;
+	font-size:10px;
+	font-family:Verdana, Tahoma, Arial, sans-serif;
+	background:#fff;
+	/*background:#f0f6df;*/
+}
+
+#page {
+	width:850px;
+	margin:0 auto;
+	height:100%;
+}
+
+#header {
+	width:850px;
+	height:120px;
+	margin: 0 auto;
+	background:  no-repeat;
+	padding:0px;
+
+}
+
+#content {
+	padding:5px 20px 0 20px;
+	background: repeat-y;
+	height:100%;
+}
+/**************************** header gif ****************************/
+
+#head {
+	float:left;
+	width: 225px;
+	color:#000;
+	background: repeat-y;
+}
+
+
+
+/**************************** menu ****************************/
+
+#nav_top {
+	background: no-repeat;
+	width:225px;
+	height:28px;
+}
+
+#nav_btm {
+	width:225px;
+	height:28px;
+	background-image: none;
+	background-repeat: no-repeat;
+}
+
+#menu {
+	float:left;
+	width: 225px;
+	color:#FFFFFF;
+	background-color: #352773;
+	background-repeat: repeat-y;
+}
+
+#menu ul {
+	list-style:none;
+	width:218px;
+	font-size:12px;
+	padding:0 0 0 3px;
+}	
+
+#menu li {
+	list-style-type: none;
+	background:transparent no-repeat 12px 6px;
+	margin-bottom:4px;
+	border-bottom:1px solid #587993;
+	padding:0;
+}
+
+#menu li:hover {
+	background:#fff;
+	margin-bottom:4px;
+}
+
+#menu a {
+	display:block;
+	padding:0 0 0 20px;
+	color:#fff;
+	text-decoration: none;
+	background:f0f6df;
+}	
+	
+#menu a:hover {
+	display:block;
+	padding:0 0 0 20px;
+	color:#333;
+	text-decoration: none;
+	background:fff;
+}	
+
+/**************************** content ****************************/
+
+#info {
+	float:center;
+	background: repeat-y;
+	width:633px;
+}
+
+.post_top {
+	background: no-repeat;
+	width:1066px;
+	height:31px;
+}
+
+.post_btm {
+	background: no-repeat;*/
+	width:533px;
+	height:31px;
+}
+
+.post {
+	padding:0 0 15px 25px;
+}
+
+img {
+	border:1px solid #fff;
+	padding:5px;
+	margin:3px;
+
+}
+
+a{
+	color:#fff;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#000;
+	text-decoration:none;
+}
+
+h1{
+	color:#fff;
+	font-weight:normal;
+	font-size:24px;
+	padding: 40px 0 10px 40px;
+}
+
+h2 a{
+	position:absolute;
+	top:7px;
+	color:#666;
+	font-size:16px;
+	margin:0 0 0 575px;
+	text-decoration:none;
+	left: -403px;
+}
+
+h2 a:hover{
+	color:#999;
+}
+
+h3{
+	color:#fff;
+	font-size:12px;
+	font-weight:bold;
+	padding: 5px 0 5px 10px
+}
+
+h4{
+	color:#666666;
+	font-size:18px;
+	font-weight: bold;
+}
+
+title{
+	color:#fff;
+	font-size:25px;
+	font-weight:normal;
+}
+
+
+h5{
+	color:#8d8d8d;
+	font-size:10px;
+	font-weight:normal;
+	padding:5px;
+}
+
+h3 img{
+	float:left;
+}
+
+/**************************** lists ****************************/
+
+ul {
+	list-style:none;
+	padding:0 0 0 3px;
+}	
+
+li {
+	list-style-type: none;
+	background:transparent  no-repeat 12px 6px;
+	padding: 0 0 0 20px;
+}
+
+#menu a {
+	display:block;
+	padding:0 0 0 20px;
+	color:#fff;
+	text-decoration: none;
+	background:f0f6df;
+}	
+	
+#menu a:hover {
+	display:block;
+	padding:0 0 0 20px;
+	color:#333;
+	text-decoration: none;
+	background:fff;
+}	
+
+
+/**************************** footer ****************************/
+
+#footer{
+	text-align:center;
+	padding:40px;
+	background: no-repeat;
+	height:42px;
+}
+
+#footer a {
+	color:#000;
+}
+
+#footer a:hover {
+	color:#fff;
+}
