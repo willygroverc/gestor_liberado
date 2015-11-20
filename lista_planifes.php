@@ -1,4 +1,5 @@
-<?php 
+<?php
+//ISRAEL
 // Version: 	1.0
 // Objetivo: 	Modificacion funciones php obsoletas para version 5.3 en adelante.
 //				Control Acceso Directo a Fichero No Autorizado.
