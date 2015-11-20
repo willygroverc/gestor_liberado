@@ -12,33 +12,17 @@ $res_cons=mysql_query($sql_cons);
 $row_cons=mysql_fetch_array($res_cons);
  if ($row_cons['datos_gral']==1){ 
 ?>
-<table width="100%" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td colspan="3"><div align="left"><font size="1" face="verdana"><strong>&nbsp;<font size="2">&nbsp;<u>DATOS 
-        GENERALES</u></font></strong></font></div></td>
-  <tr> 
-    <td width="1%"></td>
-    <td width="16%" height="19" class="subtitulo"><font size="2">ENTIDAD :</font></td>
-    <td width="83%" class="info"><?php echo $row_cons['nombre'];?></td>
-  </tr>
-  <tr> 
-    <td></td>
-    <td width="16%" height="19" class="subtitulo"><font size="2">REALIZADO POR 
-      :</font></td>
-    <td class="info"><?php echo $row_us['nom_usr'].' '.$row_us['apa_usr'].' '.$row_us['ama_usr'];?></td>
-  </tr>
-  <tr> 
-    <td></td>
-    <td width="16%" height="19" class="subtitulo"><font size="2">IP ORIGEN :</font></td>
-    <td class="info"><?php echo $_SERVER['REMOTE_ADDR'];?></td>
-  </tr>
-  <tr> 
-    <td></td>
-    <td width="16%" height="20" class="subtitulo"><font size="2">FECHA Y HORA 
-      :</font></td>
-    <td class="info"><?php echo date("Y-m-d")."&nbsp;&nbsp;&nbsp;&nbsp;".date("H:i:s");?></td>
-  </tr>
-</table>
+<div class="row">
+  <div class="column datos-generales">
+    <h6>Datos Generales</h6>
+    <ul>
+      <li><strong>Entidad: </strong><?php echo $row_cons['nombre'];?></li>
+      <li><strong>Realizado por: </strong><?php echo $row_us['nom_usr'].'-'.$row_us['apa_usr'].' '.$row_us['ama_usr'];?></li>
+      <li><strong>IP de origien: </strong><?php echo $_SERVER['REMOTE_ADDR'];?></li>
+      <li><strong>Fecha y hora: </strong><?php echo date("Y-m-d")."&nbsp;&nbsp;".date("H:i:s");?></li>
+    </ul>
+  </div>
+</div>
 <?php
 }
 ?>
