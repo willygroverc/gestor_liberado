@@ -50,201 +50,129 @@ $row6=mysql_fetch_array($result6);
 <title>Orden de Trabajo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="general.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/skeleton.css">
+<link rel="stylesheet" type="text/css" href="css/reports.css">
 </head>
 
 <body bgcolor="#FFFFFF">
-<p><?php
-include("datos_gral.php");
-?>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td> 
-      <div align="center"><b><u><font size="4" face="Arial, Helvetica, sans-serif">ORDEN 
-        DE TRABAJO</font></u></b></div>
-    </td>
-  </tr>
-</table>
-<br>
-<table width="635" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="53" class="titulo2">Fecha: </td>
-    <td width="126" class="tit_form"><strong><?php echo $row['fecha'];?></strong></td>
-    <td width="42" class="titulo2">Hora: </td>
-    <td width="81" class="tit_form"><strong><?php echo $row['time'];?></strong></td>
-    <td width="236"><div align="right"><p class="titulo2">N:</p> </div></td>
-    <td width="97"><table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
-        <tr> 
-          <td align="center" class="tit_form"><strong>&nbsp;<?php echo $row['id_orden'];?></strong></td>
-        </tr>
-      </table></td>
-  </tr>
-</table>
-<table width="637" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="178" class="titulo2">Cliente: Interno 
-      <?php 
-	if ($row['tipo_usr']=="INTERNO")
-		{
-		echo "<img src=\"images/si1.gif\" border=\"1\">";
-		}
-		else
-		{
-		echo "<img src=\"images/no1.gif\" border=\"1\">";
-		}
-	?>
-    </td>
-    <td width="453" class="titulo2">Externo 
-      <?php 
-	if ($row['tipo_usr']=="EXTERNO")
-		{
-		echo "<img src=\"images/si1.gif\" border=\"1\">";
-		}
-		else
-		{
-		echo "<img src=\"images/no1.gif\" border=\"1\">";
-		}
-	?>
-    </td>
-  </tr>
-<?php if($row['id_anidacion']){?>  <tr> 
-    <td colspan="2" class="titulo2">Viene de la orden : <?php echo $row['id_anidacion']?> </td>
-  </tr><?php }?>
-</table>
-<br>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td><u class="titulo">Datos del cliente:</u></td>
-  </tr>
-</table>
-<br>
-<table width="635" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="145" nowrap class="titulo2">Nombres y Apellidos: </td>
-    <td width="490" nowrap class="tit_form"><strong>
-	<?php 
-	if ($row['login_usr']==""){echo "SISTEMA";}
-	else {echo $row['nom_usr']." ".$row['apa_usr']." ".$row['ama_usr'];}
-	?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1" ></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
-<table width="637" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="59" class="titulo2">Entidad: </td>
-    <td width="236" class="tit_form"><strong><?php echo $row['enti_usr'];?></strong></td>
-    <td width="44" class="titulo2">Área: </td>
-    <td width="298" class="tit_form"><strong><?php echo $row['area_usr'];?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="48" class="titulo2">Cargo:</td>
-    <td width="167" class="tit_form"><strong><?php echo $row['cargo_usr'];?></strong></td>
-    <td width="64" class="titulo2">Telefono:</td>
-    <td width="217" class="tit_form"><strong><?php echo $row['telf_usr'];?></strong></td>
-    <td width="26" class="titulo2">Ext:</td>
-    <td width="100" class="tit_form"><strong><?php echo $row['ext_usr'];?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
-<br>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td class="titulo"><u>Ubicacion Fisica:</u></td>
-  </tr>
-</table>
-<br>
-<table width="638" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="61" class="titulo2">Ciudad:</td>
-    <td width="159" class="tit_form"><strong><?php echo $row['ciu_usr'];?></strong></td>
-    <td width="66" class="titulo2">Direccion: </td>
-    <td width="352" class="tit_form"><strong><?php echo $row['direc_usr'];?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
-<?php if(isset($row0[0])){ ?>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-<br>
-    <td class="titulo"><u>Datos del Titular:</u></td>
-  </tr>
-</table>
-<br>
-<table width="638" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="41" class="titulo2">CI/RUC:</td>
-    <td width="100" class="tit_form"><strong><?php echo $row0['ci_ruc'];?></strong></td>
-    <td width="135" class="titulo2">Nombres y Apellidos:</td>
-    <td width="282" class="tit_form"><strong><?php echo $row0['nombre'] ." ".$row0['apaterno']." ".$row0['amaterno']; if($row0['acasada']!=""){echo " de $row0[acasada]";}?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1" ></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1" ></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="48" class="titulo2">Email:</td>
-    <td width="167" class="tit_form"><strong><?php echo $row0['email'];?></strong></td>
-    <td width="64" class="titulo2">Direccion:</td>
-    <td width="217" class="tit_form"><strong><?php echo $row0['direccion'];?></strong></td>
-    <td width="26" class="titulo2">Telf:</td>
-    <td width="100" class="tit_form"><strong><?php echo $row0['telf'];?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
-<table width="636" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="48" class="titulo2">Entidad:</td>
-    <td width="167" class="tit_form"><strong><?php echo $row0['entidad'];?></strong></td>
-    <td width="64" class="titulo2">Area:</td>
-    <td width="217" class="tit_form"><strong><?php echo $row0['area'];?></strong></td>
-    <td width="26" class="titulo2">Cargo:</td>
-    <td width="100" class="tit_form"><strong><?php echo $row0['cargo'];?></strong></td>
-  </tr>
-  <tr> 
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-    <td height="1"></td>
-    <td height="1" bgcolor="#000000"></td>
-  </tr>
-</table>
+  <div class="container">
+    <p><?php
+    include("datos_gral.php");
+    ?>
+    <div class="print-area">
+      <div class="row center">
+        <h5>Orden de Trabajo</h5>
+      </div>
+      <div class="row">
+        <div class="three columns">
+          <strong>Fecha: </strong><?php echo $row['fecha'];?>
+        </div>
+        <div class="two columns">
+          <strong>Hora: </strong><?php echo $row['time'];?>
+        </div>
+        <div class="seven columns right">
+          <strong>N: </strong><span class="r-box"><?php echo $row['id_orden'];?></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="one columns">
+          <strong>Cliente: </strong>
+        </div>
+        <div class="two columns">
+          Interno <?php if($row['tipo_usr']=="INTERNO"){ echo "&#x2713;";} ?>
+        </div>
+        <div class="two columns">
+          Externo <?php if($row['tipo_usr']=="EXTERNO"){ echo "&#x2713;";} ?>
+        </div>
+      </div>
+      <hr>
+      <h6>Datos del Cliente</h6>
+      <div class="row">
+        <div class="column">
+          <strong>Nombres y Apellidos: </strong>
+          <?php 
+          if ($row['login_usr']==""){echo "SISTEMA";}
+          else {echo $row['nom_usr']." ".$row['apa_usr']." ".$row['ama_usr'];}
+          ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="four columns">
+          <strong>Entidad: </strong><?php echo $row['enti_usr'];?>          
+        </div>
+        <div class="four columns">
+          <strong>Área: </strong><?php echo $row['area_usr'];?>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="four columns">
+          <strong>Cargo: </strong><?php echo $row['cargo_usr'];?>
+        </div>
+        <div class="four columns">
+          <strong>Teléfono: </strong><?php echo $row['telf_usr'];?>
+        </div>
+        <div class="four columns">
+          <strong>Ext: </strong><?php echo $row['ext_usr'];?>
+        </div>
+      </div>
+      <hr>
+      <h6>Ubicación Física</h6>
+      <div class="row">
+        <div class="four columns">
+          <strong>Ciudad: </strong><?php echo $row['ciu_usr'];?>
+        </div>
+        <div class="eight columns">
+          <strong>Dirección: </strong><?php echo $row['direc_usr'];?>
+        </div>
+      </div>
+      <?php if(isset($row0[0])){ ?>
+        <hr>
+        <h6>Datos del Titular</h6>
+        <div class="row">
+          <div class="four columns">
+            <strong>CI/RUC: </strong><?php echo $row0['ci_ruc'];?>
+          </div>
+          <div class="eight columns">
+            <strong>Nombres y Apellidos: </strong>
+            <?php echo $row0['nombre'] ." ".$row0['apaterno']." ".$row0['amaterno']; if($row0['acasada']!=""){echo " de $row0[acasada]";}?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="four columns">
+            <strong>Email: </strong><?php echo $row0['email'];?>
+          </div>
+          <div class="four columns">
+            <strong>Dirección: </strong><?php echo $row0['direccion'];?>
+          </div>
+          <div class="four columns">
+            <strong>Teléfono: </strong><?php echo $row0['telf'];?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="four columns">
+            <strong>Entidad: </strong><?php echo $row0['entidad'];?>
+          </div>
+          <div class="four columns">
+            <strong>Área: </strong><?php echo $row0['area'];?>
+          </div>
+          <div class="four columns">
+            <strong>Cargo: </strong><?php echo $row0['cargo'];?>
+          </div>
+        </div>
+      <?php } ?>
+      <hr>
+      <h6>Descripción de la Incidencia</h6>
+      <div class="row">
+        <div class="column">
+          <p><?php echo $row['desc_inc']; ?></p>
+        </div>
+      </div>
+    </div> <!-- end print-area -->
 
 
-<?php } ?>
+
+
+
 <br>
 
 <table width="636" border="0" align="center" cellpadding="0" cellspacing="2">
@@ -739,5 +667,6 @@ do {
     <td colspan="2"  class="titulo2">&nbsp;</td>
   </tr>
 </table>
+  </div>
 </body>
 </html>
