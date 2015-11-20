@@ -1,48 +1,54 @@
 <?php 
 include ("conexion.php"); 
-$verif=($_GET['verif']);
-$id_minuta=($_GET['id_minuta']);
-unset($num_cod);
-$datos = $codigo.":".$eano."/".$emes."/".$edia.":".$ano."/".$mes."/".$dia.":".$elab_por.":".$tipo_min.":".$h."/".$m.":".$lugar.":".$comentario;
-$sql2 = "SELECT * FROM agenda WHERE id_agenda='$var'";
-$result2 = mysql_db_query($db,$sql2,$link);
-$row2 = mysql_fetch_array($result2);
-$sql28 = "SELECT MAX(num_codigo) AS ncod FROM minuta WHERE codigo='$row2[codigo]'";	
-$result28=mysql_db_query($db,$sql28,$link);
-$row28 = mysql_fetch_array($result28);
-$num_cod = $row28['ncod']+1;
-if ($RETORNAR){
+
+	
+$verif=$_GET['verif'];
+$id_minuta=$_GET['id_minuta'];
+if(isset($_REQUEST['var']))
+{	$var=$_REQUEST['var'];
+	unset($num_cod);
+	if(isset($_REQUEST['codigo']))
+		$datos = $codigo.":".$eano."/".$emes."/".$edia.":".$ano."/".$mes."/".$dia.":".$elab_por.":".$tipo_min.":".$h."/".$m.":".$lugar.":".$comentario;
+	$sql2 = "SELECT * FROM agenda WHERE id_agenda='$var'";
+	$result2 = mysql_db_query($db,$sql2,$link);
+	$row2 = mysql_fetch_array($result2);
+	$sql28 = "SELECT MAX(num_codigo) AS ncod FROM minuta WHERE codigo='$row2[codigo]'";	
+	$result28=mysql_db_query($db,$sql28,$link);
+	$row28 = mysql_fetch_array($result28);
+	$num_cod = $row28['ncod']+1;
+}
+if (isset($_REQUEST['RETORNAR'])){
 	if($verif=="2"){
 		//echo "$row28[ncod]";
 	}
 	header("location: lista_agenda.php?id_minuta=$var");
 }
-if ($ATEMA){
+if (isset($_REQUEST['ATEMA'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";	
 	header("location: atema.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($PROPOSICIONES){
+if (isset($_REQUEST['PROPOSICIONES'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";	
 	header("location: proposiciones.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($VTEMA){
+if (isset($_REQUEST['VTEMA'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";
 	header("location: vtema.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($RESULTADOS){
+if (isset($_REQUEST['RESULTADOS'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";	
 	header("location: resultados.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($ACCIONES){
+if (isset($_REQUEST['ACCIONES'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";		
 	header("location: acciones.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($GUARDAR){
+if (isset($_REQUEST['GUARDAR'])){
 	if ( $insertado == "2" )
 	{ 	$en_fecha = "$eano-$emes-$edia";
 		$fecha = "$ano-$mes-$dia";
@@ -115,18 +121,18 @@ if ($GUARDAR){
 	}	
 	header("location: lista_agenda.php");
 }
-if ($VASISTENTE){ 
+if (isset($_REQUEST['VASISTENTE'])){ 
 	//echo "*".$insertado;
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";
 	header("location: vasistente.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($AASISTENTE){
+if (isset($_REQUEST['AASISTENTE'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";
 	header("location: aasistente.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
-if ($AASISTENTE_EXT){
+if (isset($_REQUEST['AASISTENTE_EXT'])){
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";
 	header("location: aasistente_ext.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
@@ -191,12 +197,12 @@ function Form () {
             <td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;
              <strong> Codigo :</strong></font>&nbsp;  <font size="2" face="Arial, Helvetica, sans-serif"> 
               <?php 
-				if($row2[codigo]=="CSI"){echo "&nbsp;&nbsp;&nbsp;$row[codigo] (Comite de Sistemas)";}
-				elseif($row2[codigo]=="CCP"){echo "&nbsp;&nbsp;&nbsp;$row[codigo] (Comite de Cambios en Prod.)";}
-				elseif($row2[codigo]=="CRC"){echo "&nbsp;&nbsp;&nbsp;$row[codigo] (Comite de Recup. y Conting.)";}
-				elseif($row2[codigo]=="OTRO"){echo "&nbsp;&nbsp;&nbsp;$row[codigo]";}
+				if($row2['codigo']=="CSI"){echo "&nbsp;&nbsp;&nbsp;$row[codigo] (Comite de Sistemas)";}
+				elseif($row2['codigo']=="CCP"){echo "&nbsp;&nbsp;&nbsp;$row[codigo] (Comite de Cambios en Prod.)";}
+				elseif($row2['codigo']=="CRC"){echo "&nbsp;&nbsp;&nbsp;$row[codigo] (Comite de Recup. y Conting.)";}
+				elseif($row2['codigo']=="OTRO"){echo "&nbsp;&nbsp;&nbsp;$row[codigo]";}
 			  
-			  echo "&nbsp;&nbsp;&nbsp;".$row2[codigo];?>
+			  echo "&nbsp;&nbsp;&nbsp;".$row2['codigo'];?>
               </font><font size="2" face="Arial, Helvetica, sans-serif"> 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			  <strong>Elaborado 
@@ -208,7 +214,7 @@ function Form () {
 			  $result21 = mysql_db_query($db,$sql21,$link);
 			  while ($row21 = mysql_fetch_array($result21)) 
 			  {
-				if ($row2[elab_por]==$row21[login_usr])
+				if ($row2['elab_por']==$row21['login_usr'])
 					echo "<option value=\"$row21[login_usr]\" selected>$row21[nom_usr] $row21[apa_usr] $row21[ama_usr]</option>";
 				else
 					echo "<option value=\"$row21[login_usr]\">$row21[nom_usr] $row21[apa_usr] $row21[ama_usr]</option>";

@@ -13,12 +13,15 @@ if ($_SESSION['tipo']=='C')
 require("conexion.php");
 $login_usr = $_SESSION["login"];
 include ("top.php");
+
 echo '<div id="tbl_ajax"></div>';
 echo "<input name=\"nueva\" type=\"submit\" id=\"nueva\" value=\"NUEVO PROYECTO\" onclick=\"location.href = 'solicproyecto1.php'\">";
 echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 echo "<input name=\"estadisticas\" type=\"submit\" id=\"estadisticas\" value=\"ESTADISTICAS\" onclick=\"location.href = 'report_solicproyectos.php'\">";
 //echo '<input type="button" value="ESTADISTICAS" onclick="window.open(report_solicproyectos.php)" />';
+
 ?> 
+
 <input name="pg" id="pg" type="hidden" size="5" value="1"></input>
 <script language="javascript" src="js/proyectos.js"></script>
 <link rel="stylesheet" href="css/jquery-ui.css" />
@@ -27,5 +30,7 @@ echo "<input name=\"estadisticas\" type=\"submit\" id=\"estadisticas\" value=\"E
 <script language="javascript" src="js/jquery-ui.js"></script>
 <?php 
 	//if ($_SESSION['tipo']=='A')
+	
 		echo '<script>filtrar_lista();</script>';
+		//echo "willy";
 ?>

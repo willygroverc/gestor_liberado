@@ -27,8 +27,8 @@ if (isset($_REQUEST['reg_form'])) {
 		if($files[0]=="") $numero=0;
 		else $numero=count($files);
 		$exten = explode(".",$archivo_name); 
-		print_r($exten);
-                exit;
+		/*print_r($exten);
+                exit;*/
                 $long = count($exten)-1; 
 		$arch_nomb = "min".$num."_".$numero.".".$exten[$long];
 		
@@ -44,6 +44,8 @@ if (isset($_REQUEST['reg_form'])) {
 			$sCad=implode("*",$obs);
 		}
 		$sql="UPDATE contratodatos set file='$cadena', observacion ='$sCad' WHERE IdContra = $_GET[id_contrato]";
+		echo "WWW:".$sql;
+		exit;
 		mysql_query($sql);
 		copy($archivo,"Archivos Adjuntos/".$arch_nomb);
 		//echo $sql;
@@ -87,7 +89,7 @@ include("top.php");
 </table>
 
 <form name="form1" method="post" enctype="multipart/form-data">
-<input type="hidden" name="id_agenda" value="<?php=$id_agenda?>">
+<input type="hidden" name="id_agenda" value="<?php echo $id_agenda; ?>">
 <table width="60%" border="1" align="center" cellpadding="0" cellspacing="0" background="images/fondo.jpg" >
 	<th background="images/main-button-tileR1.jpg">SUBIR ARCHIVO ADJUNTO</th>
     <tr> 
@@ -101,9 +103,9 @@ include("top.php");
               Mb ) : </font> </div></td>
         </tr>
         <tr> 
-          <td colspan="2" align="center"> <div align="center"> 
-              <input name="archivo" type="file" size="60" value="<?php print $arch_adj;?>">
-              <br>
+          <td colspan="2" align="center"> <div align="center">
+            <input name="archivo" type="file" size="60" value="<?php print $arch_adj;?>">
+            <br>
             </div></td>
         </tr>
 		

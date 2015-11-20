@@ -1,47 +1,74 @@
 <?php 
-if (isset($Terminar))  {
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+else
+	$var=0;
+if(isset($_REQUEST['viene']))
+	$viene=$_REQUEST['viene'];
+else
+	$viene=0;
+	
+if (isset($_REQUEST['Terminar']))  {
 	if($viene=="agenda_last")
 		header("location: agenda_last.php?id_agenda=$var&verif=1");
 	else 
 		header("location: agenda.php?id_agenda=$var&verif=1");	
 }
 include("conexion.php");
-if (isset($reg_form))
-{   
-	if ($id_tem=="NUEVA")
-	{	$sql34 = "SELECT MAX(id_tema) AS ntem FROM temas WHERE id_agenda='$var'";
+if (isset($_REQUEST['reg_form']))
+{   $tema=$_REQUEST['tema'];
+	$responsable=$_REQUEST['responsable'];
+	$duracion=$_REQUEST['duracion'];
+	
+	if ($_REQUEST['id_tem']=="NUEVA")
+	{	
+		require_once('funciones.php');
+		$sql34 = "SELECT MAX(id_tema) AS ntem FROM temas WHERE id_agenda='$var'";
 		$result34=mysql_db_query($db,$sql34,$link);
 		$row34=mysql_fetch_array($result34) ;
 		$cont=$row34['ntem']+1;
-	require_once('funciones.php');
-	$var=_clean($var);
-	$tema=_clean($tema);
-	$responsable=_clean($responsable);
-	$duracion=_clean($duracion);
-	$cont=_clean($cont);
 	
-	$var=SanitizeString($var);
-	$tema=SanitizeString($tema);
-	$responsable=SanitizeString($responsable);
-	$duracion=SanitizeString($duracion);
-	$cont=SanitizeString($cont);
+		$var=_clean($var);
+		$tema=_clean($tema);
+		$responsable=_clean($responsable);
+		$duracion=_clean($duracion);
+		$cont=_clean($cont);
+	
+		$var=SanitizeString($var);
+		$tema=SanitizeString($tema);
+		$responsable=SanitizeString($responsable);
+		$duracion=SanitizeString($duracion);
+		$cont=SanitizeString($cont);
 	$sql1="INSERT INTO ".
 	"temas (id_agenda,tema,responsable,duracion,id_tema) ".
 	"VALUES ('$var','$tema','$responsable','$duracion','$cont') ";
+	/*echo $sql1;
+	exit;*/
 	mysql_db_query($db,$sql1,$link);
 	header("location: tema.php?id_agenda=$var");
 	}
 	else
-	{$sql1="UPDATE temas SET tema='$tema',responsable='$responsable',duracion='$duracion'".
-		"WHERE id_agenda='$var' AND id_tema='$id_tem'";
+	{
+		$id_tem=$_REQUEST['id_tem'];
+		$sql1="UPDATE temas SET tema='$tema',responsable='$responsable',duracion='$duracion'".
+		"WHERE id_agenda='$var' AND id_tema=$id_tem";
+	 	//echo $sql1;
+		//exit;
 	  mysql_db_query($db,$sql1,$link);
 	 header("location: tema.php?id_agenda=$var");
 	}
 }
 else { 
 include("top.php");
-$id_agenda=($_GET['id_agenda']);
-$id_tema=($_GET['id_tema']);
+if(isset($_GET['id_agenda']))
+	$id_agenda=$_GET['id_agenda'];
+else
+	$id_agenda=0;
+	
+if(isset($_GET['id_tema']))	
+	$id_tema=($_GET['id_tema']);
+else
+	$id_tema=0;
 ?>
 <?php
 require_once ( "ValidatorJs.php" );
@@ -63,7 +90,7 @@ function Form () {
 </script>
 
   <table width="59%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-    <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+    <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_agenda;?>">
 	<input name="var2" type="hidden" value="<?php echo $id_tema;?>">
 	<input name="viene" type="hidden" value="<?php echo $viene;?>">
@@ -89,8 +116,8 @@ function Form () {
   		{
 		?>
           <tr> 
-            <?php echo "<td><a href=\"tema.php?id_agenda=$id_agenda&id_tema=".$row[id_tema]."&viene=$viene\">".$row[id_tema]."</a></td>";?> 
-            <td><?php echo $row[tema]?></td>
+            <?php echo "<td><a href=\"tema.php?id_agenda=$id_agenda&id_tema=".$row['id_tema']."&viene=$viene\">".$row['id_tema']."</a></td>";?> 
+            <td><?php echo $row['tema']?></td>
             <?php
 			$sql5 = "SELECT * FROM users WHERE login_usr='$row[responsable]'";
 		    $result5 = mysql_db_query($db,$sql5,$link);
@@ -102,7 +129,7 @@ function Form () {
 				echo "<td>&nbsp;$row[responsable]</td>";
 			}
 			?>
-			<td>&nbsp;<?php echo $row[duracion]?></td>
+			<td>&nbsp;<?php echo $row['duracion']?></td>
           </tr>
           <?php 
 		 }
@@ -142,7 +169,7 @@ function Form () {
 			  $result0=mysql_db_query($db,$sql0,$link);
 			  while ($row0=mysql_fetch_array($result0)) 
 				{
-						if ($row3[responsable]==$row0[login_usr])
+						if ($row3['responsable']==$row0['login_usr'])
 							echo "<option value=\"$row0[login_usr]\" selected>$row0[apa_usr] $row0[ama_usr] $row0[nom_usr]</option>";
 						else
 							echo "<option value=\"$row0[login_usr]\">$row0[apa_usr] $row0[ama_usr] $row0[nom_usr]</option>";

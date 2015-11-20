@@ -189,7 +189,7 @@ function Form () {
           <tr>
             <td height="20" colspan="2" bgcolor="#006699"> 
                     <div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"> 
-                      <strong>AN�LISIS Y PLANIFICACI�N DE COSTOS</strong></font></div></td>
+            <strong>AN&Aacute;LISIS Y PLANIFICACI&Oacute;N DE COSTOS</strong></font></div></td>
           </tr>
         </table>
 
@@ -259,12 +259,12 @@ function Form () {
                       </select>
                       </font></div> 
                     <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">PARA 
-                      REALIZAR CAMBIOS POR FAVOR PRESIONE EL NUMERO DE RECURSO</font></div></td>
+                      REALIZAR CAMBIOS POR FAVOR ELIJA EL RECURSO</font></div></td>
                 </tr>
               </table>
               <table width="100%" border="1">
                 <tr> 
-                  <td width="6%" rowspan="2" bgcolor="#006699"><div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">N�&nbsp;</font></div></td>
+                  <td width="6%" rowspan="2" bgcolor="#006699"><div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">ELEGIR</font></div></td>
 				  <td width="6%" rowspan="2" bgcolor="#006699"><div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Tipo&nbsp;</font></div></td>
                   <td width="10%" rowspan="2" bgcolor="#006699"><div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Recurso&nbsp;</font></div></td>
                   <td width="13%" rowspan="2" bgcolor="#006699"><div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">Descripcion&nbsp;</font></div></td>
@@ -290,7 +290,7 @@ function Form () {
   		{
 		 ?>
           <tr> 
-           	<?php echo "<td><a href=\"anayplanifcostos_last.php?id_ficha=$id_ficha&numero=".$row['numero']."\">".$row['numero']."</a></font></td>";?>
+           	<?php echo "<td><a href=\"anayplanifcostos_last.php?id_ficha=$id_ficha&numero=".$row['numero']."\">elegir(".$row['numero'].")</a></font></td>";?>
 			<td>&nbsp;<?php echo $row['tipo']?></td>
             <td>&nbsp;<?php echo $row['recurso']?>&nbsp;</td>
             <td>&nbsp;<?php echo $row['descripcion']?>&nbsp;</td>
@@ -318,7 +318,10 @@ function Form () {
           </tr>
                </table>
 
-	<?php $sql = "SELECT * FROM anfacecoplancost WHERE id_ficha='$id_ficha'";
+	<?php 
+if(isset($_REQUEST['numero']))
+{
+	$sql = "SELECT * FROM anfacecoplancost WHERE id_ficha='$id_ficha'";
 	$result=mysql_query($sql);
 	$row=mysql_fetch_array($result);  ?>
 
@@ -377,4 +380,7 @@ function Form () {
   </table>
 <p>&nbsp;</p><p> 
 </p>
- <?php } ?> 
+ <?php  } //cierra if para elejir cual cambiar y obligar al usario a elegir 
+        else
+			;
+ } ?> 

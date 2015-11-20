@@ -66,7 +66,7 @@ if (isset($_REQUEST['GyC']))
                         $FormaPago=$_REQUEST['FormaPago'];
                         $Entrega=$_REQUEST['Entrega'];
                         $area=$_REQUEST['area'];
-		if ($indefinido=="1")
+		if ($_REQUEST['indefinido'])
 		{
                         /*$TipoContra=isset($_REQUEST['TipoContra']);
                         $CodLegalContra=isset($_REQUEST['CodLegalContra']);
@@ -79,19 +79,21 @@ if (isset($_REQUEST['GyC']))
                         $FormaPago=isset($_REQUEST['FormaPago']);
                         $Entrega=isset($_REQUEST['Entrega']);
                         $area=isset($_REQUEST['area']);*/
+			
 			$sql="INSERT INTO ".
 			"contratodatos (TipoContra,CodLegalContra,EmpContra,PartCont,RepresLegal,MoneContra,MontoContra,CentContra,".
 	        "FechDe,FechAl,OtrosContra,FormaPago,Entrega,area,ClausContra,SalvagContra,OtroDetalle,ObsContra,Ejecucion,Cierre,motivo_cierre,file,observacion) ".
 			"VALUES ('$TipoContra','$CodLegalContra','$row2[nombre]','$PartCont','$RepresLegal','$MoneContra','$MontoContra','$CentContra',".
 	        "'$FechDe','2030-12-31','$OtrosContra','$FormaPago','$Entrega','$area','0','0','0','0','0','0','0','','0')";
 		   } else {
+			
 			$sql="INSERT INTO ".
 			"contratodatos (TipoContra,CodLegalContra,EmpContra,PartCont,RepresLegal,MoneContra,MontoContra,CentContra,".
 	        "FechDe,FechAl,OtrosContra,FormaPago,Entrega,area,ClausContra,SalvagContra,OtroDetalle,ObsContra,Ejecucion,Cierre,motivo_cierre,file,observacion) ".
 			"VALUES ('$TipoContra','$CodLegalContra','$row2[nombre]','$PartCont','$RepresLegal','$MoneContra','$MontoContra','$CentContra',".
 	        "'$FechDe','$FechAl','$OtrosContra','$FormaPago','$Entrega','$area','0','0','0','0','0','0','0','','0')";
                 }
-
+        
 		mysql_query($sql);
 		$executeDoit=mysql_affected_rows();
 		//print "execute".$executeDoit;
@@ -113,6 +115,8 @@ if (isset($_REQUEST['GyC']))
                         $sql="INSERT INTO ".
 			"contratofases (IdContra,Fase,Detalle,Monto,FechaVenc,Garantia,VencPlazo,area) ".
 			"VALUES ('$row2[ID]','1','$TipoContra','$MontoContra.$CentContra','$FechAl','NA','$FechAl','$area')";
+			//echo "SQL:".$sql;
+			//exit;
 			mysql_query($sql);
 			header("location: contrato2.php?varia1=$row2[ID]&numfase=1");
 		}
@@ -354,7 +358,7 @@ function validaMonto () {
               <strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Arial, Helvetica, sans-serif"><a href="javascript:cal1.popup();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Haga click para seleccionar una fecha"> 
               <label> </label>
               </a></font></strong></font></strong></font></strong></font>
-			  <input name="indefinido" type="checkbox" value="1"/> 
+			  <input name="indefinido" type="checkbox"/> 
 			  <font size="2">Indefinido</font></td>
               <label> </label>
               </a></font></strong></font></strong></font></strong></font>

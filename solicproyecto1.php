@@ -21,7 +21,7 @@ if (isset($_REQUEST['RETORNAR'])){header("location: lista_solicproyecto.php");}
 if (isset($_REQUEST['GyC'])) 
 {		
 	require ("conexion.php");
-            $FechSolic=$_REQUEST['AnoS'].'-'.$_REQUEST['MesS'].'-'.$_REQUEST['DiaS'];
+    $FechSolic=$_REQUEST['AnoS'].'-'.$_REQUEST['MesS'].'-'.$_REQUEST['DiaS'];
 	$FechDesignac1=$_REQUEST['Ano1'].'-'.$_REQUEST['Mes1'].'-'.$_REQUEST['Dia1'];
 	$FechDesignac2=$_REQUEST['Ano2'].'-'.$_REQUEST['Mes2'].'-'.$_REQUEST['Dia2'];
 	$FechDesignac3=$_REQUEST['Ano3'].'-'.$_REQUEST['Mes3'].'-'.$_REQUEST['Dia3'];

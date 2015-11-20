@@ -1,24 +1,39 @@
-<?php if ($Terminar)
-header("location: agenda_last.php?id_agenda=$var&verif=1");
+<?php 
+ 
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+
+if (isset($_REQUEST['Terminar']))
+	header("location: agenda_last.php?id_agenda=$var&verif=1");
 ?>
 <?php
-if ($reg_form)
+if (isset($_REQUEST['reg_form']))
 {   include("conexion.php");
-		  		
+		  		if(isset($_REQUEST['nombre']))
+		$nombre=$_REQUEST['nombre'];	
 			  $sql33 = "SELECT * FROM users WHERE login_usr='$nombre'";
 			  $result33=mysql_db_query($db,$sql33,$link);
 			  $row33=mysql_fetch_array($result33); 
-			  $cargo=$row33[cargo_usr];
+			  $cargo=$row33['cargo_usr'];
 			  
 	$sql="INSERT INTO ".
 	"invitados (nombre,id_agenda,tipo,cargo) ".
 	"VALUES ('$nombre','$var','Interno','$cargo')";
+	
+	
 	mysql_db_query($db,$sql,$link);
+	/*echo $sql;
+	exit;*/
 	header("location: iinterno_last.php?id_agenda=$var");
 }
 else { 
 include("top.php");
-$id_agenda=($_GET['id_agenda']);
+
+$id_agenda=$_GET['id_agenda'];
+/*if(isset($_REQUEST['id_agenda']))
+	$id_agenda=$_REQUEST['id_agenda'];
+else
+	$id_agenda=$var;*/
 ?>
 <?php
 require_once ( "ValidatorJs.php" );
@@ -36,7 +51,7 @@ function Form () {
 -->
 </script>
 <table width="59%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_agenda;?>">
 	
 	<tr> 
@@ -69,7 +84,7 @@ function Form () {
 		    $result5 = mysql_db_query($db,$sql5,$link);
 		    $row5 = mysql_fetch_array($result5);
 			echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";?>
-            <td>&nbsp;<?php echo $row[cargo]?></td>
+            <td>&nbsp;<?php echo $row['cargo']?></td>
           </tr>
           <?php 
 		 }
@@ -91,7 +106,7 @@ function Form () {
 				$sql01 = "SELECT * FROM invitados WHERE nombre='$row0[login_usr]' AND id_agenda='$id_agenda'";
 			  	$result01=mysql_db_query($db,$sql01,$link);
 			  	$row01=mysql_fetch_array($result01);
-				if (!$row01[nombre])
+				if (!$row01['nombre'])
 				{echo "<option value=\"$row0[login_usr]\">$row0[apa_usr] $row0[ama_usr] $row0[nom_usr]</option>";}
 				}
 			   ?>

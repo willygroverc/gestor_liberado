@@ -1,4 +1,7 @@
 <?php
+session_start();
+//ver agenda
+
 if(isset($_REQUEST['COD'])) header("location: agenda_cod.php");
 require_once("funciones.php");
 if (valida("Actas")=="bad") {header("location: pagina_error.php");}
@@ -6,9 +9,11 @@ if(isset($_REQUEST['US_EXTERNOS'])) header("location: us_externos.php");
 if (isset($_REQUEST['RETORNAR'])){header("location: lista_gestion.php?Naveg=Gestion");}
 if (isset($_REQUEST['NUEVOREG'])) {header("location: agenda.php?verif=0");}
 //codigo para el envio de la agenda de reunion por mail 
-$ejecutar=  isset($_REQUEST['ejecutar']);
-if ($ejecutar=="enviar_agenda"){
+//$ejecutar=  ;
+if (isset($_REQUEST['ejecutar']) && $_REQUEST['ejecutar']=="enviar_agenda"){
+	//echo "ENVIAR EGENDA";
 	include ("conexion.php");
+	$id_agenda=$_REQUEST['id_agenda'];
 	$sql = "SELECT *,DATE_FORMAT(en_fecha,'%d / %m / %Y') as en_fecha,DATE_FORMAT(fecha,'%d / %m / %Y') as fecha FROM agenda  WHERE id_agenda='$id_agenda'";
 	$result=mysql_db_query($db,$sql,$link);
 	$row=mysql_fetch_array($result);
@@ -49,11 +54,12 @@ NUEVA AGENDA DE REUNION
 	$mensaje.="
 LISTA DE INVITADOS
 ";
+	$cont=0;
 	$sql2 = "SELECT * FROM invitados WHERE id_agenda=$row[id_agenda]";
 	$result2=mysql_db_query($db,$sql2,$link);
 	while ($row2=mysql_fetch_array($result2)) 
 	{
-		$cont=$cont+1;
+		$cont++;
 		$sql3 = "SELECT * FROM users WHERE login_usr='$row2[nombre]'";
 		$result3 = mysql_db_query($db,$sql3,$link);
 		$row3 = mysql_fetch_array($result3); 
@@ -103,20 +109,30 @@ COMENTARIOS
 	//codigo para el envio del mail
 	$sql5="SELECT * FROM invitados WHERE id_agenda=$row[id_agenda]";
 	$result5=mysql_db_query($db,$sql5,$link);
+	
+	//
+	$lista="";
+	$fallas="";
 	while ($row5=mysql_fetch_array($result5)){
 		$sql8="SELECT * FROM users WHERE login_usr='$row5[nombre]'";
+		
 		$result8=mysql_db_query($db,$sql8,$link);
 		$row8=mysql_fetch_array($result8);
 		$nombre=$row8['nom_usr']." ".$row8['apa_usr']." ".$row8['ama_usr']; 
 		$sql9="SELECT * FROM control_parametros";
 		$result9=mysql_db_query($db,$sql9,$link);
-		$row9=mysql_fetch_array($result9);			
+		$row9=mysql_fetch_array($result9);		
+		
 		//--------------------------------------------------------------------
 		if (!(empty($row8['email'])))
-		{	$asunto = "Nro. $row[num_codigo]. Nueva Agenda de Reunion";	
+		{	//echo $row8['email'];
+			//exit;
+			$asunto = "Nro. $row[num_codigo]. Nueva Agenda de Reunion";	
 			$mail = $row8['email'];
 			if(!mail($mail,$asunto,$mensaje))
-			{ $fallas.= $nombre.", ";}																
+			{ $fallas.= $nombre.", ";
+				
+			}																
 			else
 			{ $lista.= $nombre.", "; }
 		}
@@ -129,7 +145,11 @@ COMENTARIOS
 	$msg = "Se han enviado los correos correctamente, excepto a: $fallas posiblemente la direccion es erronea";
 }
 //codigo para el envio de la minuta por mail 
-if ($ejecutar=="enviar_minuta"){
+if (isset($_REQUEST['ejecutar']) && $_REQUEST['ejecutar']=="enviar_minuta"){
+	if(isset($_GET['id_minuta']))
+		$id_minuta=$_GET['id_minuta'];
+	else
+		$id_minuta=0;
 	include ("conexion.php");
 	$sql = "SELECT *,DATE_FORMAT(en_fecha,'%d / %m / %Y') as en_fecha,DATE_FORMAT(fecha,'%d / %m / %Y') as fecha FROM minuta  WHERE id_minuta='$id_minuta'";
 	$result=mysql_db_query($db,$sql,$link);
@@ -290,7 +310,13 @@ include_once ("help.class.php");
 $help=new Help();
 $help->AddHelp("num","Numero");
 print $help->ToHtml();
+//*********ver id_minuta por migracion
+/*if(isset($row['id_agenda']))
+	;
+else*/
+	
 
+//
 ?>
 <script language="JavaScript">
 <!--
@@ -374,10 +400,14 @@ while ($row=mysql_fetch_array($result))
 	if (!$row4['id_minuta'])
 		{	echo "<td><font size=\"1\">&nbsp;<a href=\"minuta.php?verif=0&id_minuta=$row[id_agenda]\">MINUTA</a></font></td>";}
 		else	
-		{	echo "<td><font size=\"1\">LLENADO</font></td>";}		
-	$sql3 = "SELECT * FROM minuta WHERE id_minuta='$row[id_minuta]' GROUP BY id_minuta";
-    $result3 = mysql_db_query($db,$sql3,$link);
-	$row3 = mysql_fetch_array($result3);
+		{	echo "<td><font size=\"1\">LLENADO</font></td>";}	
+	// parte valida id_munuta
+	if(isset($row['id_minuta']))
+	{	$sql3 = "SELECT * FROM minuta WHERE id_minuta='$row[id_minuta]' GROUP BY id_minuta";
+	//echo $sql3;
+    	$result3 = mysql_db_query($db,$sql3,$link);
+		$row3 = mysql_fetch_array($result3);
+	}
 		
 if ($row4['id_minuta'])
 		{
@@ -467,16 +497,16 @@ print $_pagi_navegacion;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input name="ESTADISTICAS" type="button" onClick="estad()" id="NUEVOREG" value="ESTADISTICAS">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input name="IMPRIMIR" type="button" onClick="impre()" id="NUEVOREG" value="IMPRIMIR">
+    <input name="IMPRIMIR" type="button" onClick="impre()" id="NUEVOREG1" value="IMPRIMIR">
   </div>
 </form>
 <script language="JavaScript">
 <!-- 
 function estad(){
-	open("agenda_estadisticas_pre.php",'Estad�sticas', 'width=580,height=210,status=no,resizable=no,top=200,left=200,dependent=yes,alwaysRaised=yes')
+	open("agenda_estadisticas_pre.php",'Estadísticas', 'width=580,height=210,status=no,resizable=no,top=200,left=200,dependent=yes,alwaysRaised=yes')
 }
 function impre(){
-	open('agenda_impresion_pre.php','Estad�sticas', 'width=580,height=210,status=no,resizable=no,top=200,left=200,dependent=yes,alwaysRaised=yes')
+	open('agenda_impresion_pre.php','Estadísticas', 'width=580,height=210,status=no,resizable=no,top=200,left=200,dependent=yes,alwaysRaised=yes')
 }
 <?php
 	if (isset($msg)) {

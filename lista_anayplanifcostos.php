@@ -41,7 +41,7 @@ include ("top.php");?>
             DE COSTOS</th>
         </tr>
         <tr align=\"center\"> 
-          <th class="menu" width="5%" background="images/main-button-tileR2.jpg"><?php print $help->AddLink("num", "N� DE FORM."); ?></th>
+          <th class="menu" width="5%" background="images/main-button-tileR2.jpg"><?php print $help->AddLink("num", "No DE FORM."); ?></th>
 		  <th class="menu" background="images/main-button-tileR2.jpg"> NOMBRE DEL PROYECTO</th>
   		  <th class="menu" background="images/main-button-tileR2.jpg"> NOMBRE DEL RESPONSABLE</th>
   		  <th class="menu" background="images/main-button-tileR2.jpg"> TOTAL</th>

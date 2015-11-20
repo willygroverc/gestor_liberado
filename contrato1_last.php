@@ -2,17 +2,20 @@
 session_start();
 $tipo=$_SESSION["tipo"];
 if ($tipo<>"A")
-header("location: pagina_error.php?variable1=2");
+	header("location: pagina_error.php?variable1=2");
 else
-{
-if (isset($_REQUEST['RETORNAR'])){
-    header("location: lista_contratos.php");
+{	if (isset($_REQUEST['RETORNAR'])){
+    	header("location: lista_contratos.php");
     
-}elseif(isset($_REQUEST['ModFases'])) 
-{	
-        $Generales=$_REQUEST['Generales'];
-	$Especificas=$_REQUEST['Especificas'];
-	$Necesarias=$_REQUEST['Necesarias'];
+	}elseif(isset($_REQUEST['ModFases'])) 
+	{	//echo "MODIFCA FASES".$var;
+		//exit;
+		//**************1 por migracion php5 se debe guardar el registro POST
+		$var=$_REQUEST['var'];
+		//**************FIN 1
+    	$Generales=$_REQUEST['Generales'];
+		$Especificas=$_REQUEST['Especificas'];
+		$Necesarias=$_REQUEST['Necesarias'];
 	$Anexos=$_REQUEST['Anexos'];
 	$Otros=$_REQUEST['Otros'];
 	$Otros1=$_REQUEST['Otros1'];
@@ -22,7 +25,7 @@ if (isset($_REQUEST['RETORNAR'])){
 	$Auditabilidad=$_REQUEST['Auditabilidad'];
 	$Arbitraje=$_REQUEST['Arbitraje'];
         
-        if ($Generales=="") {$Generales="Z";}
+    if ($Generales=="") {$Generales="Z";}
 	if ($Especificas=="") {$Especificas="Z";}
 	if ($Necesarias=="") {$Necesarias="Z";}
 	if ($Anexos=="") {$Anexos="Z";}
@@ -74,7 +77,7 @@ if (isset($_REQUEST['RETORNAR'])){
 	$ObsContra=SanitizeString($ObsContra);
 	$area=SanitizeString($area);
         
-        $TipoContra=$_REQUEST['TipoContra'];
+    $TipoContra=$_REQUEST['TipoContra'];
 	$CodLegalContra=$_REQUEST['CodLegalContra'];
 	$PartCont=$_REQUEST['PartCont'];
 	$RepresLegal=$_REQUEST['RepresLegal'];
@@ -92,7 +95,7 @@ if (isset($_REQUEST['RETORNAR'])){
 	      "PartCont='$PartCont',RepresLegal='$RepresLegal',MoneContra='$MoneContra',MontoContra='$MontoContra',CentContra='$CentContra',".
 		  "FechDe='$FechDe',FechAl='$FechAl',OtrosContra='$OtrosContra',FormaPago='$FormaPago',Entrega='$Entrega',".
           "ClausContra='$ClausContra',SalvagContra='$SalvagContra',OtroDetalle='$OtroDetalle',ObsContra='$ObsContra', area='$area' ".
-		  "WHERE IdContra='$_REQUEST[var]'";
+		  "WHERE IdContra='$var'";
 	mysql_query($sql9);
 
 	if ($_REQUEST['Entrega']=="UNICA")
@@ -270,12 +273,12 @@ echo $valid->toHtml ();
   <tr> 
     <td height="650"> 
       <form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" onKeyPress="return Form()">
-        <input name="var" type="hidden" value="<?php echo $IdContra;?>">
+        <input name="var" type="hidden" value="<?php echo $IdContra; ?>">
 	  	<table width="100%" cellspacing="0" cellpadding="0">
           <tr> 
             <td background="images/main-button-tileR1.jpg" height="20">
 <div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"> 
-                <strong>FORMULARIO DE CONTRATOS</strong></font></div></td>
+                <strong>FORMULARIO DE CONTRATOS </strong></font></div></td>
           </tr>
 		  <tr> 
             <td> <div align="left">&nbsp;&nbsp;&nbsp;<font size="2" face="Arial, Helvetica, sans-serif"><strong>N&deg; 

@@ -17,14 +17,18 @@ $rs=mysql_query($sql);
 while ($tmp=mysql_fetch_array($rs)) {
 	$lstTecnico[$tmp['login_usr']]=$tmp['nombre'];
 }
+
 ?>
 <html>
 <head>
-<title>Impresion</title>
+<title>IMPRESION</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
+
 <script lenguaje="javascript" type="text/javascript">
-<!--
+
+
+
+
 function irapagina(pagina){         
  		 if (pagina!="") {
      	 	self.location = pagina;
@@ -36,10 +40,28 @@ function cambio(numero){
 		 } 
 }
 var foco_texto=false;
--->
+
+
+
+
+function OpenPrint () {
+	//alert(form.menu.value);
+	var form=document.form2;
+
+	if (form.menu.value=="agendas") window.open('agenda_impresion.php', 'Estadisticas', 'width=600,height=450,status=no,resizable=no,top=150,left=250,dependent=yes,alwaysRaised=yes,Scrollbars=yes');
+	if (form.menu.value=="propo") window.open('agenda_impresion_asis.php?elab_por='+form.nombre.value, 'Estadisticas', 'width=600,height=450,status=no,resizable=no,top=150,left=250,dependent=yes,alwaysRaised=yes,Scrollbars=yes');
+	close();
+	return false;	
+}
+
+
+
+
 </script>
 <script language="JavaScript" src="calendar.js"></script>
+</head>
 <body>
+<?php //var_dump($lstTecnico); ?>
 <table background="images/fondo.jpg" width="98%"  align="center" border="1">
   <tr>
     <td  bgcolor="#006699" align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica"><b>IMPRESION</b></font></td>
@@ -60,10 +82,10 @@ var foco_texto=false;
                 <tr> 
                   <td width="34" height="40"></td>
                   <td width="132"><font size="2" face="Arial, Helvetica"><B>Tipo:</B></font></td>
-                  <td width="781"> <select name="menu" id="select3" onChange=redirect(this.options.selectedIndex)>
+                  <td width="781"> <select name="menu" id="select3" onChange="redirect(this.options.selectedIndex);">
                       <option value="agendas" selected>Lista de Agenda</option>
-                      <option value="propo">Proposiciones por Usuarios</optio>
-                      <option value="agendas" selected>Lista de Agenda</option>
+                      <option value="propo">Proposiciones por Usuarios</option>
+                   
                     </select> </td>
                 </tr>
                 <tr> 
@@ -76,7 +98,7 @@ var foco_texto=false;
 					?>
                     </select> &nbsp;&nbsp;&nbsp;&nbsp; 
                     
-                    <input name="IMPRE" type="button" value="    VER    " onClick="OpenPrint()"> 
+                    <input name="IMPRE" type="button" value="    VER    " onClick="OpenPrint();"> 
                     
                     <br> </td>
                 </tr>
@@ -168,45 +190,46 @@ var foco_texto=false;
   </tr>
 </table>
 <script language="JavaScript">
-<!--
+
 /*
 Double Combo Script Credit
 By JavaScript Kit (www.javascriptkit.com)
 Over 200+ free JavaScripts here!
 */
 
-var groups=document.form2.menu.options.length
-var group=new Array(groups)
-for (i=0; i<groups; i++)
-group[i]=new Array()
-<?php
-	$i = 0;
+
+
+var groups=document.form2.menu.options.length;
+var group=new Array(groups);
+for(i=0; i<groups; i++)
+	group[i]=new Array();
+<?php $i = 0;
 	$v="GENERAL";
-	print "group[0][$i]=new Option(\"$v\",\"$k\")\n";
+	echo "group[0][$i]=new Option(\"$v\",\"$k\")\n";
 
 	$i=0;
 	foreach ($lstTecnico as $k => $v){
-		print "group[1][$i]=new Option(\"$v\",\"$k\")\n";
+		echo "group[1][$i]=new Option(\"$v\",\"$k\")\n";
 		$i++;
 	}
 ?>
-var temp=document.form2.nombre;
+
+
 function redirect(x){
-for (m=temp.options.length-1;m>0;m--)
-temp.options[m]=null
-for (i=0;i<group[x].length;i++){
-	temp.options[i]=new Option(group[x][i].text,group[x][i].value)
-}
-	temp.options[0].selected=true
+	var temp=document.form2.nombre;
+	//alert(temp);
+	for (m=temp.options.length-1;m>0;m--)
+		temp.options[m]=null;
+	for (i=0;i<group[x].length;i++){
+		temp.options[i]=new Option(group[x][i].text,group[x][i].value);
+		
+	}
+	temp.options[0].selected=true;
 }					
 
-function OpenPrint () {
-	var form=document.form2;
-	if (form.menu.value=="agendas") window.open('agenda_impresion.php', 'Estadisticas', 'width=600,height=450,status=no,resizable=no,top=150,left=250,dependent=yes,alwaysRaised=yes,Scrollbars=yes');
-	if (form.menu.value=="propo") window.open('agenda_impresion_asis.php?elab_por='+form.nombre.value, 'Estadisticas', 'width=600,height=450,status=no,resizable=no,top=150,left=250,dependent=yes,alwaysRaised=yes,Scrollbars=yes');
-	close();
-	return false;	
-}
+
+
+
 
 function OpenPrint7 () {	
 	var form = document.form2;
@@ -215,7 +238,7 @@ function OpenPrint7 () {
 	close();
 	return false;	
 }
--->
+
 </script>
 </body>
 </html>

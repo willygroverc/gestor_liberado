@@ -1,6 +1,14 @@
 <?php 
 session_start();
 $tipo=$_SESSION["tipo"];
+if(isset($_REQUEST['numfase']))
+	$numfase=$_REQUEST['numfase'];
+else
+	$numfase=0;
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+else
+	$var=0;
 if ($tipo<>"A"){
 header("location: pagina_error.php?variable1=2");
 }else
@@ -9,9 +17,34 @@ if (isset($_REQUEST['ACEPTAR']))
 {header("location: contrato1_last.php?IdContra=$var");}
 elseif (isset($_REQUEST['insertar']))
     {include("conexion.php");
+	$AnoV=$_REQUEST['AnoV'];
+	$MesV=$_REQUEST['MesV'];
+	$DiaV=$_REQUEST['DiaV'];
+	if(isset($_REQUEST['AnoVP']))
+		$AnoVP=$_REQUEST['AnoVP'];
+	else
+		$AnoVP="0000";
+	if(isset($_REQUEST['MesVP']))	
+		$MesVP=$_REQUEST['MesVP'];
+	else
+		$MesVP="00";
+	if(isset($_REQUEST['DiaVP']))		
+		$DiaVP=$_REQUEST['DiaVP'];
+	else	
+		$DiaVP="00";
 	$FechaVenc="$AnoV-$MesV-$DiaV";
 	$VencPlazo="$AnoVP-$MesVP-$DiaVP";
-		
+	if(isset($_REQUEST['Fase']))		
+		$Fase=$_REQUEST['Fase'];
+	else	
+		$Fase=0;
+	if(isset($_REQUEST['Garantia']))		
+		$Garantia=$_REQUEST['Garantia'];
+	else	
+		$Garantia="";	
+	//detalle y monto
+	$Detalle=$_REQUEST['Detalle'];
+	$Monto=$_REQUEST['Monto'];
 	if ($_REQUEST['Fase']=="Nueva")
 		{$sql8="SELECT MAX(Fase) AS Fas FROM contratofases WHERE IdContra='$var'";
 	 	$result8=mysql_db_query($db,$sql8,$link);
@@ -45,6 +78,8 @@ elseif (isset($_REQUEST['insertar']))
 		$sql5="UPDATE contratofases SET Detalle='$Detalle',".
 	        "Monto='$Monto',FechaVenc='$FechaVenc',Garantia='$Garantia',VencPlazo='$VencPlazo' ".
 		    "WHERE IdContra='$var' AND Fase='$Fase'";
+		/*echo $sql5;
+		exit;*/
 	  mysql_db_query($db,$sql5,$link);
 	  header("location: contrato2_last.php?variable1=$var&numfase=$numfase");
 	}

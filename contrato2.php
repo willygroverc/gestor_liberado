@@ -58,22 +58,28 @@ elseif (isset($_REQUEST['insertar']))
 	$Otros1=_clean($Otros1);
 	$Otros1=SanitizeString($Otros1);
         $Otros1=$_REQUEST['Otros1'];
-	
+	$var1=$_REQUEST[var1];
+	$var3=$_REQUEST[var3];
 	
 	$sql="INSERT INTO ".
 	"contratofases (IdContra,Fase,Detalle,Monto,FechaVenc,Garantia,VencPlazo,area) ".
-	"VALUES ('$_REQUEST[var1]','$_REQUEST[var3]','$Detalle','$Monto','$FechaVenc','$Garantia','$VencPlazo','$area')";
+	"VALUES ('$var1','$var3','$Detalle','$Monto','$FechaVenc','$Garantia','$VencPlazo','$area')";
 
 	mysql_query($sql);
         $var3=$_REQUEST[var3];
-	$var3=$var3+1;
+	$var3++;
 	print("$Fase");
-	header("location: contrato2.php?varia1=$_REQUEST[var1]&varia3=$_REQUEST[var3]");
+	header("location: contrato2.php?varia1=$var1&varia3=$var3");
 }
 else { 
 include("top.php");
 $IdContra= $_GET['varia1'];
-$Fase=$_GET['varia3'];
+if(isset($_GET['varia3']))
+	$Fase=$_GET['varia3'];
+else
+	$Fase=0;
+//echo "ID:".$IdContra." -FASE:".$Fase;
+//exit;
 ?>
 <script language="JavaScript">
 <!--

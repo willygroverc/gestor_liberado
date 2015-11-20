@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once("funciones.php");
 if (valida("Contratos")=="bad") {header("location: pagina_error.php");}
 if (isset($_REQUEST['RETORNAR'])){echo "<script type=\"text/javascript\">
@@ -10,6 +11,7 @@ include ("top.php");
 $IdContra=  isset($_GET['IdContra']);
 $Ejecuc=  isset($_GET['Ejec']);
 $Cierre=  isset($_GET['Cierre']);
+
 if ($Ejecuc<>"")
 {	$sql3="UPDATE contratodatos SET Ejecucion='$_GET[Ejec]' WHERE IdContra='$_GET[IdContra]'";
 	

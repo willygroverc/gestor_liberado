@@ -3,8 +3,8 @@ include("conexion.php");
 if(isset($_REQUEST['RETORNAR'])) header("location: lista_agenda.php");
 if(isset($_REQUEST['reg_form'])){
 	unset($msg);
-        $nombre=$_REQUEST['nombre'];
-        $obs=$_REQUEST['obs'];
+    $nombre=$_REQUEST['nombre'];
+    $obs=$_REQUEST['obs'];
 	$cons="SELECT * FROM us_ext_mod WHERE nombre='$nombre'";
         //print_r($cons);
         //exit;
@@ -80,6 +80,7 @@ print $valid->toHtml ();
 </form>
 <?php
 include("top_.php");
+$msg=$_REQUEST['msg'];
 ?>
 <script language="JavaScript" type="text/JavaScript">
 <?php if($msg==1) echo "alert('El nombre ya existe, seleccione otro.\\n Mensaje generado por GestorF1')";?>

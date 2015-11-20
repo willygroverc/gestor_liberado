@@ -1,20 +1,30 @@
-<?php if ($Terminar)
-header("location: agenda.php?id_agenda=$var&verif=1");
+<?php 
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+if (isset($_REQUEST['Terminar']))
+	header("location: agenda.php?id_agenda=$var&verif=1");
+
 ?>
 <?php
-if ($reg_form)
-{   include("conexion.php");
-
+if (isset($_REQUEST['reg_form']))
+{   include("conexion.php");		
+ 	if(isset($_REQUEST['nombre']))
+		$nombre=$_REQUEST['nombre'];
 		
- $sql33 = "SELECT * FROM users WHERE login_usr='$nombre'";
- $result33=mysql_db_query($db,$sql33,$link);
- $row33=mysql_fetch_array($result33);
- $cargo=$row33[cargo_usr];
-
+ 	$sql33 = "SELECT * FROM users WHERE login_usr='$nombre'";
+ 
+	 $result33=mysql_db_query($db,$sql33,$link);
+ 	$row33=mysql_fetch_array($result33);
+ 	$cargo=$row33['cargo_usr'];
+	
 
 	$sql="INSERT INTO ".
 	"invitados (nombre,id_agenda,tipo,cargo) ".
 	"VALUES ('$nombre','$var','Interno','$cargo')";
+	
+	/*echo $sql;
+ 	exit;*/
+	
 	mysql_db_query($db,$sql,$link);
 	header("location: iinterno.php?id_agenda=$var");
 }
@@ -38,7 +48,7 @@ function Form () {
 -->
 </script>
 <table width="46%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_agenda;?>">
 	
 	<tr> 
@@ -103,9 +113,9 @@ function Form () {
               </div></td>
           </tr>
           <tr> 
-            <td height="28" colspan="3" nowrap> <div align="center"> 
-                <input name="reg_form" type="submit" id="reg_form3" value="INSERTAR DATOS" <?php print $valid->onSubmit() ?>>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <td height="28" colspan="3" nowrap> <div align="center">
+              <input name="reg_form" type="submit" id="reg_form3" value="INSERTAR DATOS" <?php print $valid->onSubmit() ?> />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                 <input type="submit" name="Terminar" value="RETORNAR">
               </div></td>
           </tr>

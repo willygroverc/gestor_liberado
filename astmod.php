@@ -30,6 +30,8 @@ if (isset($_REQUEST['GUARDATOS'])) {
     }
     $sql6 = "UPDATE informacionast SET des_infAST='$des_infAST',clasifi='$clasifi',tiempo_ret='$numero',clas_tiempo='$tiempo',medio_ret='$medio_ret',medio_dest='$medio_dest',control_dest='$control_dest',acta_dest='$acta_dest',control='$control',tecnico='$tecnico' " .
             "WHERE id_infAST='$var'";
+	/*echo $sql6;
+	exit;*/
     mysql_query($sql6);
     header("location: ast11.php");
 }
@@ -141,7 +143,7 @@ print $valid->toHtml();
                         <option value="Confidencial"  <?php if ($row['clasifi'] == "Confidencial") echo "selected"; ?>>Confidencial</option>
                         <option value="Reservada"  <?php if ($row['clasifi'] == "Reservada") echo "selected"; ?>>Reservada</option>
                         <option value="Interna"  <?php if ($row['clasifi'] == "Interna") echo "selected"; ?>>Interna</option>
-                        <option value="Publica"  <?php if ($row['clasifi'] == "Publica") echo "selected"; ?>>Publica</option>
+                        <option value="Publica"  <?php if ($row['clasifi'] == "Pública") echo "selected"; ?>>Publica</option>
                     </select>
                 </div></td>
             <td colspan="-4" rowspan="2"> <div align="center"><font size="1" face="Arial, Helvetica, sans-serif"> 
@@ -174,7 +176,7 @@ print $valid->toHtml();
         <tr> 
             <td height="23"> <div align="center"> <font size="1" face="Arial, Helvetica, sans-serif"> 
                     <input type="radio" name="medio_ret" value="Impreso" <?php if ($row['medio_ret'] == "Impreso") echo "checked"; ?>>
-                    <font size="2">Impreso</font></font></div></td>
+                    <font size="2">Impreso(destruccion=Picado)</font></font></div></td>
             <td rowspan="2"><div align="left"><font size="1" face="Arial, Helvetica, sans-serif"> 
                     </font><font face="Arial, Helvetica, sans-serif"><font face="Arial, Helvetica, sans-serif"><font face="Arial, Helvetica, sans-serif"><font size="1" face="Arial, Helvetica, sans-serif"> 
                     </font><font face="Arial, Helvetica, sans-serif"><font face="Arial, Helvetica, sans-serif"><font face="Arial, Helvetica, sans-serif"><font size="1" face="Arial, Helvetica, sans-serif"> 
@@ -188,7 +190,7 @@ print $valid->toHtml();
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="medio_dest" value="Picado" <?php if ($row['medio_dest'] == "Picado") echo "checked"; ?>>
                     Picado </font><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="medio_dest" value="Incinerado" <?php if ($row['medio_dest'] == "Incinerado") echo "checked"; ?>>
+                    <input type="radio" name="medio_dest"  value="Incinerado" <?php if ($row['medio_dest'] == "Incinerado") echo "checked"; ?>>
                     Incinerado </font></p> </font></div></td>
             <td rowspan="2"><div align="center"> 
                     <select name="control_dest">

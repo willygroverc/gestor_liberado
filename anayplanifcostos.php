@@ -192,7 +192,7 @@ function Form () {
                 <tr> 
                   <td height="20" colspan="2" background="images/main-button-tileR1.jpg"> 
                     <div align="center"><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"> 
-                      <strong>AN�LISIS Y PLANIFICACI�N DE COSTOS</strong></font></div></td>
+                  <strong>AN&Aacute;LISIS Y PLANIFICACI&Oacute;N DE COSTOS</strong></font></div></td>
               </tr>              </table>
             <table width="100%">
 			   
