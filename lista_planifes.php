@@ -1,4 +1,5 @@
-<?php 
+<?php
+//ISRAEL
 // Version: 	1.0
 // Objetivo: 	Modificacion funciones php obsoletas para version 5.3 en adelante.
 //				Control Acceso Directo a Fichero No Autorizado.
@@ -13,12 +14,12 @@ if (isset($_SESSION['login'])){
 }
 require_once("funciones.php");
 if (valida("PlanifEstrat")=="bad") {header("location: pagina_error.php");}
-if (isset($RETORNAR)){
+if (isset($_REQUEST['RETORNAR'])){
 	echo "<script type=\"text/javascript\">
            history.go(-2);
        </script>";}
-if (isset($IMPRIMIR)){header("location: ver_planife.php");}
-if (isset($NUEVO)) {header("location: planif_estrategica.php"); }
+if (isset($_REQUEST['IMPRIMIR'])){header("location: ver_planife.php");}
+if (isset($_REQUEST['NUEVO'])) {header("location: planif_estrategica.php"); }
 include ("top.php"); 
 include_once ("help.class.php");
 $help=new Help();
