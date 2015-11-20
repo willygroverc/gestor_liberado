@@ -154,7 +154,10 @@ $(document).ready(function() {
 	</tr>
        
   </table><br><br>
-<div id="tbl_ajax"></div>
+<div id="tbl_ajax">
+
+
+</div>
 <br>
 <?php 
 	if ($_SESSION['tipo']=='A')

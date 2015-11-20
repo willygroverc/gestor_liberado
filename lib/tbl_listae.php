@@ -285,10 +285,11 @@ else
 /*PAGINACION*/
 echo '<center><b><font size="2">Pagina(s): ';
 
-if ($pg>20){
+if ($pg>=20){
 	echo '<a href="javascript:pag_lista(3,0);">Anterior,&nbsp</a>';
-	$pagina_ini=$pg-20+1;
-	$pagina_fin=$pg;
+	$pagina_ini=$pg-20+5;
+	$pagina_fin=$pg+4;
+	
 }
 else{
 	$pagina_ini=1;
@@ -303,11 +304,12 @@ for ($i=$pagina_ini;$i<=$pagina_fin;$i++){
 		echo $i;
 	else{
 		echo '<a href="javascript:pag_lista(1,'.$i.');">'.$i.'</a>';
+		
 	}	
 	if ($i!=$num_paginas)
 		echo ',';
 }
-if ($i>20 & $i<=$num_paginas){
+if ($i>20 && $i<=$num_paginas){
 	echo '<a href="javascript:pag_lista(2,0)">&nbsp;Siguiente</a>';
 }
 /*FIN PAGINACION*/

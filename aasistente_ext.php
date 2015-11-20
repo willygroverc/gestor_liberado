@@ -12,9 +12,15 @@ if (isset($_SESSION['login'])){
 	}
 }
 require("conexion.php");
-$cad = $dato;
-if ( isset($insertado) && $insertado == "1" )
-{	$fila = explode(":",$dato);		
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+$id_minuta=$_REQUEST['id_minuta'];
+$cad = $_GET['dato'];
+$dato=$_REQUEST['dato'];
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "1" )
+{	$num_cod=$_REQUEST['num_cod'];
+
+	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
 	$fechad = explode("/", $fila[2]);
@@ -27,7 +33,7 @@ if ( isset($insertado) && $insertado == "1" )
 	mysql_query($sql);												
 	$insertado = "2";
 }
-if ( $insertado == "0" )
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "0" )
 {	$fila = explode(":",$dato);
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -63,16 +69,18 @@ $valid->addIsNotEmpty ( "nombre",  "Nombre, $errorMsgJs[empty]" );
 print $valid->toHtml ();
 ?>    
 <script language="JavaScript">
-<!--
+
 function Form () {
 	var key = window.event.keyCode;
 	if (key==13) return false;
 	else return true; 
 }
--->
+
+
+
 </script>
 <table width="62%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<input name="verif" type="hidden" value="<?php if ($_GET[verif]) {echo $_GET[verif];}else{echo "1";};?>">
 	<input name="dato" type="hidden" value="<?php echo $dato; ?>">
@@ -120,12 +128,17 @@ function Form () {
                 <select name="select" id="select" onChange="abrir(this.value)">
                   <option value="0">Seleccione un Modulo</option>
                   <?php
+				   if(isset($_GET['id_mod']))
+				  	$id_mod=$_GET['id_mod'];
+				  else
+				  	$id_mod=0;
 				  $sql_ext="SELECT * FROM us_ext_mod ORDER BY nombre";
 				  $res_ext=mysql_query($sql_ext);
 				  while($row_ext=mysql_fetch_array($res_ext)){
-				  	if ($row_ext['id_mod']==$id_mod) $vas="selected";
+				  	if ($row_ext['id_mod']==$id_mod) $vas="selected='selected'";
 					else $vas="";
-					echo '<option value="'.$row_ext['id_mod'].' "'.$vas>$row_ext['nombre'].'</option>';
+					echo "<option value=\"$row_ext[id_mod]\" $vas>$row_ext[nombre]</option>";
+					//echo '<option value="'.$row_ext['id_mod'].' "'.$vas>$row_ext['nombre'].'</option>';
 				  }
 				  ?>
                 </select>
@@ -159,10 +172,8 @@ function Form () {
     </tr></form>
   </table>
 <script language="JavaScript" type="text/JavaScript">
-<!--
 function abrir(x){
-	dir="aasistente_ext.php?id_minuta=<?php=$id_minuta?>&dato=<?php=$dato?>&insertado=<?php=$insertado?>&num_cod=<?php=$num_cod?>&id_mod="+x
+	dir="aasistente_ext.php?id_minuta=<?php echo $id_minuta; ?>&dato=<?php echo $dato; ?>&insertado=<?php echo $insertado;?>&num_cod=<?php echo $num_cod; ?>&id_mod="+x
 	self.location=dir
 }
--->
 </script>

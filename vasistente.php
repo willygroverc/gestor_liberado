@@ -1,9 +1,17 @@
 <?php
 //echo $dato;
 include("conexion.php");
-$cad = $dato;
-if ( $insertado == "1" )
-{	$fila = explode(":",$dato);		
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+$cad = $_GET['dato'];
+$dato=$_REQUEST['dato'];
+
+if ( $_GET['insertado'] == "1" )
+{	
+	$id_minuta=$_REQUEST['id_minuta'];
+	$num_cod=$_REQUEST['num_cod'];
+	
+	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
 	$fechad = explode("/", $fila[2]);
@@ -39,7 +47,7 @@ if ( $insertado == "1" )
 	mysql_query($sql);												
 	$insertado = "2";
 }
-if ( $insertado == "0" )
+if ( $_GET['insertado'] == "0" )
 {	$fila = explode(":",$dato);
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -74,14 +82,16 @@ if ( $insertado == "0" )
 	mysql_db_query($db,$sql,$link);
 	$insertado = "2";
 }
-if ($Terminar){ header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
-if ($reg_form)
-{	$sql = "SELECT * FROM invitados WHERE nombre='$nombre' AND id_agenda='$var'";
+if (isset($_REQUEST['Terminar'])){ header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
+if (isset($_REQUEST['reg_form']))
+{	$nombre=$_REQUEST['nombre'];
+	$sql = "SELECT * FROM invitados WHERE nombre='$nombre' AND id_agenda='$var'";
 	$result=mysql_db_query($db,$sql,$link);		
 	$row=mysql_fetch_array($result);		
 	$cargo=$row['cargo'];
 	$tip=$row['tipo'];
 	$sql1="INSERT INTO asistentes (nombre,cargo,id_minuta,tipo,prop,adjunto,hash_archivo) VALUES('$nombre','$cargo','$var','$tip','','','')";
+	
 	mysql_query($sql1);
 	//echo $sql1;
 	header("location: vasistente.php?id_minuta=$var&verif=2&dato=$dato&insertado=$insertado");
@@ -107,9 +117,9 @@ function Form () {
 </script>
 
 <table width="58%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF ?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
-	<input name="verif" type="hidden" value="<?php if ($_GET[verif]) {echo $_GET[verif];}else{echo "1";};?>">
+	<input name="verif" type="hidden" value="<?php if ($_GET['verif']) {echo $_GET['verif'];}else{echo "1";};?>">
 	<input name="dato" type="hidden" value="<?php echo $dato; ?>">
 	<input name="num_cod" type="hidden" value="<?php echo $num_cod; ?>">
 	<input name="insertado" type="hidden" value="<?php echo $insertado; ?>">
@@ -134,7 +144,7 @@ function Form () {
 		
 		while($row=mysql_fetch_array($result)) 
   		{
-		if ($row[tipo]=='Interno' OR $row[tipo]=='Externo'){
+		if ($row['tipo']=='Interno' OR $row['tipo']=='Externo'){
 			  $cont=$cont+1;
 			  ?>
 			  <tr> 
@@ -142,11 +152,11 @@ function Form () {
 				<?php 	$sql5 = "SELECT * FROM users WHERE login_usr='$row[nombre]'";
 					$result5 = mysql_db_query($db,$sql5,$link);
 					$row5 = mysql_fetch_array($result5);
-					if (!$row5[login_usr])
+					if (!$row5['login_usr'])
 					{echo "<td align=\"center\">&nbsp;$row[nombre]</td>";}
 					else
 					{echo "<td align=\"center\">&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";}?>
-				<td align="center">&nbsp;<?php echo $row[cargo]?></td>
+				<td align="center">&nbsp;<?php echo $row['cargo']?></td>
 			  </tr>
 			  <?php 
 		 	}
@@ -158,10 +168,10 @@ function Form () {
           </tr>
           <tr> 
             <td width="23" nowrap height="7"><strong> </strong></td>
-            <td width="190" nowrap><div align="center"><strong> 
-                <select name="nombre" id="select8">
-                  <option value="0"></option>
-                  <?php 
+            <td width="190" nowrap><div align="center"><strong>
+              <select name="nombre" id="select8">
+                <option value="0"></option>
+                <?php 
 				  $sql0 = "SELECT * FROM invitados WHERE id_agenda='$id_minuta'";
 				  $result0=mysql_db_query($db,$sql0,$link);
 				  while ($row0=mysql_fetch_array($result0)) 
@@ -169,18 +179,18 @@ function Form () {
 					$sql01 = "SELECT * FROM asistentes WHERE nombre='$row0[nombre]' AND id_minuta='$id_minuta'";
 					$result01=mysql_db_query($db,$sql01,$link);
 					$row01=mysql_fetch_array($result01);
-					if (!$row01[nombre])
+					if (!$row01['nombre'])
 					{$sql5 = "SELECT * FROM users WHERE login_usr='$row0[nombre]' ORDER BY apa_usr ASC";
 					$result5 = mysql_db_query($db,$sql5,$link);
 					$row5 = mysql_fetch_array($result5);
-					if (!$row5[login_usr])
+					if (!$row5['login_usr'])
 						{echo "<option value=\"$row0[nombre]\">$row0[nombre] </option>";}
 					else
 						{echo "<option value=\"$row5[login_usr]\">$row5[apa_usr] $row5[ama_usr] $row5[nom_usr]</option>";}
 				   }}
 			 ?>
-                </select>
-                </strong></div></td>
+              </select>
+            </strong></div></td>
             <td width="198" nowrap height="7"><div align="center"><strong></strong> 
               </div></td>
           </tr>

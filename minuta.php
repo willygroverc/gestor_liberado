@@ -8,7 +8,7 @@ if(isset($_REQUEST['var']))
 {	$var=$_REQUEST['var'];
 	unset($num_cod);
 	if(isset($_REQUEST['codigo']))
-		$datos = $codigo.":".$eano."/".$emes."/".$edia.":".$ano."/".$mes."/".$dia.":".$elab_por.":".$tipo_min.":".$h."/".$m.":".$lugar.":".$comentario;
+		$datos = $_REQUEST['codigo'].":".$_REQUEST['eano']."/".$_REQUEST['emes']."/".$_REQUEST['edia'].":".$_REQUEST['ano']."/".$_REQUEST['mes']."/".$_REQUEST['dia'].":".$_REQUEST['elab_por'].":".$_REQUEST['tipo_min'].":".$_REQUEST['h']."/".$_REQUEST['m'].":".$_REQUEST['lugar'].":".$_REQUEST['comentario'];
 	$sql2 = "SELECT * FROM agenda WHERE id_agenda='$var'";
 	$result2 = mysql_db_query($db,$sql2,$link);
 	$row2 = mysql_fetch_array($result2);
@@ -17,6 +17,11 @@ if(isset($_REQUEST['var']))
 	$row28 = mysql_fetch_array($result28);
 	$num_cod = $row28['ncod']+1;
 }
+//insertado
+if(isset($_GET['insertado']))
+	$insertado=$_GET['insertado'];
+else
+	$insertado=0;
 if (isset($_REQUEST['RETORNAR'])){
 	if($verif=="2"){
 		//echo "$row28[ncod]";
@@ -125,6 +130,8 @@ if (isset($_REQUEST['VASISTENTE'])){
 	//echo "*".$insertado;
 	if ( $insertado == "2" ) $insertado = "0";	
 	else   $insertado = "1";
+	/*echo "location: vasistente.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod";
+	exit;*/
 	header("location: vasistente.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
 if (isset($_REQUEST['AASISTENTE'])){
@@ -176,10 +183,10 @@ function Form () {
 <table width="90%" border="1" align="center" cellpadding="0" cellspacing="0" background="images/fondo.jpg">
   <tr> 
     <td> 
-      <form name="form1" method="post" action="<?php echo $PHP_SELF ?>" onKeyPress="return Form()">
+      <form name="form1" method="post" action="" onKeyPress="return Form()">
 	  <input name="var" type="hidden" value="<?php echo $id_minuta;?>">	
 	  <input name="verif" type="hidden" value="<?php echo $verif;?>">	  
-	  <input name="codigo" type="hidden" value="<?php echo $row2[codigo];?>">
+	  <input name="codigo" type="hidden" value="<?php echo $row2['codigo'];?>">
 	  <input name="insertado" type="hidden" value="<?php echo $insertado;?>">	 	  
         <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#006699">
           <tr> 
@@ -279,10 +286,10 @@ function Form () {
 				Tipo de 
                   Reunion  :&nbsp;&nbsp;&nbsp; </strong><font size="2" face="Arial, Helvetica, sans-serif"> 
                   <select name="tipo_min">
-                    <option value="Ordinaria" <?php if ($row2[tipo_reu]=="Ordinaria") echo "selected";?>>Ordinaria</option>
-                    <option value="Extraordinaria" <?php if ($row2[tipo_reu]=="Extraordinaria") echo "selected";?>>Extraordinaria</option>
-                    <option value="Emergencia" <?php if ($row2[tipo_reu]=="Emergencia") echo "selected";?>>Emergencia</option>
-                    <option value="Otros" <?php if ($row2[tipo_reu]=="Otros") echo "selected";?>>Otros</option>
+                    <option value="Ordinaria" <?php if ($row2['tipo_reu']=="Ordinaria") echo "selected";?>>Ordinaria</option>
+                    <option value="Extraordinaria" <?php if ($row2['tipo_reu']=="Extraordinaria") echo "selected";?>>Extraordinaria</option>
+                    <option value="Emergencia" <?php if ($row2['tipo_reu']=="Emergencia") echo "selected";?>>Emergencia</option>
+                    <option value="Otros" <?php if ($row2['tipo_reu']=="Otros") echo "selected";?>>Otros</option>
                   </select>
                   </font> </font></p>
               </div></td>
@@ -348,13 +355,13 @@ function Form () {
   							  
 				if($verif==1)
 				{			
-  				$h1=substr($row2[hora],0,2);
-				$mi1=substr($row2[hora],3,2);
+  				$h1=substr($row2['hora'],0,2);
+				$mi1=substr($row2['hora'],3,2);
 				}
 				else
 				{			
-  				$h1=substr($row2[hora],0,2);
-				$mi1=substr($row2[hora],3,2);
+  				$h1=substr($row2['hora'],0,2);
+				$mi1=substr($row2['hora'],3,2);
 				}
 			?>
                 <font size="2">
@@ -395,7 +402,7 @@ function Form () {
               <p>&nbsp; </p></td>
             <td width="39%"><div align="center"> 
                 <p><font size="2" face="Arial, Helvetica, sans-serif"><strong>Lugar:</strong> </font>
-                  <input name="lugar" type="text" value="<?php echo $row2[lugar];?>" size="35" maxlength="150">
+                  <input name="lugar" type="text" value="<?php echo $row2['lugar'];?>" size="35" maxlength="150">
                 </p>
                 <p>&nbsp;</p>
                 </div></td>
@@ -428,11 +435,11 @@ function Form () {
 			<?php 	$sql5 = "SELECT * FROM users WHERE login_usr='$row24[nombre]'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[login_usr])
+				if (!$row5['login_usr'])
 				{echo "<td>&nbsp;$row24[nombre]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";}?>
-            <td>&nbsp;<?php echo $row24[cargo]?></td>
+            <td>&nbsp;<?php echo $row24['cargo']?></td>
           </tr>
 		            <?php 
 		
@@ -608,7 +615,7 @@ function Form () {
         </table>
               <p align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp; 
                 </font><font size="2" face="Arial, Helvetica, sans-serif"> 
-                <textarea name="comentario" cols="100"><?php echo $row2[comentario];?></textarea>
+                <textarea name="comentario" cols="100"><?php echo $row2['comentario'];?></textarea>
                 </font>
                 <br>
                 <br>

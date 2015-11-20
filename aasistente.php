@@ -1,8 +1,8 @@
 <?php
 // Version: 	1.0
-// Objetivo: 	Modificacion funciones php obsoletas para version 5.3 en adelante.
+// Objetivo: 	Modificacion funciones php obsoletas para version 5.3 en adelaTerminarnte.
 //				Control Acceso Directo a Fichero No Autorizado.
-// Fecha: 		06/NOV/2012
+// Fecha: 		06/NOV/2012var
 // Autor: 		Cesar Cuenca
 //_____________________________________________________________________________
 @session_start();
@@ -12,9 +12,17 @@ if (isset($_SESSION['login'])){
 	}
 }
 require("conexion.php");
-$cad = $dato;
-if ( isset($insertado) && $insertado == "1" )
-{	$fila = explode(":",$dato);		
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+$cad = $_GET['dato'];
+$dato=$_REQUEST['dato'];
+$id_minuta=$_REQUEST['id_minuta'];
+
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "1" )
+{	
+	$num_cod=$_REQUEST['num_cod'];
+	
+	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
 	$fechad = explode("/", $fila[2]);
@@ -27,7 +35,7 @@ if ( isset($insertado) && $insertado == "1" )
 	mysql_query($sql);												
 	$insertado = "2";
 }
-if ( $insertado == "0" )
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "0" )
 {	$fila = explode(":",$dato);
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -39,16 +47,22 @@ if ( $insertado == "0" )
 			fecha='$fecha', hora='$hora',lugar='$fila[6]', comentario='$fila[7]' WHERE id_minuta='$id_minuta'";
 	mysql_query($sql);
 	$insertado = "2";
+	
 }
 
-if (isset($Terminar)){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
-if (isset($reg_form))
-{   include("conexion.php");
+if (isset($_REQUEST['Terminar'])){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
+if (isset($_REQUEST['reg_form']))
+{   $nombre=$_REQUEST['nombre'];
+	include("conexion.php");
     $sql0 = "SELECT * FROM users WHERE login_usr='$nombre'";
+	
     $result0=mysql_query($sql0);
     $row0=mysql_fetch_array($result0);
+
 	$sql="INSERT INTO asistentes (nombre,cargo,id_minuta,tipo) ".
 	"VALUES ('$nombre','$row0[cargo_usr]','$var','Nuevo')";
+	/*echo $sql;
+	exit;*/
 	mysql_query($sql);
 	header("location: aasistente.php?id_minuta=$var&verif=2&dato=$dato&insertado=$insertado");
 }
@@ -71,7 +85,7 @@ function Form () {
 -->
 </script>
 <table width="62%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<input name="verif" type="hidden" value="<?php if ($_GET[verif]) {echo $_GET[verif];}else{echo "1";};?>">
 	<input name="dato" type="hidden" value="<?php echo $dato; ?>">
