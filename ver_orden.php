@@ -53,8 +53,7 @@ $row6=mysql_fetch_array($result6);
 <link rel="stylesheet" type="text/css" href="css/skeleton.css">
 <link rel="stylesheet" type="text/css" href="css/reports.css">
 </head>
-
-<body bgcolor="#FFFFFF">
+<body>
   <div class="container">
     <?php include("datos_gral.php"); ?>
     <div class="print-area">
