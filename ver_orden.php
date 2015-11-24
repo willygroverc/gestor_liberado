@@ -1,6 +1,5 @@
 ﻿<?php 
 include ("top_ver.php");
-//header('Content-Type: text/html; charset=iso-8859-1');
 header('Content-Type: text/html; charset=UTF-8');
 require_once('funciones.php');
 $id_orden=SanitizeString($_REQUEST['id_orden']);
