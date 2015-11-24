@@ -1,10 +1,4 @@
-<?php 
-// Version: 	1.0
-// Objetivo: 	Modificacion funciones php obsoletas para version 5.3 en adelante.
-//				Control Acceso Directo a Fichero No Autorizado.
-// Fecha: 		23/NOV/2012
-// Autor: 		Cesar Cuenca
-//_____________________________________________________________________________
+<?php
 @session_start();
 if (isset($_SESSION['login'])){
 	if ($_SESSION['tipo']=='C'){
@@ -22,56 +16,42 @@ $sql="SELECT *,DATE_FORMAT(FechaAdAs,'%d / %m / %Y') as FechaAdAs FROM admyasegd
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
 ?>
-<html>
+
 <head>
 <title> GesTor F1 - GESTION-PRODAT - PROYECTOS</title>
+<link rel="stylesheet" href="css/skeleton.css">
+<link rel="stylesheet" href="css/reports.css">
 </head>
 <body>
-<p>
-<?php
-include("datos_gral.php");
-?>
-<table  width="637" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td><div align="center"><font size="4" face="Arial, Helvetica, sans-serif"><u><strong>PROYECTOS - LISTA ADMINISTRACION Y ASEGURAMIENTO<br><br></strong><?php echo $row['Tipo']?></u></font></div></td>
-  </tr>
-</table>
-<br>
-<br>
-<table  width="493" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td width="180" ><font size="2" face="Arial, Helvetica, sans-serif"><strong>NOMBRE 
-      DEL PROYECTO : </strong></font></td>
-    <td width="198">&nbsp;<?php echo $row['NombProy']; ?> </td>
-    <td width="115"> </td>
-  </tr>
-  <tr> 
-    <td height="2"></td>
-    <td bgcolor="#000000"></td>
-    <td></td>
-  </tr>
-</table>
+  <div class="container">
+    <?php include("datos_gral.php"); ?>
+    <div class="print-area">
+      <div class="row center">
+        <h5>Proyectos - Lista de Administración y Aseguramiento</h5>
+      </div>
+      <br>
+      <h6>Administración del Alcance</h6>
+      <div class="row">
+        <div class="column">
+          <strong>Nombre del Proyecto: </strong><?php echo $row['NombProy']; ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <strong>Nombre del Responsable: </strong>
+          <?php
+          $sql3="SELECT * FROM users WHERE login_usr='".$row['NombResp']."'";
+          $result3=mysql_query($sql3);
+          $row3=mysql_fetch_array($result3);
+          echo $row3['nom_usr']." ".$row3['apa_usr']." ".$row3['ama_usr'];  
+          ?>
+        </div>
+      </div>
+    </div> <!-- end print-area -->
+  </div>
 
-<br>
-<table  width="489" height="23" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="203"><font size="2" face="Arial, Helvetica, sans-serif"><strong>NOMBRE 
-      DEL RESPONSABLE : </strong></font></td>
-    <td width="173"><?php
-	$sql3="SELECT * FROM users WHERE login_usr='".$row['NombResp']."'";
-	$result3=mysql_query($sql3);
-	$row3=mysql_fetch_array($result3);
-	echo $row3['nom_usr']." ".$row3['apa_usr']." ".$row3['ama_usr'];
-	
-	?></td>
-    <td width="113">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td height="2"></td>
-    <td bgcolor="#000000"></td>
-    
-  </tr>
-</table>
+
+
 <br>
 
 <?php 
@@ -155,7 +135,7 @@ echo "<td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\"><strong>";
 	if($row['Tipo']=="ADMINISTRACION DE LA COMUNICACION")
 	{echo "SEGUIMIENTO";}
 	if($row['Tipo']=="ASEGURAMIENTO DE LA CALIDAD")
-	{echo "M�TRICAS";}
+	{echo "MÉTRICAS";}
 echo "</strong></font></div></td>";
 echo "</tr>";
 $sql3 = "SELECT * FROM admyasegactiv WHERE IdAdmyAseg='$idadmy' AND Tipo='$Tip'";
