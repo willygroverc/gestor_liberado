@@ -16,6 +16,14 @@ include("datos_gral.php");
 <title>GesTor PCN - Riesgos</title>
 <?php 
 	include("conexion.php");
+	 if(isset($_REQUEST['codigo']))
+	$codigo=$_REQUEST['codigo'];
+   
+  if(isset($_REQUEST['campo']))
+	$campo=$_REQUEST['campo'];	
+ 
+  if(isset($_REQUEST['orden']))
+	$orden=$_REQUEST['orden'];	
 	if(isset($cons)){ 
 		$cons=str_replace("*",", ",$cons);
 		$sql = "SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y %H:%i:%s') as fecha1 FROM riesgo_resptabla WHERE id_riesgo0 IN ($cons) LIMIT 1";
@@ -52,7 +60,7 @@ include("datos_gral.php");
   </tr>
   <tr align="center"> 
     <td colspan="6">&nbsp;<strong>FECHA:</strong>
-      <?php=$result['fecha1'];?>
+      <?php echo $result['fecha1'];?>
     </td>
   </tr>
   <tr align="center" bgcolor="#CCCCCC"> 
@@ -80,7 +88,7 @@ include("datos_gral.php");
 		if(isset($cons)) $sql = "SELECT * FROM riesgo_resptabla WHERE id_riesgo0 IN ($cons) ORDER BY $campo1 $orden1";
 		else $sql = "SELECT * FROM riesgo_resptabla WHERE id_riesgo0='$codigo' ORDER BY $campo1 $orden1";
 		$result=mysql_query($sql);
-		//$num=1;
+		$num=1;
 		$i=1;
 		while($row=mysql_fetch_array($result)) {					
 			$i++;

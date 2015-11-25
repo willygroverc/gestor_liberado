@@ -18,7 +18,8 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 		$rs19 = mysql_db_query($db,$sql9,$link);
 		$numAsig = 0;
 		while ($tmp = mysql_fetch_array($rs19))  {			
-				$total[$numAsig] = $tmp[id_orden];
+				$total[$numAsig] = $tmp['id_orden'];
+				//echo "TOT:".$total['$numAsig'];
 				$numAsig++;
 		}
 //NUMERO TOTAL DE ORDENES
@@ -29,17 +30,19 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 //NUMERO DE ORDENES CON SEGUIMIENTO ++++++++++++++++++++++++   fecha_se////===============SEGUI
 		$seg=0;
 		for ($i=0; $i<$numAsig; $i++) {
+			//echo "<br>es:".$total[$i];
 			$sql="SELECT * FROM seguimiento WHERE id_orden='$total[$i]' ORDER BY id_seg DESC";
+			//echo "<br>".$sql;
 			$rsTmp0 = mysql_fetch_array(mysql_db_query($db,$sql,$link));
-			if ($rsTmp0[id_orden]==$total[$i]) {
+			if ($rsTmp0['id_orden']==$total[$i]) {
 			$seg++;}
 		}
-		$row3[seg]=$seg;	
+		$row3['seg']=$seg;	
 
 //MUMERO DE ORDENES SIN SEGUIMIENTO ++++++++++++++++++++++++
-	$noseg=$row[numtot]-$row3[seg];
+	$noseg=$row['numtot']-$row3['seg'];
 //ENVIO DE DATOS
-	$dat1=$row3[seg];
+	$dat1=$row3['seg'];
 	$dat2=$noseg;
 //hasta aqui
 $data.="<set label='Con Seguimiento' value='$dat1'/><set label='Sin Seguimiento' value='$dat2'/>";
@@ -53,7 +56,7 @@ $prom=$dat2;
    <div id="chartdiv" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
       var myChart = new FusionCharts("Charts/Pie3D.swf", "myChartId", "600", "300", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
+      myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv");
    </script>
 </body>

@@ -64,14 +64,16 @@ if (isset($_REQUEST['guardar'])){
 		{
 			$sql3="INSERT INTO riesgo_resptabla(id_riesgo0,id_riesgo,realizado_por,val1,val2,val3,titulo,descripcion,fecha,hora,proceso) VALUES ('$mriesgo','$row[id_riesgo]','$login','$val1','$val2','$val3','$titulo','$descrip','$fecha','$hora','$idproc')";
 			//print_r($sql3);exit;
-                        mysql_query($sql3);
+                        //mysql_query($sql3);
 		}
 		else
 		{
 			$sql3="INSERT INTO riesgo_resptabla(id_riesgo0,id_riesgo,realizado_por,val1,val2,val3,titulo,descripcion,fecha,hora,proceso,obs) VALUES ('$mriesgo','$row[id_riesgo]','$login','$val1','$val2','$val3','$titulo','$descrip','$fecha','$hora','0','0')";
 			//print_r($sql3);exit;
-                        mysql_query($sql3);
+                        //mysql_query($sql3);
 		}
+		
+		mysql_query($sql3);
 		$nume++;
 	}
 	//echo $sql3;
@@ -116,7 +118,7 @@ function multiplicar(){
 }
 //-->
 </script>
-<form name="form2" action="<?php=$_SERVER['PHP_SELF'] ?>" method="post">
+<form name="form2" action="" method="post">
 
 <table width="70%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg" bgcolor="#EAEAEA">
     <tr> 
@@ -145,7 +147,7 @@ function multiplicar(){
 </form>
 <?php 
                 echo @$val1."  "; echo @$val2;?> 
-<form name="form1" method="post" action="<?php=$_SERVER['PHP_SELF'] ?>" onKeyPress="multiplicar()" onClick="multiplicar()">
+<form name="form1" method="post" action="" onKeyPress="multiplicar()" onClick="multiplicar()">
   <table width="70%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg" bgcolor="#EAEAEA">
     <tr align="center"> 
       <td height="24" colspan="2">TITULO: 

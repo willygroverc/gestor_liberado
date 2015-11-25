@@ -2,20 +2,31 @@
 include("Includes/FusionCharts.php");
 include("../conexion.php");
 include("func_datos.php");
+if(isset($_REQUEST['n'])) $n=$_REQUEST['n']; else $n=0;
+if(isset($_REQUEST['area_cod'])) $area_cod=$_REQUEST['area_cod']; else $area_cod=0;
+if(isset($_REQUEST['dominio_cod'])) $dominio_cod=$_REQUEST['dominio_cod']; else $dominio_cod=0;
 $show_values=1;
 $show_lab=1;
 $tam1=750;
 $tam2=450;
 $tam3=25;
 $tam4=150;
-if(isset($DA) && isset($MA)){
-if (strlen($DA) == 1){ $DA = "0".$DA; }
-if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
+
+if(isset($_REQUEST['DA']) && isset($_REQUEST['MA'])){
+	if(isset($_REQUEST['DA'])) $DA=$_REQUEST['DA']; else $DA="";
+	if(isset($_REQUEST['MA'])) $MA=$_REQUEST['MA']; else $MA="";
+	if(isset($_REQUEST['AA'])) $AA=$_REQUEST['AA']; else $AA="";
+	if(isset($_REQUEST['DE'])) $DE=$_REQUEST['DE']; else $DE="";
+	if(isset($_REQUEST['ME'])) $ME=$_REQUEST['ME']; else $ME="";
+	if(isset($_REQUEST['AE'])) $AE=$_REQUEST['AE']; else $AE="";
+	if (strlen($DA) == 1){ $DA = "0".$DA; }
+	if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
 	$fecha1 = $AA."-".$MA."-".$DA;   
-if (strlen($DE) == 1){ $DE = "0".$DE; }
-if (strlen($ME) == 1){ $ME = "0".$ME; }
+	if (strlen($DE) == 1){ $DE = "0".$DE; }
+	if (strlen($ME) == 1){ $ME = "0".$ME; }
 	$fecha2 = $AE."-".$ME."-".$DE; 
 }
+
 ?>
 <html>
 <head>
@@ -145,7 +156,7 @@ include("reportes/a30.php");?>
 <!--<input name="                    AMPLIAR                    " type="button" class="Estilo2" id="AMPLIAR" onClick="ampliar('a30','<?php=$fecha1?>','<?php=$fecha2?>')" value="                                              A M P L I A R                                              ">-->
 <?php
 echo "<td>";
-if ($row_pmi[ind]<>0){
+if (isset($row_pmi) && $row_pmi['ind']<>0){
 	include("reportes/a_i1.php");
 }
 echo "</td></tr></table></td>";

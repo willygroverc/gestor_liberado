@@ -34,16 +34,16 @@ DESDE asignacion HASTA solucion - fecha sistema */
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -68,16 +68,16 @@ DESDE asignacion HASTA solucion - fecha sistema */
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -103,16 +103,16 @@ DESDE asignacion HASTA solucion - fecha sistema */
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -137,9 +137,9 @@ $data.="</dataset></chart>";
 
    <div id="chartdiv<?php $ra=rand(); echo $ra?>" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
-      var myChart = new FusionCharts("Charts/MSColumn3D.swf", "myChartId", "<?php=$tam1?>", "<?php=$tam2?>", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
-      myChart.render("chartdiv<?php=$ra?>");
+      var myChart = new FusionCharts("Charts/MSColumn3D.swf", "myChartId", "<?php echo $tam1;?>", "<?php echo $tam2;?>", "0", "0");
+      myChart.setDataXML("<?php echo $data;?>");
+      myChart.render("chartdiv<?php echo $ra;?>");
    </script>
 
 </body>

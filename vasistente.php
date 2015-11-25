@@ -5,11 +5,12 @@ if(isset($_REQUEST['var']))
 	$var=$_REQUEST['var'];
 $cad = $_GET['dato'];
 $dato=$_REQUEST['dato'];
-
+$id_minuta=$_REQUEST['id_minuta'];
+if(isset($_REQUEST['num_cod']))
+	$num_cod=$_REQUEST['num_cod'];
 if ( $_GET['insertado'] == "1" )
 {	
-	$id_minuta=$_REQUEST['id_minuta'];
-	$num_cod=$_REQUEST['num_cod'];
+	
 	
 	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
@@ -40,9 +41,7 @@ if ( $_GET['insertado'] == "1" )
 	$id_minuta=SanitizeString($id_minuta);
 	$num_cod=SanitizeString($num_cod);
 	$fila[7]=SanitizeString($fila[7]);
-	$sql="INSERT INTO ".
-	"minuta (codigo,elab_por,en_fecha,tipo_min,fecha,hora,lugar,id_minuta,num_codigo,comentario)".
-	"VALUES ('$fila[0]','$fila[3]','$en_fecha','$fila[4]','$fecha','$hora','$fila[6]','$id_minuta','$num_cod','$fila[7]')";
+	$sql="INSERT INTO minuta (codigo,elab_por,en_fecha,tipo_min,fecha,hora,lugar,id_minuta,num_codigo,comentario)VALUES ('$fila[0]','$fila[3]','$en_fecha','$fila[4]','$fecha','$hora','$fila[6]','$id_minuta','$num_cod','$fila[7]')";
 	
 	mysql_query($sql);												
 	$insertado = "2";

@@ -1,12 +1,19 @@
 <?php
-if(isset($RETORNAR)) header("location: sao_param.php");
+if(isset($_REQUEST['RETORNAR'])) header("location: sao_param.php");
 session_start();
-$login_usr=$_SESSION['login_pmi'];
+if(isset($_SESSION['login_pmi']))
+	$login_usr=$_SESSION['login_pmi'];
+if(isset($_REQUEST['id_report'])) $id_report=$_REQUEST['id_report']; else $id_report=0;
 //include("Includes/FusionCharts.php");
 include("../conexion.php");
 //include("func_datos.php");
-if(isset($GUARDAR)){
+if(isset($_REQUEST['GUARDAR'])){
+	$nivel=$_REQUEST['nivel'];
+	$accion=$_REQUEST['accion'];
+	//tabla pmi_sao no tiene columnas nivel ni aaacion****************
 	$sql="UPDATE pmi_sao SET nivel='$nivel' , accion='$accion' WHERE id_report='$id_report'";
+	//echo $sql;
+	//exit;
 	mysql_db_query($db,$sql,$link);
 }
 ?>
@@ -73,26 +80,27 @@ OPTION.niv1{background-color:#FF0000}
 </TR>
 <?php 
 $sql_sao="SELECT * FROM pmi_sao WHERE id_report='$id_report'";
+//echo $sql_sao;
 $res_sao=mysql_db_query($db,$sql_sao,$link);
 $row_sao=mysql_fetch_array($res_sao);
 echo "<TR><TD>$row_sao[id_report]</TD><TD>$row_sao[nom]</TD>
 <TD align=\"center\"><SELECT name=\"nivel\"><option value=5 class=\"niv1\" ";
-	if($row_sao[nivel]=='5') echo "selected";
+	if(isset($row_sao['nivel']) && $row_sao['nivel']=='5') echo "selected";
 	echo ">5</option><option value=4 class=\"niv2\" ";
-	if($row_sao[nivel]=='4') echo "selected";
+	if(isset($row_sao['nivel']) && $row_sao['nivel']=='4') echo "selected";
 	echo ">4</option><option value=3 class=\"niv3\" ";
-	if($row_sao[nivel]=='3') echo "selected";
+	if(isset($row_sao['nivel']) && $row_sao['nivel']=='3') echo "selected";
 	echo ">3</option><option value=2 class=\"niv4\" ";
-	if($row_sao[nivel]=='2') echo "selected";
+	if(isset($row_sao['nivel']) && $row_sao['nivel']=='2') echo "selected";
 	echo ">2</option><option value=1 class=\"niv5\" ";
-	if($row_sao[nivel]=='1') echo "selected";	
+	if(isset($row_sao['nivel']) && $row_sao['nivel']=='1') echo "selected";	
 	echo ">1</option></SELECT></TD><TD>"; 
 	echo "<SELECT name=\"accion\">
 	<option value=1>Enviar correo al SA</option>
 	<option value=2>Bloquear cuenta</option>
 	</SELECT></TD></TR>";
 ?>
-</table><INPUT type="hidden" name="id_report" value="<?php=$id_report?>">
+</table><INPUT type="hidden" name="id_report" value="<?php echo $id_report;?>">
 <br>
 <INPUT type="submit" name="GUARDAR" value="GUARDAR"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <INPUT type="submit" name="RETORNAR" value="RETORNAR">

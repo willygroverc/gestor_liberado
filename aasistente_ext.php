@@ -14,9 +14,19 @@ if (isset($_SESSION['login'])){
 require("conexion.php");
 if(isset($_REQUEST['var']))
 	$var=$_REQUEST['var'];
+if(isset($_REQUEST['insertado']))
+	$insertado=$_REQUEST['insertado'];
+	
+if(isset($_REQUEST['num_cod']))
+	$num_cod=$_REQUEST['num_cod'];
+
 $id_minuta=$_REQUEST['id_minuta'];
 $cad = $_GET['dato'];
-$dato=$_REQUEST['dato'];
+if(isset($_REQUEST['dato']))
+	$dato=$_REQUEST['dato'];
+else
+	$dato="";
+
 if ( isset($_GET['insertado']) && $_GET['insertado'] == "1" )
 {	$num_cod=$_REQUEST['num_cod'];
 
@@ -46,15 +56,17 @@ if ( isset($_GET['insertado']) && $_GET['insertado'] == "0" )
 	mysql_query($sql);
 	$insertado = "2";
 }
-if (isset($Terminar)){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
-if (isset($reg_form))
-{   
+if (isset($_REQUEST['Terminar'])){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
+if (isset($_REQUEST['reg_form']))
+{   $nombre=$_REQUEST['nombre'];
 	$sel="SELECT cargo FROM us_ext_user WHERE nombre='$nombre'"; 
 	$resultado=mysql_query($sel);
 	$row=mysql_fetch_array($resultado);
 	
 	$sql="INSERT INTO asistentes (nombre,cargo,id_minuta,tipo) ".
 	"VALUES ('$nombre','".$row['cargo']."','$var','Nuevo_ext')";
+	//echo $sql;
+	//exit;
 	mysql_query($sql);
 	header("location: aasistente_ext.php?id_minuta=$var&verif=2&dato=$dato&insertado=$insertado");
 }
@@ -68,7 +80,7 @@ $valid->addIsNotEmpty ( "nombre",  "Nombre, $errorMsgJs[empty]" );
 //$valid->addIsTextNormal ( "cargo",  "Cargo, $errorMsgJs[empty]" );
 print $valid->toHtml ();
 ?>    
-<script language="JavaScript">
+<script language="JavaScript" type="text/JavaScript">
 
 function Form () {
 	var key = window.event.keyCode;
@@ -110,9 +122,9 @@ function Form () {
 		 ?>
           <tr> 
             <td align="center">&nbsp;<?php echo $cont?></td>
-            <td align="center">&nbsp;<?php echo $row[nombre]?></td>
-            <td align="center">&nbsp;<?php echo $row[cargo]?></td>
-			<?php if ($row[tipo]=="Nuevo_ext") array_push($ident,"'".$row[nombre]."'");?>
+            <td align="center">&nbsp;<?php echo $row['nombre']?></td>
+            <td align="center">&nbsp;<?php echo $row['cargo']?></td>
+			<?php if ($row['tipo']=="Nuevo_ext") array_push($ident,"'".$row['nombre']."'");?>
           </tr>
           <?php 
 		 }

@@ -12,9 +12,18 @@ if (isset($_SESSION['login'])){
 	}
 }
 require ("conexion.php");
-if (isset($GUARDAR))
-{	session_start();
-	if (!session_is_registered("login")) { header("location: index_2.php"); }
+if (isset($_REQUEST['GUARDAR']))
+{	//session_start();
+	$tip_riesgo=$_REQUEST['tip_riesgo'];
+	$riesgo=$_REQUEST['riesgo'];
+	$mensaje_u=$_REQUEST['mensaje_u'];
+	$mensaje_p=$_REQUEST['mensaje_p'];
+	$mensaje_e=$_REQUEST['mensaje_e'];
+	$lista=$_REQUEST['lista'];
+	$lista2=$_REQUEST['lista2'];
+	$lista3=$_REQUEST['lista3'];
+	$mail=$_REQUEST['mail'];
+	if (!$_SESSION["login"]) { header("location: index_2.php"); }
 	$login   = $_SESSION["login"];	
 	if(empty($mail)) { $mail=0; }
 	$sql_ins = "INSERT INTO alarmas_riesgos (tipo_alarma,alarma,mensaje_u,mensaje_p,mensaje_e,msn_celu,msn_mail,login_creador,fec_creacion) ".
@@ -41,7 +50,7 @@ if (isset($GUARDAR))
 	}
 	header("location: lista_alarmas.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
 }
-if (isset($RETORNAR)) header("location: lista_alarmas.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
+if (isset($_REQUEST['RETORNAR'])) header("location: lista_alarmas.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
 
 include ("top.php");
 
@@ -63,7 +72,7 @@ function irapagina(pagina){
     }
 }
 function cambio(numero)
-{        
+{    //alert(numero);    
 	if (!foco_texto)
 	{	 irapagina("riesgo_alarmas.php?op="+numero);
 	} 
@@ -74,7 +83,7 @@ var foco_texto=false;
 <title>ALARMAS</title>
 </head>
 <body>
-<form name="form1" method="post" action="<?php echo $PHP_SELF?>">
+<form name="form1" method="post" action="">
   <table width="80%" align="center" border="1">
     <tr><td>
 <table background="images/fondo.jpg" align="center" width="100%">
@@ -87,15 +96,15 @@ var foco_texto=false;
           <tr> 
             <td width="5%" background="images/main-button-tileR2.jpg">&nbsp; </td>
             <td width="14%" class="titulo">TIPO DE RIESGO: </td>
-            <td width="81%"> <select name="tip_riesgo"  onChange="cambio(this.options.value)">
+            <td width="81%"> <select name="tip_riesgo"  onChange="cambio(this.value)">
                 <?php 
 		$sql3 = "SELECT * FROM riesgo_tipos";
 		$res3 = mysql_query($sql3);
 		while($row3 = mysql_fetch_array($res3)) {	
-			if (isset($op) && $op == $row3['id_riesgo'])
-			echo "<option value=\"$row3[id_riesgo]\" selected>$row3[descripcion]</option>";							
+			if (isset($_REQUEST['op']) && $_REQUEST['op'] == $row3['id_riesgo'])
+			echo "<option value='$row3[id_riesgo]' selected>$row3[descripcion]</option>";							
 			else					
-			echo "<option value=\"$row3[id_riesgo]\">$row3[descripcion]</option>";			
+			echo "<option value='$row3[id_riesgo]'>$row3[descripcion]</option>";			
 		}		
 	?>
               </select> </td>
@@ -105,7 +114,9 @@ var foco_texto=false;
             <td width="14%" class="titulo">RIESGO: </td>
             <td width="81%"> <select name="riesgo">
                 <?php
-	if (!isset($op)) $op = 1;
+	if (!isset($_REQUEST['op'])) $op = 1;
+	else
+		$op=$_REQUEST['op'];
 	$sql2 = "SELECT id_riesgo, desc_riesgo  FROM riesgo_pregunta WHERE tipo_r='$op'";
 	$res2 = mysql_query($sql2);
 	while($row2 = mysql_fetch_array($res2)){	

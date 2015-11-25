@@ -24,7 +24,7 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 		$rs19 = mysql_db_query($db,$sql9,$link);
 		$numAsig = 0;
 		while ($tmp = mysql_fetch_array($rs19))  {			
-				$total[$numAsig] = $tmp[id_orden];
+				$total[$numAsig] = $tmp['id_orden'];
 				$numAsig++;
 		}
 //NUMERO DE ORDENES CON COSTO
@@ -32,17 +32,17 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 		for ($i=0; $i<$numAsig; $i++) {
 			$sql = "SELECT DISTINCT(id_orden) FROM costo WHERE id_orden='$total[$i]'";
 			$rsTmp4=mysql_fetch_array(mysql_db_query($db,$sql,$link));
-			if ($rsTmp4[id_orden]==$total[$i]){
+			if ($rsTmp4['id_orden']==$total[$i]){
 			$numCost++;}
 		}
-		$row6[cost]=$numCost;
+		$row6['cost']=$numCost;
 
 
 //NUMERO DE ORDENES SIN COSTO
-$nocost=$row[numtot]-$row6[cost];
+$nocost=$row['numtot']-$row6['cost'];
 
 //ENVIO DE DATOS
-	$dat1 = $row6[cost];
+	$dat1 = $row6['cost'];
 	$dat2 = $nocost;
 ///hasta aqui
 $data.="<set label='Con Costo' value='$dat1'/><set label='Sin Costo' value='$dat2'/>";
@@ -56,7 +56,7 @@ $prom=$dat1;
    <div id="chartdiv" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
       var myChart = new FusionCharts("Charts/Pie3D.swf", "myChartId", "600", "300", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
+      myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv");
    </script>
 </body>

@@ -1,7 +1,8 @@
 <?php
 include('top.php');
 require_once('funciones.php');
-$numero=  isset($_REQUEST['numero']);
+$numero=  $_REQUEST['numero'];
+
 $numero=SanitizeString($numero);
 include('conexion.php');
 @session_start();
@@ -16,7 +17,7 @@ include('conexion.php');
 	<script language="javascript" src="js/validate.js"></script>
 	<script language="javascript" src="js/jquery-ui.js"></script>
 	<script>
-$(function() {
+$(document).ready(function() {
 	$( "#fecha_ctrl" ).datepicker({
 	dateFormat: 'yy/mm/dd',
 	showOn: 'both',
@@ -29,11 +30,13 @@ $(function() {
 });
 </script>
 </head>
-<body onload="document.getElementById('temperatura').focus();">
+<body onLoad="document.getElementById('temperatura').focus();">
 <?php
 $sql = "SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM controltemp WHERE numero='$numero'";
+
 $result=mysql_query($sql);
 $row=mysql_fetch_array($result);
+$fec=explode("/",$row['fecha']);
 echo '<form name="frm_temp" id="frm_temp" method="POST" action="" />
 	<input name="var1" id="var1" type="hidden" value="'; echo $numero; echo '">
   <table width="83%" border="2" align="center" cellpadding="0" cellspacing="0" background="images/fondo.jpg">
@@ -80,7 +83,7 @@ echo '<form name="frm_temp" id="frm_temp" method="POST" action="" />
           <div align="center">'; echo $row['hora']; echo '</div>
         </div></td>
       <td><div align="center"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
-         <input type="text" name="fecha_ctrl" id="fecha_ctrl" value="'; echo date('Y-m-d'); echo '">
+         <input type="text" name="fecha_ctrl" id="fecha_ctrl" value="'.$fec[2]."/".$fec[1]."/".$fec[0].'">
           </font>
 		  
 		  </font></strong></div></td>

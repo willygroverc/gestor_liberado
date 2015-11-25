@@ -11,20 +11,25 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
-if (isset($Terminar))
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+
+if (isset($_REQUEST['Terminar']))
 header("location: minuta_last.php?id_minuta=$var&verif=1");
 
-if (isset($reg_form))
+if (isset($_REQUEST['reg_form']))
 {   require("conexion.php");
-
-$sql11 = "SELECT * FROM invitados WHERE nombre='$nombre'";
-$result11=mysql_query($sql11);		
-$row11=mysql_fetch_array($result11);
-$cargo=$row11['cargo'];
+	$nombre1=$_REQUEST['nombre1'];
+	$sql11 = "SELECT * FROM invitados WHERE nombre='$nombre1'";
+	$result11=mysql_query($sql11);		
+	$row11=mysql_fetch_array($result11);
+	$cargo=$row11['cargo'];
 
 	$sql="INSERT INTO ".
 	"asistentes (nombre,cargo,id_minuta,tipo,prop,adjunto,hash_archivo) ".
 	"VALUES ('$nombre1','$cargo','$var','0','0','0','0')";
+	/*echo $sql;
+	exit;*/
 	mysql_query($sql);
 	header("location: vasistente_last.php?id_minuta=$var");
 }
@@ -49,7 +54,7 @@ function Form () {
 </script>
 
 <table width="55%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	
 	<tr> 

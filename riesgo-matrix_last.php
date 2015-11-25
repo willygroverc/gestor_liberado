@@ -1,32 +1,42 @@
 <?php 
-if (isset($retornar)) 
+session_start();
+	$login=$_SESSION["login"];
+if (isset($_REQUEST['retornar'])) 
 { 
 	header("location: riesgo-resultados.php");
 }
+if(isset($_REQUEST['id_riesgo_0'])) $id_riesgo_0=$_REQUEST['id_riesgo_0']; else $id_riesgo_0="";
+if(isset($_REQUEST['idproc'])) $idproc=$_REQUEST['idproc']; else $idproc="";
+//echo "riesgo0:".$id_riesgo_0;
 include("conexion.php");	
 $num=0;
 
 $sql0 = "SELECT * FROM riesgo_parametros";
 $result0 = mysql_db_query($db,$sql0,$link);
 $row0 = mysql_fetch_array($result0);
-$partic = $row0[participantes];
+$partic = $row0['participantes'];
 
 $sql = "SELECT * FROM riesgo_pregunta WHERE sel='1'";
 $result = mysql_db_query($db,$sql,$link);
 $cuantos = mysql_num_rows($result);
 $nume=0;
 $fecha=date("Y-m-d H:i:s");
-if (isset($guardar)){
-	session_start();
-	$login=$_SESSION["login"];
+if (isset($_REQUEST['guardar'])){
+	
 	$sql ="SELECT * FROM riesgo_pregunta a, riesgo_respuesta b WHERE a.id_riesgo=b.id_riesgo AND b.id_riesgo_0='$id_riesgo_0' ORDER BY a.id_riesgo";
+	/*echo $sql;
+    exit;*/
 	$res = mysql_db_query($db,$sql,$link);
 	while($row = mysql_fetch_array($res)){
+		$titulo=$_REQUEST['titulo'];
+		$descripcion=$_REQUEST['descripcion'];
 		$num++;
 		$fecha=date("Y-m-d");
 		$val=$_POST["v11$num"];
 		if($num==1) $sqlmod="UPDATE riesgo_respuesta SET realizado_por='$login',val='$val',fecha='$fecha',titulo='$titulo',descripcion='$descripcion',proceso='$idproc' WHERE id_riesgo_0='$id_riesgo_0' AND id_riesgo='$row[id_riesgo]'";
 		else $sqlmod="UPDATE riesgo_respuesta SET val='$val',fecha='$fecha',titulo='$titulo',proceso='$idproc' WHERE id_riesgo_0='$id_riesgo_0' AND id_riesgo='$row[id_riesgo]'";
+		/*echo $sqlmod;
+    	exit;*/
 		mysql_db_query($db,$sqlmod,$link);
 	}
 /*
@@ -246,10 +256,10 @@ $sql_mod="SELECT * FROM riesgo_respuesta WHERE id_riesgo_0='$id_riesgo_0' LIMIT 
 $res_mod=mysql_db_query($db,$sql_mod,$link);
 $row_mod=mysql_fetch_array($res_mod);
 ?>
-<form name="form1" method="post" action="<?php=$PHP_SELF ?>">
+<form name="form1" method="post" action="">
 <input name="idproc" type="hidden" value="<?php echo $idproc;?>">
 <input name="pg" type="hidden" value="<?php echo $pg;?>">
-<input name="id_riesgo_0" type="hidden" id="id_riesgo_0" value="<?php=$id_riesgo_0?>">
+<input name="id_riesgo_0" type="hidden" id="id_riesgo_0" value="<?php echo $id_riesgo_0;?>">
   <table border="1" align="center" cellpadding="2" cellspacing="2" bgcolor="#EAEAEA"  background="images/fondo.jpg">
     <tr> 
       <th width="126">Nro. DE PARTICIPANTES</th>
@@ -258,7 +268,7 @@ $row_mod=mysql_fetch_array($res_mod);
     </tr>
     <tr align="center"> 
       <td> <input name="v21a2" type="text" value="<?php echo $partic?>" class="mio" maxlength="3" readonly="yes"></td>
-      <td><input name="titulo" type="text" id="titulo2" value="<?php=$row_mod[titulo]?>" size="30" maxlength="30"></td>
+      <td><input name="titulo" type="text" id="titulo2" value="<?php echo $row_mod['titulo'];?>" size="30" maxlength="30"></td>
 	  <?php
 	  if(!empty($idproc))
 	  {
@@ -268,7 +278,7 @@ $row_mod=mysql_fetch_array($res_mod);
 	  }
 	  ?>
 	  
-      <td><textarea name="descripcion" cols="30" rows="2"><?php echo $row_mod[descripcion];?></textarea></td>
+      <td><textarea name="descripcion" cols="30" rows="2"><?php echo $row_mod['descripcion'];?></textarea></td>
     </tr>
   </table>
   <br>
@@ -288,10 +298,10 @@ $row_mod=mysql_fetch_array($res_mod);
 		$matrix[]=0;
 		while($row=mysql_fetch_array($result)) {
 			$num++;
-			$matrix[$num-1]=$row[desc_riesgo];
+			$matrix[$num-1]=$row['desc_riesgo'];
 			echo "<tr align=\"center\">";
 			echo " <td>" . $num . "</td>";
-			echo " <td align='center'>".$row[desc_riesgo]."</td>";
+			echo " <td align='center'>".$row['desc_riesgo']."</td>";
 			echo " <td><input name=\"v11$num\" type=\"text\" value=\"$row[val]\" class=\"mio2\" maxlenght=\"3\" readonly=\"\" ></td>";
 			echo "<tr>";
        	}
@@ -309,8 +319,15 @@ $row_mod=mysql_fetch_array($res_mod);
 	$i=0;
 	while ($nombres=mysql_fetch_array($result))
 	{
-		$cab[$i]=$nombres[desc_riesgo];
+		$cab[$i]=$nombres['desc_riesgo'];
 		$i++;
+	}
+	if($i<=9)
+	{	while($i<=9)
+		{	
+			$cab[$i]="";
+			$i++;
+		}
 	}
 	?>
     <tr align="center"> 

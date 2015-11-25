@@ -12,10 +12,11 @@ if (isset($_SESSION['login'])){
 	}
 }
 require_once("funciones.php");
+if(isset($_REQUEST['op'])) $op=$_REQUEST['op']; else $op="";
 //if (valida("Riesgo")=="bad") {header("location: pagina_error.php");}
 
-if (isset($retornar)) { header("location: riesgo-opciones.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc"); }
-if (isset($continuar)) {
+if (isset($_REQUEST['retornar'])) { header("location: riesgo-opciones.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc"); }
+if (isset($_REQUEST['continuar'])) {
 	$clase = $_POST['clasi'];
 	require("conexion.php");
 	$sql="UPDATE riesgo_pregunta SET sel='0'";
@@ -26,10 +27,10 @@ if (isset($continuar)) {
 			$msg="OCURRIO UN ERROR MIENTRAS SE ACTUALIZABA LA BASE DE DATOS ".mysql_errno().": ".mysql_error();
 		}
 	}
-	if ($continuar){header("location: riesgo-matrix.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");}
+	if (isset($_REQUEST['continuar'])){header("location: riesgo-matrix.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");}
 }
 
-if (isset($reg_form)) {
+if (isset($_REQUEST['reg_form'])) {
 	include("conexion.php");
 	if($fase=="nuevo"){
 		$sql3="INSERT INTO riesgo_pregunta (desc_riesgo,tipo,sel) VALUES ('$desc_riesgo','$tipo''0')";
@@ -87,7 +88,7 @@ function Check()
     </th>
     </tr>
 	</table>    </form>
-	<form name="form1" method="post" action="<?php=$PHP_SELF ?>" onClick="return Check()" >
+	<form name="form1" method="post" action="" onClick="return Check()" >
 	
   <table width="70%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg" bgcolor="#EAEAEA">
     <tr align="center"> 

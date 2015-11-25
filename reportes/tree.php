@@ -68,8 +68,7 @@ pre {
 	</script>
 	</td>
 	
-</tr>
-</table>
+</tr></table>
 <br>
 </body>
 </html>

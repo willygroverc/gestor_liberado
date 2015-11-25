@@ -1,4 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"><html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
 <head>
 <title>PANEL DE MANDO INTEGRAL</title>
 <script type='text/javascript'>
@@ -35,12 +36,15 @@ function f1Onload() {
   ele.style.display = 'none';
 }
 </script>
+<?php
+$login_usr=$_REQUEST['login_usr'];
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 
 <frameset id='frameset1' rows="*" cols="*,85%" framespacing="0" frameborder="NO" border="0">
-  <frame src="tree.php?login_usr=<?php=$login_usr?>" name="mainFrame">
-  <frame src="panel.php?login_usr=<?php=$login_usr?>" name="rightFrame" scrolling="auto" noresize>
+  <frame src="tree.php?login_usr=<?php echo $login_usr;?>" name="mainFrame">
+  <frame src="panel.php?login_usr=<?php echo $login_usr;?>" name="rightFrame" scrolling="auto" noresize>
 </frameset>
 <noframes><body>
 </body></noframes>

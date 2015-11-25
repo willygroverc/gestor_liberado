@@ -181,6 +181,19 @@ $xajax->processRequests();
 	<script language="JavaScript" src="js/ajax.js"></script>
 	<script language="javascript" src="js/validate.js"></script>
 	<script language="javascript" src="js/jquery-ui.js"></script>
+    <script language="javascript" type="text/javascript">
+$(document).ready(function() {
+	$( "#fecha_temp" ).datepicker({
+	dateFormat: 'yy/mm/dd',
+	showOn: 'both',
+	changeMonth: true,
+	changeYear: true,
+	buttonImage: 'images/cal.gif',
+	buttonImageOnly: true,
+	buttonText: 'Selecciona una fecha'
+	});
+});
+</script>
 </head>
 <body>
 <form name="frm_temp" id="frm_temp" action="#" method="post">
@@ -217,7 +230,7 @@ $xajax->processRequests();
 	  <div align="center"> 
 	   <?php $fsist=date("Y-m-d"); ?>
           
-          <input type="text" id="fecha_temp" name="fecha_temp" size="10" maxlength="10" value="<?php echo date('Y-m-d');	?>"></input>
+          <input type="text" id="fecha_temp" name="fecha_temp" size="10" maxlength="10" value="<?php echo date('Y-m-d');	?>" readonly></input>
 	  <td><div align="center"> 
           <input name="temperatura" id="temperatura" type="text" size="5" maxlength="3">
         </div></td>
@@ -257,13 +270,13 @@ $xajax->processRequests();
 	</div>
 <div class="button_div">   
 	</br> 
-    <input type="reset" id="btnCancel" name="btnCancel" value="LIMPIAR DATOS" class="buttons_CANCEL" onclick="xajax_cancelar();" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="reset" id="btnCancel" name="btnCancel" value="LIMPIAR DATOS" class="buttons_CANCEL" onClick="xajax_cancelar();" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" id="btnAgregar" name="btnAgregar" value="Agregar Registro" class="buttons_aplicar" onclick="xajax_agregarFila(xajax.getFormValues('frm_temp'));" />
+	<input type="button" id="btnAgregar" name="btnAgregar" value="Agregar Registro" class="buttons_aplicar" onClick="xajax_agregarFila(xajax.getFormValues('frm_temp'));" />
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" id="btnAgregar" name="btnAgregar" value="GUARDAR TODO Y VOLVER" class="buttons_OK" onclick="xajax_guardar(xajax.getFormValues('frm_temp'));" />
+	<input type="button" id="btnAgregar" name="btnAgregar" value="GUARDAR TODO Y VOLVER" class="buttons_OK" onClick="xajax_guardar(xajax.getFormValues('frm_temp'));" />
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" id="btnRetornar" name="btnRetornar" value="RETORNAR" class="buttons_OK" onclick="xajax_retornar(xajax.getFormValues('frm_temp'));" />
+	<input type="button" id="btnRetornar" name="btnRetornar" value="RETORNAR" class="buttons_OK" onClick="xajax_retornar(xajax.getFormValues('frm_temp'));" />
 </div>
         
     </legend>

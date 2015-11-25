@@ -1,5 +1,5 @@
 <?php 
-if (isset($retornar)) 
+if (isset($_REQUEST['retornar'])) 
 { 
 	header("location: riesgo-ejercicio.php?idproc=$idproc&pg=$pg");
 }
@@ -9,18 +9,23 @@ $num=0;
 $sql0 = "SELECT * FROM riesgo_parametros";
 $result0 = mysql_db_query($db,$sql0,$link);
 $row0 = mysql_fetch_array($result0);
-$partic = $row0[participantes];
+$partic = $row0['participantes'];
 
 $sql = "SELECT * FROM riesgo_pregunta WHERE sel='1'";
 $result = mysql_db_query($db,$sql,$link);
 $cuantos = mysql_num_rows($result);
 $nume=0;
 $fecha=date("Y-m-d H:i:s");
-if (isset($guardar)){
+if(isset($_REQUEST['titulo'])) $titulo=$_REQUEST['titulo']; else $titulo="";
+if(isset($_REQUEST['descripcion'])) $descripcion=$_REQUEST['descripcion']; else $descripcion="";
+if(isset($_REQUEST['idproc'])) $idproc=$_REQUEST['idproc']; else $idproc="";
+if (isset($_REQUEST['guardar'])){
+	
+	
 	$sql0_1 = "SELECT MAX(id_riesgo_0) AS maxid FROM riesgo_respuesta";
 	$result0_1 = mysql_db_query($db,$sql0_1,$link);
 	$row0_1 = mysql_fetch_array($result0_1);
-	$mriesgo=$row0_1[maxid]+1;
+	$mriesgo=$row0_1['maxid']+1;
 	while($row=mysql_fetch_array($result)) {
 		$num++;
 		$val=$_POST["v11$num"];
@@ -36,6 +41,8 @@ if (isset($guardar)){
 			$sql3="INSERT INTO riesgo_respuesta(id_riesgo_0,id_riesgo,val,fecha, titulo,proceso) ".
 				  "VALUES ($mriesgo,'$row[id_riesgo]','$val','".$fecha."', '$titulo','$idproc')";
 		}
+		/*echo $sql3;
+		exit;*/
 		mysql_db_query($db,$sql3,$link);
 		$nume++;
 		//print $sql;
@@ -230,7 +237,7 @@ function sumar(aa,bb) {
 }
 </script>
 
-<form name="form1" method="post" action="<?php=$PHP_SELF ?>">
+<form name="form1" method="post" action="">
 <input name="idproc" type="hidden" value="<?php echo $idproc;?>">
 <input name="pg" type="hidden" value="<?php echo $pg;?>">
   <table border="1" align="center" cellpadding="2" cellspacing="2" bgcolor="#EAEAEA"  background="images/fondo.jpg">
@@ -240,7 +247,7 @@ function sumar(aa,bb) {
       <th width="215">DESCRIPCION</th>
     </tr>
     <tr align="center"> 
-      <td> <input name="v21a2" type="text" value="<?php echo $partic?>" class="mio" maxlength="3" readonly="yes"></td>
+      <td> <input name="v21a2" type="text" value="<?php echo $partic;?>" class="mio" maxlength="3" readonly="yes"></td>
       <td><input name="titulo" type="text" id="titulo2" size="30" maxlength="30"></td>
 	  <?php
 	  if(!empty($idproc))
@@ -249,9 +256,10 @@ function sumar(aa,bb) {
 		$result_p=mysql_db_query($db,$sql_p,$link);
 		$row_p=mysql_fetch_array($result_p);
 	  }
+	  
 	  ?>
 	  
-      <td><textarea name="descripcion" cols="30" rows="2"><?php echo $row_p[descripcion];?></textarea></td>
+      <td><textarea name="descripcion" cols="30" rows="2"><?php if(!empty($idproc)){ echo $row_p['descripcion']; }?></textarea></td>
     </tr>
   </table>
   <br>
@@ -271,10 +279,10 @@ function sumar(aa,bb) {
 		$matrix[]=0;
 		while($row=mysql_fetch_array($result)) {
 			$num++;
-			$matrix[$num-1]=$row[desc_riesgo];
+			$matrix[$num-1]=$row['desc_riesgo'];
 			echo "<tr align=\"center\">";
 			echo " <td>" . $num . "</td>";
-			echo " <td align='center'>".$row[desc_riesgo]."</td>";
+			echo " <td align='center'>".$row['desc_riesgo']."</td>";
 			echo " <td><input name=\"v11$num\" type=\"text\" class=\"mio2\" maxlenght=\"3\" readonly=\"\" ></td>";
 			echo "<tr>";
        	}
@@ -292,12 +300,19 @@ function sumar(aa,bb) {
 	$i=0;
 	while ($nombres=mysql_fetch_array($result))
 	{
-		$cab[$i]=$nombres[desc_riesgo];
+		$cab[$i]=$nombres['desc_riesgo'];
 		$i++;
+	}
+	if($i<=9)
+	{	while($i<=9)
+		{	
+			$cab[$i]="";
+			$i++;
+		}
 	}
 	?>
     <tr align="center"> 
-      <td width="18"><div align="center"><font size="1"><strong><?php echo "<div style=cursor:hand><a title='$cab[0]'>"; echo substr($cab[0],0,10).".."; echo "</a></div>"; ?></strong></font></div></td>
+      <td width="68"><div align="center"><font size="1"><strong><?php echo "<div style=cursor:hand><a title='$cab[0]'>"; echo substr($cab[0],0,10).".."; echo "</a></div>"; ?></strong></font></div></td>
       <td width="58"><div align="center"><font size="1"><strong><?php echo "<div style=cursor:hand><a title='$cab[0]'>"; echo substr($cab[0],0,10).".."; echo "</a></div>"; ?></strong></font></div></td>
       <td width="60"><div align="center"><font size="3"><font size="2"><font size="1"></font></font></font></div></td>
       <td width="60"><div align="center"><font size="3"><font size="2"><font size="1"></font></font></font></div></td>

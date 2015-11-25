@@ -1,102 +1,186 @@
 <?php 
 include ("conexion.php");
-if ($RETORNAR){	header("location: lista_agenda.php?id_minuta=$var");}
- $id = $id_minuta;
-if ($ATEMA){if(verif==1){header("location: atema_last.php?id_minuta=$var");}
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+	
+if (isset($_REQUEST['RETORNAR'])){	header("location: lista_agenda.php?id_minuta=$var");}
+ $id = $_REQUEST['id_minuta'];
+
+
+if (isset($_REQUEST['ATEMA'])){
+	if(verif==1){header("location: atema_last.php?id_minuta=$var");}
 	else
-	{$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+	{
+		
+		//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: atema_last.php?id_minuta=$var");
 	}
 }
-if ($PROPOSICIONES){
+if (isset($_REQUEST['PROPOSICIONES'])){
 	if(verif==1){header("location: proposiciones_last.php?id_minuta=$var");}
 	else
-	{$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+	{
+		//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: proposiciones_last.php?id_minuta=$var");
 	}
 }
-if ($VTEMA)
+if (isset($_REQUEST['VTEMA']))
 {	
 	if(verif==1){header("location: vtema_last.php?id_minuta=$var");}
 	else
-	{$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+	{
+		//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: vtema_last.php?id_minuta=$var");
 	}
 }
-if ($RESULTADOS)
+if (isset($_REQUEST['RESULTADOS']))
 {	
 	if(verif==1){header("location: resultados_last.php?id_minuta=$var");}
 	else
-	{$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+	{
+		//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: resultados_last.php?id_minuta=$var");
 	}
 }
-if ($ACCIONES)
+if (isset($_REQUEST['ACCIONES']))
 {	
 	if(verif==1){header("location: acciones_last.php?id_minuta=$var");}
 	else
-	{$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+	{
+		//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: acciones_last.php?id_minuta=$var");
 	}
 }
-if ($GUARDAR)
+if (isset($_REQUEST['GUARDAR']))
 {	include("conexion.php");
-	$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+	//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar',recau='$recau',comentario='$comentario' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: lista_agenda.php");
 }
 
-if ($VASISTENTE)
-{	$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+if (isset($_REQUEST['VASISTENTE']))
+{	//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: vasistente_last.php?id_minuta=$var");
 }
-if ($AASISTENTE)
-{	$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+if (isset($_REQUEST['AASISTENTE']))
+{	//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
 	header("location: aasistente_last.php?id_minuta=$var");
 }
-if ($AASISTENTE_EXT)
-{	$en_fecha="$eano-$emes-$edia";
-	$fecha="$ano-$mes-$dia";
-	$hora="$h:$m";
+if (isset($_REQUEST['AASISTENTE_EXT']))
+{	//datos enviados
+$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+$codigo=$_REQUEST['codigo'];
+$elab_por=$_REQUEST['elab_por'];
+$tipo_min=$_REQUEST['tipo_min'];
+$lugar=$_REQUEST['lugar'];
+$comentario=$_REQUEST['comentario'];
+$recau=$_REQUEST['recau'];
+//***
 	$sql="UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min', ".
 		"fecha='$fecha',hora='$hora',lugar='$lugar' WHERE id_minuta='$var'";
   	mysql_db_query($db,$sql,$link);
@@ -115,13 +199,32 @@ function confirmLink(theLink, usuario)
 } // end of the 'confirmLink()' function
 //-->
 </script>
-<?php $verif=($_GET['verif']);
+<?php 
+$verif=($_GET['verif']);
 $id_minuta=($_GET['id_minuta']);
-$nom=($_GET['nom']);
-$tema=($_GET['tema']);
-$rtema=($_GET['rtema']);
-$atema=($_GET['atema']);
-$accion=($_GET['accion']);
+if(isset($_GET['nom']))
+	$nom=$_GET['nom'];
+else
+	$nom="";
+if(isset($_GET['tema']))	
+	$tema=$_GET['tema'];
+else
+	$tema="";
+if(isset($_GET['rtema']))	
+	$rtema=$_GET['rtema'];
+else
+	$rtema="";
+
+if(isset($_GET['atema']))	
+	$atema=$_GET['atema'];
+else
+	$atema="";
+
+
+if(isset($_REQUEST['accion']))
+	$accion=$_REQUEST['accion'];
+else
+	$accion="";
 
 if ($accion=="elimina" AND $nom<>"")
 	{ $sql="DELETE FROM asistentes WHERE nombre='$nom' AND id_minuta='$id_minuta'";
@@ -148,6 +251,8 @@ if ($accion=="elimina" AND $atema<>"")
 
 
 $sql2 = "SELECT * FROM minuta WHERE id_minuta='$id_minuta'";
+//echo $sql2;
+//exit;
 $result2=mysql_db_query($db,$sql2,$link);
 $row2=mysql_fetch_array($result2);
 ?>
@@ -177,7 +282,7 @@ function Form () {
 <table width="95%" border="1" align="center" cellpadding="0" cellspacing="0" background="images/fondo.jpg">
   <tr> 
     <td> 
-      <form name="form1" method="post" action="<?php echo $PHP_SELF ?>" onKeyPress="return Form()">
+      <form name="form1" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">	
 		<input name="verif" type="hidden" value="<?php echo $verif;?>">	  
         <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#006699">
@@ -201,12 +306,12 @@ function Form () {
 				$sql_cod1="SELECT agenda_cod FROM agenda_cod ORDER BY agenda_cod";
 				$res_cod1=mysql_db_query($db,$sql_cod1,$link);
 				while($row_cod1=mysql_fetch_array($res_cod1)){ ?>
-                <option value="<?php=$row_cod1[agenda_cod]?>" <?php if ($row_cod1[agenda_cod]==$row2[codigo]) echo "selected"; ?> > 
-                <?php=$row_cod1[agenda_cod]?>
+                <option value="<?php $row_cod1['agenda_cod'];?>" <?php if ($row_cod1['agenda_cod']==$row2['codigo']) echo "selected"; ?> > 
+                <?php echo $row_cod1['agenda_cod'];?>
                 </option>
-<!--			  <option value="CAI" <?php if ($row2[codigo]=='CAI') { echo "selected"; } ?> >CAI</option>
-				  <option value="CGR" <?php if ($row2[codigo]=='CGR') { echo "selected"; } ?> >CGR</option>
-				  <option value="OTRO" <?php if ($row2[codigo]=='OTRO') { echo "selected"; } ?> >OTRO</option>	  -->
+<!--			  <option value="CAI" <?php if ($row2['codigo']=='CAI') { echo "selected"; } ?> >CAI</option>
+				  <option value="CGR" <?php if ($row2['codigo']=='CGR') { echo "selected"; } ?> >CGR</option>
+				  <option value="OTRO" <?php if ($row2['codigo']=='OTRO') { echo "selected"; } ?> >OTRO</option>	  -->
                 <?php //} 
 				}
 				?>
@@ -221,10 +326,9 @@ function Form () {
 			  $sql21 = "SELECT * FROM users WHERE tipo2_usr='T' ORDER BY apa_usr ASC";
 			  $result21 = mysql_db_query($db,$sql21,$link);
 			  while ($row21 = mysql_fetch_array($result21)) 
-				{
-				if ($row2[elab_por]==$row21[login_usr])
+				{	if ($row2['elab_por']==$row21['login_usr'])
 							echo "<option value=\"$row21[login_usr]\" selected> $row21[apa_usr] $row21[ama_usr] $row21[nom_usr]</option>";
-						else
+					else
 							echo "<option value=\"$row21[login_usr]\">$row21[apa_usr] $row21[ama_usr] $row21[nom_usr]</option>";
 	            }
 			   ?>
@@ -245,9 +349,9 @@ function Form () {
 		
   				
 							
-  				$a1=substr($row2[en_fecha],0,4);
-				$m1=substr($row2[en_fecha],5,2);
-				$d1=substr($row2[en_fecha],8,2);
+  				$a1=substr($row2['en_fecha'],0,4);
+				$m1=substr($row2['en_fecha'],5,2);
+				$d1=substr($row2['en_fecha'],8,2);
 			for($i=1;$i<=31;$i++)
 					{
 	                echo "<option value=\"$i\""; if($d1=="$i") echo "selected"; echo">$i</option>";
@@ -275,10 +379,10 @@ function Form () {
                 <p align="left"><font size="2" face="Arial, Helvetica, sans-serif"> <strong>
                   Tipo de Reunion  : <font size="2" face="Arial, Helvetica, sans-serif"> 
                   <select name="tipo_min">
-                    <option value="Ordinaria" <?php if ($row2[tipo_min]=="Ordinaria") echo "selected";?>>Ordinaria</option>
-                    <option value="Extraordinaria" <?php if ($row2[tipo_min]=="Extraordinaria") echo "selected";?>>Extraordinaria</option>
-                    <option value="Emergencia" <?php if ($row2[tipo_min]=="Emergencia") echo "selected";?>>Emergencia</option>
-                    <option value="Otros" <?php if ($row2[tipo_min]=="Otros") echo "selected";?>>Otros</option>
+                    <option value="Ordinaria" <?php if ($row2['tipo_min']=="Ordinaria") echo "selected";?>>Ordinaria</option>
+                    <option value="Extraordinaria" <?php if ($row2['tipo_min']=="Extraordinaria") echo "selected";?>>Extraordinaria</option>
+                    <option value="Emergencia" <?php if ($row2['tipo_min']=="Emergencia") echo "selected";?>>Emergencia</option>
+                    <option value="Otros" <?php if ($row2['tipo_min']=="Otros") echo "selected";?>>Otros</option>
                   </select>
                   </font> </strong></font></p>
               </div></td>
@@ -291,9 +395,9 @@ function Form () {
                   <select name="dia" >
                     <?php
 			
-  				$a1=substr($row2[fecha],0,4);
-				$m1=substr($row2[fecha],5,2);
-				$d1=substr($row2[fecha],8,2);
+  				$a1=substr($row2['fecha'],0,4);
+				$m1=substr($row2['fecha'],5,2);
+				$d1=substr($row2['fecha'],8,2);
 				
 					for($i=1;$i<=31;$i++)
 					{
@@ -322,8 +426,8 @@ function Form () {
                 </font> 
                 <?php
 			
-  				$h1=substr($row2[hora],0,2);
-				$mi1=substr($row2[hora],3,2);
+  				$h1=substr($row2['hora'],0,2);
+				$mi1=substr($row2['hora'],3,2);
 		
 			?>
                 <font size="2"> 
@@ -364,7 +468,7 @@ function Form () {
               </td>
             <td width="44%"><div align="center"> 
                 <p><font size="2" face="Arial, Helvetica, sans-serif"><strong>Lugar:</strong></font>
-                  <input name="lugar" type="text" value="<?php echo $row2[lugar];?>" size="40" maxlength="150">
+                  <input name="lugar" type="text" value="<?php echo $row2['lugar'];?>" size="40" maxlength="150">
                   <br>
                 </p>
               </div></td>
@@ -398,18 +502,19 @@ function Form () {
             <?php 	$sql5 = "SELECT * FROM users WHERE login_usr='$row24[nombre]'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[login_usr])
+				if (!$row5['login_usr'])
 				{	echo "<td>&nbsp;$row24[nombre]</td>";
-					$usuar=$row24[nombre];
+					$usuar=$row24['nombre'];
 					$sql_uext="SELECT b.nombre FROM us_ext_user a, us_ext_mod b WHERE a.id_mod=b.id_mod AND a.nombre='$row24[nombre]'";
 					$row_uext=mysql_fetch_array(mysql_db_query($db,$sql_uext,$link));
-					$mod_ext=" - ".$row_uext[nombre];
+					$mod_ext=" - ".$row_uext['nombre'];
 				}
 				else
-				{echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";
+				{	$mod_ext="";
+					echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";
 				$usuar="$row5[4] $row5[5] $row5[6]";}?>
-            <td>&nbsp;<?php echo $row24[cargo].$mod_ext;?></td>
-            <?php echo "<td nowrap><a href=\"minuta_last.php?nom=".$row24[nombre]."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$usuar')\">ELIMINAR</a>&nbsp;</td>";?> 
+            <td>&nbsp;<?php echo $row24['cargo'].$mod_ext;?></td>
+            <?php echo "<td nowrap><a href=\"minuta_last.php?nom=".$row24['nombre']."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$usuar')\">ELIMINAR</a>&nbsp;</td>";?> 
 		  </tr>
           <?php 
 		
@@ -452,11 +557,11 @@ function Form () {
   		{
 		 ?>
           <tr align="center"> 
-            <td>&nbsp;<?php echo  $row27[id_tema]?></td>
+            <td>&nbsp;<?php echo  $row27['id_tema']?></td>
             <?php 	$sql5 = "SELECT * FROM temas WHERE id_tema='$row27[tema]'  AND id_agenda='$id_minuta'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[id_tema])
+				if (!$row5['id_tema'])
 				{echo "<td>&nbsp;$row27[tema]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[tema]</td>";}
@@ -464,12 +569,12 @@ function Form () {
 				$sql5 = "SELECT * FROM users WHERE login_usr='$row27[responsable]'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[login_usr])
+				if (!$row5['login_usr'])
 				{echo "<td>&nbsp;$row27[responsable]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";}?>
-            <td >&nbsp;<?php echo $row27[duracion];$ttotal+=$row27[duracion];?></td>
-            <?php echo "<td nowrap><a href=\"minuta_last.php?tema=".$row27[id_tema]."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$row27[tema]')\">ELIMINAR</a>&nbsp;</td>";?> 
+            <td >&nbsp;<?php echo $row27['duracion'];$ttotal+=$row27['duracion'];?></td>
+            <?php echo "<td nowrap><a href=\"minuta_last.php?tema=".$row27['id_tema']."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$row27[tema]')\">ELIMINAR</a>&nbsp;</td>";?> 
 		  </tr>
           <?php }?>
 		  <tr bgcolor="#CCCCCC"> 
@@ -518,9 +623,9 @@ function Form () {
   		{
 		?>
           <tr align="center"> 
-            <td>&nbsp;<?php echo $row27[id_tema] ;?></td>
-            <td >&nbsp;<?php echo $row27[resultado]?>&nbsp;&nbsp;</td>
-           <?php echo "<td nowrap><a href=\"minuta_last.php?rtema=".$row27[id_tema]."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$row27[tema]')\">ELIMINAR</a>&nbsp;</td>";?> 
+            <td>&nbsp;<?php echo $row27['id_tema'] ;?></td>
+            <td >&nbsp;<?php echo $row27['resultado']?>&nbsp;&nbsp;</td>
+           <?php echo "<td nowrap><a href=\"minuta_last.php?rtema=".$row27['id_tema']."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$row27[tema]')\">ELIMINAR</a>&nbsp;</td>";?> 
           </tr>
           <?php }?>
 		  
@@ -556,14 +661,14 @@ function Form () {
 		$cont=$cont+1;
 		 ?>
           <tr align="center"> 
-            <td >&nbsp;<?php echo $row27[id_tema]?></td>
-            <td >&nbsp;<?php echo $row27[accion]?></td>
+            <td >&nbsp;<?php echo $row27['id_tema']?></td>
+            <td >&nbsp;<?php echo $row27['accion']?></td>
             <?php 	$sql5 = "SELECT * FROM users WHERE login_usr='$row27[responsable]'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
 				echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";?>
-            <td >&nbsp;<?php echo $row27[flimite];?></td>
-            <?php echo "<td nowrap><a href=\"minuta_last.php?atema=".$row27[id_tema]."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$row27[tema]')\">ELIMINAR</a>&nbsp;</td>";?> 
+            <td >&nbsp;<?php echo $row27['flimite'];?></td>
+            <?php echo "<td nowrap><a href=\"minuta_last.php?atema=".$row27['id_tema']."&verif=0&id_minuta=$id_minuta\" onClick=\"return confirmLink(this,'$row27[tema]')\">ELIMINAR</a>&nbsp;</td>";?> 
           </tr>
           <?php }?>
           <tr> 
@@ -581,7 +686,7 @@ function Form () {
         </table>
         <p align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp; 
           </font><font size="2" face="Arial, Helvetica, sans-serif"> 
-          <textarea name="comentario" cols="100"><?php echo $row2[comentario];?></textarea>
+          <textarea name="comentario" cols="100"><?php echo $row2['comentario'];?></textarea>
           </font><br><br>
 		
         </div>
@@ -591,7 +696,7 @@ function Form () {
             <tr> 
               <td width="50%"><div align="right"><strong><font size="2" face="Arial, Helvetica, sans-serif">Costo 
                   :</font></strong> </div></td>
-              <td width="50%"><input name="recau" type="text" id="recau" value="<?php=$row2[recau]?>" size="6"> 
+              <td width="50%"><input name="recau" type="text" id="recau" value="<?php echo $row2['recau']; ?>" size="6"> 
                 <strong><font size="2" face="Arial, Helvetica, sans-serif"> Bs.</font></strong> 
               </td>
             </tr>

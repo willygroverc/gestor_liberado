@@ -11,8 +11,19 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
-if (isset($Terminar)){header("location: minuta_last.php?id_minuta=$var&verif=1");}
-if (isset($reg_form))
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+	
+if(isset($_REQUEST['tema']))
+	$tema=$_REQUEST['tema'];
+
+if(isset($_REQUEST['responsable']))
+	$responsable=$_REQUEST['responsable'];
+	
+if(isset($_REQUEST['duracion']))
+	$duracion=$_REQUEST['duracion'];
+if (isset($_REQUEST['Terminar'])){header("location: minuta_last.php?id_minuta=$var&verif=1");}
+if (isset($_REQUEST['reg_form']))
 {   require("conexion.php");
 	
 		$sql = "SELECT MAX(id_tema) AS ntem FROM temad WHERE id_minuta='$var'";
@@ -23,6 +34,8 @@ if (isset($reg_form))
 	$sql="INSERT INTO ".
 	"temad (tema,responsable,duracion,id_tema,id_minuta,tipo)".
 	"VALUES ('$tema','$responsable','$duracion','$id_tema','$var','Nuevo')";
+	/*echo $sql;
+	exit;*/
 	mysql_query($sql);
 	header("location: atema_last.php?id_minuta=$var");
 }
@@ -49,7 +62,7 @@ function Form () {
 -->
 </script>
 <table width="65%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<tr> 
       <td > 
@@ -117,11 +130,11 @@ function Form () {
 				$sql01 = "SELECT * FROM temad WHERE responsable='$row0[nombre]' AND id_minuta='$id_minuta'";
 			  	$result01=mysql_query($sql01);
 			  	$row01=mysql_fetch_array($result01);
-				if (!$row01[responsable])
+				if (!$row01['responsable'])
 				{$sql02 = "SELECT * FROM users WHERE login_usr='$row0[nombre]' ORDER BY apa_usr ASC";
 		    	$result02 = mysql_query($sql02);
 		    	$row02 = mysql_fetch_array($result02);
-				if (!$row02[login_usr])
+				if (!$row02['login_usr'])
 					{echo '<option value="'.$row0['nombre'].'">'.$row0['nombre'].'</option>';}
 				else
 					{echo '<option value="'.$row02['login_usr'].'">'.$row02['apa_usr'].' '.$row02['ama_usr'].' '.$row02['nom_usr'].'</option>';}

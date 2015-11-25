@@ -13,6 +13,20 @@
 -->
 </style>
   <?php 	include("conexion.php");
+  
+  if(isset($_REQUEST['codigo']))
+	$codigo=$_REQUEST['codigo'];
+   
+  if(isset($_REQUEST['campo']))
+	$campo=$_REQUEST['campo'];	
+ 
+  if(isset($_REQUEST['orden']))
+	$orden=$_REQUEST['orden'];	
+	if(isset($_REQUEST['variable1']))
+		$variable1=$_REQUEST['variable1'];
+	else
+		$variable1="";
+	
   		if(isset($cons)){ 
 			$cons=str_replace("*",", ",$cons);
 			$sql = "SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y %H:%i:%s') as fecha1 FROM riesgo_respuesta WHERE id_riesgo_0 IN ($cons) LIMIT 1";}
@@ -35,22 +49,22 @@
 				$sql_titu="SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1 FROM riesgo_respuesta WHERE id_riesgo_0 IN ($cons) GROUP BY id_riesgo_0";
 				$res_titu=mysql_db_query($db,$sql_titu,$link);
 				while($row_titu=mysql_fetch_array($res_titu)){
-					echo "- ".$row_titu[titulo]."<br>";
+					echo "- ".$row_titu['titulo']."<br>";
 				}
-				}else{echo $result[titulo];}
+				}else{echo $result['titulo'];}
 			  ?>
           </td>
           <td width="25%" valign="top"> <div align="right"><strong><font size="2" face="Arial, Helvetica, sans-serif">DESCRIPCION 
               :</font></strong></div></td>
           <td width="32%" valign="top"> 
-            <?php if(isset($cons)){echo "CONSOLIDADO";}else{echo $result[descripcion];}?>
+            <?php if(isset($cons)){echo "CONSOLIDADO";}else{echo $result['descripcion'];}?>
           </td>
         </tr>
       </table></td>
   </tr>
   <tr align="center"> 
     <td colspan="4"><strong><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;FECHA:</font></strong> 
-      <?php=$result[fecha1]?>
+      <?php echo $result['fecha1']?>
     </td>
   </tr>
   <tr align="center"> 
@@ -63,15 +77,16 @@
   		if(isset($cons)) $sql = "SELECT * FROM riesgo_respuesta WHERE id_riesgo_0 IN ($cons) ORDER BY val DESC";
 		else $sql = "SELECT * FROM riesgo_respuesta WHERE id_riesgo_0='$variable1' ORDER BY val DESC";
 		$result=mysql_db_query($db,$sql,$link);
+		$titulox="";
 		while($row=mysql_fetch_array($result)) {
 			
 			$sql2 = "SELECT * FROM riesgo_pregunta WHERE id_riesgo='$row[id_riesgo]'";
 			$result2=mysql_db_query($db,$sql2,$link);
 			$row2=mysql_fetch_array($result2);
-			$desc=$row2[desc_riesgo];
-			if(isset($cons)) $titulox=" - ".$row[titulo];
+			$desc=$row2['desc_riesgo'];
+			if(isset($cons)) $titulox=" - ".$row['titulo'];
 			echo "<tr align=\"center\">";
-			echo " <td width=\"59\">".$row[id_riesgo]."</td>";
+			echo " <td width=\"59\">".$row['id_riesgo']."</td>";
 			echo " <td width=\"408\">".$desc.$titulox."</td>";
 			echo " <td width=\"68\">$row[val]</td>";
 			echo " <td width=\"68\">&nbsp;$row[obs]</td>";
@@ -89,7 +104,7 @@
 	  else $sql8 = "SELECT COUNT(*) AS num,SUM(val)AS suma FROM riesgo_respuesta WHERE id_riesgo_0='$variable1'";
 	  $result8 = mysql_db_query($db,$sql8,$link);
 	  $row8 = mysql_fetch_array($result8);
-	  $prom=round($row8[suma]/$row8[num],2);
+	  $prom=round($row8['suma']/$row8['num'],2);
 	  echo "&nbsp;$prom";
 	  ?>
       </font></td>

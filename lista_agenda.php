@@ -1,6 +1,6 @@
 <?php
 session_start();
-//ver agenda
+//ver agendacont
 
 if(isset($_REQUEST['COD'])) header("location: agenda_cod.php");
 require_once("funciones.php");
@@ -188,11 +188,12 @@ NUEVA MINUTA DE REUNION
 	$mensaje.="
 ASISTENTES
 ";
+	$cont=0;
 	$sql2 = "SELECT * FROM asistentes WHERE id_minuta=$row[id_minuta]";
 	$result2=mysql_db_query($db,$sql2,$link);
 	while ($row2=mysql_fetch_array($result2)) 
 	{
-		$cont=$cont+1;
+		$cont++;
 		$sql3 = "SELECT * FROM users WHERE login_usr='$row2[nombre]'";
 		$result3 = mysql_db_query($db,$sql3,$link);
 		$row3 = mysql_fetch_array($result3); 
@@ -277,6 +278,8 @@ ACCIONES POR TEMA
 		$mensaje.="FECHA LIMITE: $row14[flimite] ";
 	}
 	//codigo para el envio del mail
+	$lista="";
+	$fallas="";
 	$sql5="SELECT * FROM asistentes WHERE id_minuta=$row[id_minuta]";
 	$result5=mysql_db_query($db,$sql5,$link);
 	while ($row5=mysql_fetch_array($result5)){

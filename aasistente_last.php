@@ -6,20 +6,27 @@
 // Autor: 		Cesar Cuenca
 //_____________________________________________________________________________
 @session_start();
+
+$id_minuta=($_GET['id_minuta']);
 if (isset($_SESSION['login'])){
 	if ($_SESSION['tipo']=='C'){
 		header('location:pagina_inicio.php');
 	}
 }
-if (isset($Terminar)){header("location: minuta_last.php?id_minuta=$var&verif=1");}
-if (isset($reg_form))
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+if (isset($_REQUEST['Terminar'])){header("location: minuta_last.php?id_minuta=$var&verif=1");}
+if (isset($_REQUEST['reg_form']))
 {   require("conexion.php");
+
+	$nombre=$_REQUEST['nombre'];
     $sql0 = "SELECT * FROM users WHERE login_usr='$nombre'";
     $result0=mysql_query($sql0);
     $row0=mysql_fetch_array($result0);
 	
-	$sql="INSERT INTO asistentes (nombre,cargo,id_minuta,tipo) ".
-	"VALUES ('$nombre','$row0[cargo_usr]','$var','Nuevo')";
+	$sql="INSERT INTO asistentes (nombre,cargo,id_minuta,tipo) VALUES ('$nombre','$row0[cargo_usr]','$var','Nuevo')";
+	/*echo $sql;
+	exit;*/
 	mysql_query($sql);
 	header("location: aasistente_last.php?id_minuta=$var");
 }
@@ -42,7 +49,7 @@ function Form () {
 -->
 </script>
 <table width="62%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<tr> 
       <td > 

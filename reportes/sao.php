@@ -7,7 +7,7 @@ $res_usr1=mysql_db_query($db,$sql_usr1,$link);
 echo mysql_error();
 $usr="usrboris";
 while($row_usr1=mysql_fetch_array($res_usr1)){
-	$usr.=",".$row_usr1[email];
+	$usr.=",".$row_usr1['email'];
 }
 $usr=ereg_replace("usrboris,","",$usr);
 $headers  = "From: Gestor TI <admin@jesusnazareno.coop>\n";
@@ -25,7 +25,7 @@ while($row_pmi=mysql_fetch_array($res_pmi)){
 	//echo $sql_sao."<br>";
 	$ver=0;
 	while($row_sao=mysql_fetch_array($res_sao)){
-		if($row_pmi[nivel]==$row_sao[nivel]) $ver++;
+		if($row_pmi['nivel']==$row_sao['nivel']) $ver++;
 	}
 	if($ver==3){
 		//aqui realizar la accion predeterminada

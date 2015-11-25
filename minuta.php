@@ -22,6 +22,8 @@ if(isset($_GET['insertado']))
 	$insertado=$_GET['insertado'];
 else
 	$insertado=0;
+	
+echo "INSER:".$insertado;	
 if (isset($_REQUEST['RETORNAR'])){
 	if($verif=="2"){
 		//echo "$row28[ncod]";
@@ -54,10 +56,23 @@ if (isset($_REQUEST['ACCIONES'])){
 	header("location: acciones.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod");
 }
 if (isset($_REQUEST['GUARDAR'])){
-	if ( $insertado == "2" )
-	{ 	$en_fecha = "$eano-$emes-$edia";
-		$fecha = "$ano-$mes-$dia";
-		$hora = "$h:$m";	
+	$en_fecha=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
+	$fecha=$_REQUEST['ano']."-".$_REQUEST['mes']."-".$_REQUEST['dia'];
+	$hora=$_REQUEST['h'].":".$_REQUEST['m'];
+	$codigo=$_REQUEST['codigo'];
+	$elab_por=$_REQUEST['elab_por'];
+	$tipo_min=$_REQUEST['tipo_min'];
+	$lugar=$_REQUEST['lugar'];
+	$comentario=$_REQUEST['comentario'];
+	$recau=$_REQUEST['recau'];
+	if(isset($_REQUEST['prop']))
+    	$prop=$_REQUEST['prop'];
+	else
+		$prop='';
+	if ( $_GET['insertado'] == "2" )
+	{ 	
+		
+		
 		require_once('funciones.php');
 		$codigo=_clean($codigo);
 	$elab_por=_clean($elab_por);
@@ -68,7 +83,7 @@ if (isset($_REQUEST['GUARDAR'])){
 	$lugar=_clean($lugar);
 	$comentario=_clean($comentario);
 	$recau=_clean($recau);
-	$prop=_clean($prop);
+	
 	
 	$codigo=SanitizeString($codigo);
 	$elab_por=SanitizeString($elab_por);
@@ -79,16 +94,18 @@ if (isset($_REQUEST['GUARDAR'])){
 	$lugar=SanitizeString($lugar);
 	$comentario=SanitizeString($comentario);
 	$recau=SanitizeString($recau);
-	$prop=SanitizeString($prop);
+	
 		$sql = "UPDATE minuta SET codigo='$codigo',elab_por='$elab_por',en_fecha='$en_fecha',tipo_min='$tipo_min',
-		fecha='$fecha', hora='$hora',lugar='$lugar', comentario='$comentario', recau='$recau', prop='$prop' WHERE id_minuta='$var'";
+		fecha='$fecha', hora='$hora',lugar='$lugar', comentario='$comentario', recau='$recau' WHERE id_minuta='$var'";
 		//echo $sql;
+		//echo "UPINETADO:".$_GET['insertado'];
+		//exit;
 		mysql_db_query($db,$sql,$link);
 	}
 	else
-	{	$en_fecha = "$eano-$emes-$edia";
-		$fecha = "$ano-$mes-$dia";
-		$hora = "$h:$m";
+	{	
+		
+		
 		$sql28 = "SELECT MAX(num_codigo) AS ncod FROM minuta WHERE codigo='$codigo' ";	
 		$result28=mysql_db_query($db,$sql28,$link);
 		$row28=mysql_fetch_array($result28);
@@ -99,13 +116,13 @@ if (isset($_REQUEST['GUARDAR'])){
 		$en_fecha=_clean($en_fecha);
 		$tipo_min=_clean($tipo_min);
 		$fecha=_clean($fecha);
-		$hora=_clean($choraodigo);
+		//$hora=_clean($choraodigo);
 		$lugar=_clean($lugar);
 		$var=_clean($var);
 		$num_codigo=_clean($num_codigo);
 		$comentario=_clean($comentario);
 		$recau=_clean($recau);
-		$prop=_clean($prop);
+		//$prop=_clean($prop);
 		
 		$codigo=SanitizeString($codigo);
 		$elab_por=SanitizeString($elab_por);
@@ -118,17 +135,18 @@ if (isset($_REQUEST['GUARDAR'])){
 		$num_codigo=SanitizeString($num_codigo);
 		$comentario=SanitizeString($comentario);
 		$recau=SanitizeString($recau);
-		$prop=SanitizeString($prop);
-		$sql="INSERT INTO ".
-		"minuta (codigo,elab_por,en_fecha,tipo_min,fecha,hora,lugar,id_minuta,num_codigo,comentario,recau,prop)".
-		"VALUES ('$codigo','$elab_por','$en_fecha','$tipo_min','$fecha','$hora','$lugar','$var','$num_codigo','$comentario','$recau','$prop')";
+		
+		$sql="INSERT INTO minuta (codigo,elab_por,en_fecha,tipo_min,fecha,hora,lugar,id_minuta,num_codigo,comentario,recau) VALUES ('$codigo','$elab_por','$en_fecha','$tipo_min','$fecha','$hora','$lugar','$var','$num_codigo','$comentario','$recau')";
+		//echo "fada:".$sql;
+		//echo "INETADO:".$_GET['insertado'];
+		//exit;
 		mysql_db_query($db,$sql,$link);
 	}	
 	header("location: lista_agenda.php");
 }
 if (isset($_REQUEST['VASISTENTE'])){ 
 	//echo "*".$insertado;
-	if ( $insertado == "2" ) $insertado = "0";	
+	if ( $_GET['insertado'] == "2" ) $insertado = "0";	
 	else   $insertado = "1";
 	/*echo "location: vasistente.php?id_minuta=$var&dato=$datos&insertado=$insertado&num_cod=$num_cod";
 	exit;*/
@@ -248,14 +266,14 @@ function Form () {
   				
 				if($verif==1)
 				{				
-  				$a1=substr($row2[en_fecha],0,4);
-				$m1=substr($row2[en_fecha],5,2);
-				$d1=substr($row2[en_fecha],8,2);
+  				$a1=substr($row2['en_fecha'],0,4);
+				$m1=substr($row2['en_fecha'],5,2);
+				$d1=substr($row2['en_fecha'],8,2);
 				}
 				else
-				{	  $a1=substr($row2[en_fecha],0,4);
-				      $m1=substr($row2[en_fecha],5,2);
-				      $d1=substr($row2[en_fecha],8,2);
+				{	  $a1=substr($row2['en_fecha'],0,4);
+				      $m1=substr($row2['en_fecha'],5,2);
+				      $d1=substr($row2['en_fecha'],8,2);
 				}
 				
 					for($i=1;$i<=31;$i++)
@@ -310,14 +328,14 @@ function Form () {
   					
 				if($verif==1)
 				{					
-  				$a1=substr($row2[fecha],0,4);
-				$m1=substr($row2[fecha],5,2);
-				$d1=substr($row2[fecha],8,2);
+  				$a1=substr($row2['fecha'],0,4);
+				$m1=substr($row2['fecha'],5,2);
+				$d1=substr($row2['fecha'],8,2);
 				}
 				else
-				{     $a1=substr($row2[fecha],0,4);
-				      $m1=substr($row2[fecha],5,2);
-				      $d1=substr($row2[fecha],8,2);				
+				{     $a1=substr($row2['fecha'],0,4);
+				      $m1=substr($row2['fecha'],5,2);
+				      $d1=substr($row2['fecha'],8,2);				
 				}
 				
 					for($i=1;$i<=31;$i++)
@@ -490,7 +508,7 @@ function Form () {
             <?php 	$sql5 = "SELECT * FROM temas WHERE id_tema='$row27[tema]' AND id_agenda='$id_minuta'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[id_tema])
+				if (!$row5['id_tema'])
 				{echo "<td>&nbsp;$row27[tema]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[tema]</td>";}
@@ -498,11 +516,11 @@ function Form () {
 				$sql5 = "SELECT * FROM users WHERE login_usr='$row27[responsable]'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[login_usr])
+				if (!$row5['login_usr'])
 				{echo "<td>&nbsp;$row27[responsable]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";}?>
-			<td >&nbsp;<?php echo $row27[duracion];$ttotal+=$row27[duracion];?></td>
+			<td >&nbsp;<?php echo $row27['duracion'];$ttotal+=$row27['duracion'];?></td>
           </tr>
 		  
 		  <?php }?>
@@ -550,8 +568,8 @@ function Form () {
   		{
 		?>
           <tr align="center"> 
-            <td>&nbsp;<?php echo $row27[id_tema] ;?></td>
-            <td >&nbsp;<?php echo $row27[resultado]?>&nbsp;&nbsp;</td>
+            <td>&nbsp;<?php echo $row27['id_tema'] ;?></td>
+            <td >&nbsp;<?php echo $row27['resultado']?>&nbsp;&nbsp;</td>
           </tr>
           <?php }?>
           <tr> 
@@ -590,13 +608,13 @@ function Form () {
 		$cont=$cont+1;
 		 ?>
           <tr align="center"> 
-           <td >&nbsp;<?php echo $row27[id_tema]?></td>
-            <td >&nbsp;<?php echo $row27[accion]?></td>
+           <td >&nbsp;<?php echo $row27['id_tema']?></td>
+            <td >&nbsp;<?php echo $row27['accion']?></td>
 			<?php	$sql5 = "SELECT * FROM users WHERE login_usr='$row27[responsable]'";
 		    $result5 = mysql_db_query($db,$sql5,$link);
 		    $row5 = mysql_fetch_array($result5);
 			echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";?>
-            <td >&nbsp;<?php echo $row27[flimite];?></td>
+            <td >&nbsp;<?php echo $row27['flimite'];?></td>
           </tr>
 		  
 		  <?php }?>

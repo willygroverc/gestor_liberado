@@ -1,5 +1,7 @@
 <?php
+
 include ("../conexion.php");
+if(isset($_REQUEST['prom'])) $prom=$_REQUEST['prom']; else $prom="";
 $sql="SELECT * FROM pmi_sao WHERE id_report='$report'";
 $res=mysql_db_query($db,$sql,$link);
 $row_pmi=mysql_fetch_array($res);
@@ -9,7 +11,7 @@ $data="<chart ledGap='1' clickURL='alertas_pre.php?id=".$row_pmi['id_report']."'
       Grafico.
    </div>
 <script type="text/javascript">
-      var myChart = new FusionCharts("Charts/VLED.swf", "angular", "<?php=$tam3?>", "<?php=$tam4?>", "0", "0");
+      var myChart = new FusionCharts("Charts/VLED.swf", "angular", "<?php echo $tam3;?>", "<?php echo $tam4;?>", "0", "0");
       myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv<?php echo $ra?>");
 </script>

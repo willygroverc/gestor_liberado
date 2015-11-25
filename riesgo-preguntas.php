@@ -75,7 +75,7 @@ include("top.php");
     }
 -->
 </script>
-<form name="form1" method="post" action="<?php= $_SERVER['PHP_SELF'] ?>" >
+<form name="form1" method="post" action="" >
     <input name="idproc" type="hidden" id="idproc" value="<?php echo $_REQUEST['idproc']; ?>" >
     <input name="pg" type="hidden" id="pg" value="<?php echo $_REQUEST['pg']; ?>" >
     <input name="BUSCAR" type="hidden" value="<?php echo $_REQUEST['BUSCAR']; ?>">

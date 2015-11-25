@@ -12,8 +12,17 @@ if (isset($_SESSION['login'])){
 	}
 }
 require("conexion.php");
-$cad = $dato;
-if ( isset($insertado) && $insertado == "1" )
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+$cad = $_GET['dato'];
+$dato=$_REQUEST['dato'];
+$id_minuta=$_REQUEST['id_minuta'];
+$insertado=$_REQUEST['insertado'];
+/*if(isset($_REQUEST['verif']))
+	$verif=$_REQUEST['verif'];*/
+if(isset($_REQUEST['num_cod']))
+	$num_cod=$_REQUEST['num_cod'];
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "1" )
 {	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -27,7 +36,7 @@ if ( isset($insertado) && $insertado == "1" )
 	mysql_query($sql);												
 	$insertado = "2";
 }
-if ( isset($insertado) && $insertado == "0" )
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "0" )
 {	$fila = explode(":",$dato);
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -40,9 +49,11 @@ if ( isset($insertado) && $insertado == "0" )
 	mysql_query($sql);
 	$insertado = "2";
 }
-if (isset($Terminar)){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
-if (isset($reg_form))
-{   
+if (isset($_REQUEST['Terminar'])){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
+if (isset($_REQUEST['reg_form']))
+{   	$tema=$_REQUEST['tema'];
+		$responsable=$_REQUEST['responsable'];
+		$duracion=$_REQUEST['duracion'];
 		$sql = "SELECT MAX(id_tema) AS ntem FROM temad WHERE id_minuta='$var'";
 		$result=mysql_query($sql);
 		$row=mysql_fetch_array($result);
@@ -51,6 +62,8 @@ if (isset($reg_form))
 	$sql="INSERT INTO ".
 	"temad (tema,responsable,duracion,id_tema,id_minuta,tipo)".
 	"VALUES ('$tema','$responsable','$duracion','$id_tema','$var','Nuevo')";
+	/*echo $sql;
+	exit;*/
 	mysql_query($sql);
 	header("location: atema.php?id_minuta=$var&verif=2&dato=$dato&insertado=$insertado");
 }
@@ -77,7 +90,7 @@ function Form () {
 -->
 </script>
 <table width="65%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<input name="verif" type="hidden" value="<?php if ($_GET['verif']) {echo $_GET['verif'];}else{echo "1";};?>">
 	<input name="dato" type="hidden" value="<?php echo $dato; ?>">
@@ -140,6 +153,9 @@ function Form () {
                   <option value="0"></option>
                   <?php 
 			  $sql0 = "SELECT * FROM asistentes WHERE id_minuta='$id_minuta'";
+			  //echo $sql0;
+			
+			  
 			  $result0=mysql_query($sql0);
 			  while ($row0=mysql_fetch_array($result0)) 
 				{
@@ -157,7 +173,7 @@ function Form () {
 			   }}
 			 ?>
                 </select>
-                </strong></div></td>
+                </strong><?php //echo "fqwerqw:".$sql0;  ?></div></td>
             <td width="100" nowrap height="7"><div align="center"><strong> 
                 <input name="duracion" type="text" size="3" maxlength="4">
                 <font size="2" face="Arial, Helvetica, sans-serif">Min.</font> </strong> </div></td>

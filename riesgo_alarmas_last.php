@@ -1,17 +1,37 @@
 <?php  
 include ("conexion.php");
-if ($GUARDAR)
+if(isset($_REQUEST['id_alar']))
+	$id_alar=$_REQUEST['id_alar'];
+if (isset($_REQUEST['GUARDAR']))
 {	session_start();
-	if (!session_is_registered("login")) { header("location: index_2.php"); }
+	$mensaje_u=$_REQUEST['mensaje_u'];
+	$mensaje_p=$_REQUEST['mensaje_p'];
+	$mensaje_e=$_REQUEST['mensaje_e'];
+	$lista=$_REQUEST['lista'];
+	$lista2=$_REQUEST['lista2'];
+	$lista3=$_REQUEST['lista3'];
+	if(isset($_REQUEST['mail']))
+		$mail=$_REQUEST['mail'];
+	else
+		$mail="";
+	if(isset($_REQUEST['msn']))	
+		$msn=$_REQUEST['msn'];
+	else
+		$msn="";
+	if (!$_SESSION["login"]) { header("location: index_2.php"); }
 	$login   = $_SESSION["login"];	
 	$sql_ins = "UPDATE alarmas_riesgos SET mensaje_u='$mensaje_u',mensaje_p='$mensaje_p',".
 				"mensaje_e='$mensaje_e',msn_celu='$msn',msn_mail='$mail' WHERE id_alarma='$id_alar'";
+	
 	mysql_db_query($db, $sql_ins, $link);		
 	$sql = "SELECT MAX(id_alarma) AS id_alarma FROM alarmas_riesgos";
+	
+	/*echo $sql;
+	exit;*/
 	$row = mysql_fetch_array(mysql_db_query($db, $sql, $link));
 	
 	$sql_usu0 = "DELETE FROM alarma_usuarios WHERE id_alarma='$id_alar'";
-				mysql_db_query($db,$sql_usu0,$link);	 
+	mysql_db_query($db,$sql_usu0,$link);	 
 	for ($i= 0; $i<count($lista); $i++)
 	{	$usu = $lista[$i]; 
 		$sql_usu = "INSERT INTO alarma_usuarios (id_alarma,usuario) VALUES ('$row[id_alarma]','$usu')";
@@ -35,7 +55,7 @@ if ($GUARDAR)
 	}
 	header("location: lista_alarmas.php");
 }
-if ($RETORNAR) header("location: lista_alarmas.php");
+if (isset($_REQUEST['RETORNAR'])) header("location: lista_alarmas.php");
 
 include ("top.php");
 require_once ( "ValidatorJs.php" );
@@ -72,7 +92,7 @@ $result=mysql_db_query($db, $sql, $link);
 $row=mysql_fetch_array($result);
 ?>
 
-<form name="form1" method="post" action="<?php echo $PHP_SELF?>">
+<form name="form1" method="post" action="">
 <input name="id_alar" type="hidden" value="<?php echo $id_alar;?>">
   <table width="80%" align="center" border="1">
     <tr><td>
@@ -91,7 +111,7 @@ $row=mysql_fetch_array($result);
 		$sql3 = "SELECT * FROM riesgo_tipos WHERE id_riesgo='$row[tipo_alarma]'";
 		$res3 = mysql_db_query($db,$sql3,$link);
 		$row3 = mysql_fetch_array($res3);
-		echo $row3[descripcion];			
+		echo $row3['descripcion'];			
 		?></select>
               </font></td>
           </tr>
@@ -103,7 +123,7 @@ $row=mysql_fetch_array($result);
 			$sql2 = "SELECT desc_riesgo FROM riesgo_pregunta WHERE tipo_r='$row[tipo_alarma]' AND id_riesgo='$row[alarma]'";
 			$res2 = mysql_db_query($db,$sql2,$link);
 			$row2 = mysql_fetch_array($res2);
-			echo $row2[desc_riesgo];
+			echo $row2['desc_riesgo'];
 			?>
               </font></td>
           </tr>
@@ -126,7 +146,7 @@ $row=mysql_fetch_array($result);
 				$sql_usu0 = "SELECT usuario FROM alarma_usuarios WHERE usuario='0' AND id_alarma='$id_alar'";
 				$res_usu0= mysql_db_query($db,$sql_usu0,$link);
 				$row_usu0 = mysql_fetch_array($res_usu0);
-				if ($row_usu0[usuario]=='0'){echo "selected";}?>>NA</option>
+				if ($row_usu0['usuario']=='0'){echo "selected";}?>>NA</option>
 				<?php
 				   	$sql_usu = "SELECT * FROM users WHERE tipo2_usr='T' AND bloquear=0 order by apa_usr";
 					$res_usu = mysql_db_query($db,$sql_usu,$link);
@@ -136,15 +156,15 @@ $row=mysql_fetch_array($result);
 						$sql_usu2 = "SELECT usuario FROM alarma_usuarios WHERE usuario='$row_usu[login_usr]' AND id_alarma='$id_alar'";
 						$res_usu2 = mysql_db_query($db,$sql_usu2,$link);
 						$row_usu2 = mysql_fetch_array($res_usu2);
-						if ($row_usu2[usuario]){echo "selected";}
-                		echo ">".$row_usu[apa_usr]." ".$row_usu[ama_usr]." ".$row_usu[nom_usr]." &nbsp;(". $row_usu[area_usr].")";
+						if ($row_usu2['usuario']){echo "selected";}
+                		echo ">".$row_usu['apa_usr']." ".$row_usu['ama_usr']." ".$row_usu['nom_usr']." &nbsp;(". $row_usu['area_usr'].")";
 						echo "</option>";
                 	}
 				?>
               </select>
 			</td>
             <td align="center" valign="middle"> 
-              <textarea name="mensaje_u" cols="40" rows="5"><?php echo $row[mensaje_u];?></textarea>
+              <textarea name="mensaje_u" cols="40" rows="5"><?php echo $row['mensaje_u'];?></textarea>
             </td>
           </tr>
           <tr> 
@@ -167,7 +187,7 @@ $row=mysql_fetch_array($result);
 				$sql5_0 = "SELECT id_proveedor FROM alarma_proveedores WHERE id_proveedor='0' AND id_alarma='$id_alar'";
 				$res5_0= mysql_db_query($db,$sql5_0,$link);
 				$row5_0 = mysql_fetch_array($res5_0);
-				if ($row5_0[id_proveedor]=='0'){echo "selected";}?>>NA</option>
+				if ($row5_0['id_proveedor']=='0'){echo "selected";}?>>NA</option>
 				<?php 
 				    $sql5 = "SELECT IdProv, NombProv FROM proveedor ORDER BY NombProv ASC";
 					$res5 = mysql_db_query($db,$sql5,$link);
@@ -177,8 +197,8 @@ $row=mysql_fetch_array($result);
 						$sql5_2 = "SELECT id_proveedor FROM alarma_proveedores WHERE id_proveedor='$row5[IdProv]' AND id_alarma='$id_alar'";
 						$res5_2 = mysql_db_query($db,$sql5_2,$link);
 						$row5_2 = mysql_fetch_array($res5_2);
-						if ($row5_2[id_proveedor]){echo "selected";}
-                		echo ">".$row5[NombProv]; 
+						if ($row5_2['id_proveedor']){echo "selected";}
+                		echo ">".$row5['NombProv']; 
 					    echo "</option>";
 					}
 				?>
@@ -186,7 +206,7 @@ $row=mysql_fetch_array($result);
 			</td>
             <td align="center" valign="middle"> 
               <div align="center">
-                <textarea name="mensaje_p" cols="40" rows="5"><?php echo $row[mensaje_p];?></textarea>
+                <textarea name="mensaje_p" cols="40" rows="5"><?php echo $row['mensaje_p'];?></textarea>
               </div></td>
           </tr>
           <tr> 
@@ -207,7 +227,7 @@ $row=mysql_fetch_array($result);
 				$sql4_0 = "SELECT id_entidad FROM alarma_entidad WHERE id_entidad='0' AND id_alarma='$id_alar'";
 				$res4_0= mysql_db_query($db,$sql4_0,$link);
 				$row4_0 = mysql_fetch_array($res4_0);
-				if ($row4_0[id_entidad]=='0'){echo "selected";}?>
+				if ($row4_0['id_entidad']=='0'){echo "selected";}?>
 				>NA</option>
 				<?php
 				    $sql4 = "SELECT * FROM procesos_parametros WHERE tipo_dep ='2' ORDER BY desc_dep ASC";
@@ -218,14 +238,14 @@ $row=mysql_fetch_array($result);
 						$sql4_2 = "SELECT id_entidad FROM alarma_entidad WHERE id_entidad='$row4[id_dep]' AND id_alarma='$id_alar'";
 						$res4_2 = mysql_db_query($db,$sql4_2,$link);
 						$row4_2 = mysql_fetch_array($res4_2);
-						if ($row4_2[id_entidad]){echo "selected";}
-                		echo ">".$row4[desc_dep]; 
+						if ($row4_2['id_entidad']){echo "selected";}
+                		echo ">".$row4['desc_dep']; 
 						echo "</option>";
 					}
 				 ?>
               </select></td>
             <td align="center" valign="middle"> 
-              <textarea name="mensaje_e" cols="40" rows="5"><?php echo $row[mensaje_e];?></textarea>
+              <textarea name="mensaje_e" cols="40" rows="5"><?php echo $row['mensaje_e'];?></textarea>
             </td>
           </tr>
           <tr> 
@@ -239,9 +259,9 @@ $row=mysql_fetch_array($result);
           </tr>
           <tr> 
             <td width="12%">&nbsp;</td>
-            <td width="88%" class="titulo2">&nbsp; <input type="checkbox"  name="mail" value="1" <?php if ($row[msn_mail]==1){echo "checked";}?>>
+            <td width="88%" class="titulo2">&nbsp; <input type="checkbox"  name="mail" value="1" <?php if ($row['msn_mail']==1){echo "checked";}?>>
               Correo electronico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-              <input type="checkbox" name="msn" value="1" <?php if ($row[msn_celu]==1){echo "checked";}?>>
+              <input type="checkbox" name="msn" value="1" <?php if ($row['msn_celu']==1){echo "checked";}?>>
               Mensaje por Celular </td>
           </tr>
         </table></td></tr></table>

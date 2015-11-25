@@ -18,9 +18,10 @@ if (strlen($DE) == 1){ $DE = "0".$DE; }
 if (strlen($ME) == 1){ $ME = "0".$ME; }
 	$fecha2 = $AE."-".$ME."-".$DE; 
 }
+//echo "F1:".$fecha1."**F2:".$fecha2;
 if(isset($fecha1) && isset($fecha2)) {
 	$sql_alt=" AND fecha_conf BETWEEN '$fecha1' AND '$fecha2'";
-	if($val_area!=0) $sql_alt.=" AND b.area=$val_area";
+	if(isset($_REQUEST['val_area']) && $_REQUEST['val_area']!=0) $sql_alt.=" AND b.area=$val_area";
 	}
 else $sql_alt="";
 
@@ -34,7 +35,7 @@ else $sql_alt="";
       Grafico.
    </div>
 <script type="text/javascript">
-      var myChart = new FusionCharts("Charts/AngularGauge.swf", "angular", "<?php=$tam1?>", "<?php=$tam2?>", "0", "0");
+      var myChart = new FusionCharts("Charts/AngularGauge.swf", "angular", "<?php echo $tam1;?>", "<?php echo $tam2;?>", "0", "0");
       myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv<?php echo $ra?>");
 </script>
