@@ -112,42 +112,10 @@
 			}
 		},
 		{
-			"file": "ver_orden.php",
+			"file": "ver_admyaseg.php",
 			"settings":
 			{
-				"buffer_size": 17077,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ver_usuario.php",
-			"settings":
-			{
-				"buffer_size": 4493,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/gestor_liberado/ver_orden.php",
-			"settings":
-			{
-				"buffer_size": 26747,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ver_roles.php",
-			"settings":
-			{
-				"buffer_size": 7897,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ver_solicproydatos.php",
-			"settings":
-			{
-				"buffer_size": 12964,
+				"buffer_size": 6814,
 				"line_ending": "Windows"
 			}
 		}
@@ -196,8 +164,13 @@
 	},
 	"file_history":
 	[
-		"/C/xampp/htdocs/gestor-re/ver_titulares.php",
+		"/C/xampp/htdocs/gestor-re/ver_admyaseg.php",
 		"/C/xampp/htdocs/gestor-re/ver_orden.php",
+		"/C/xampp/htdocs/gestor-re/ver_usuario.php",
+		"/C/xampp/htdocs/gestor_liberado/ver_orden.php",
+		"/C/xampp/htdocs/gestor-re/ver_roles.php",
+		"/C/xampp/htdocs/gestor-re/ver_solicproydatos.php",
+		"/C/xampp/htdocs/gestor-re/ver_titulares.php",
 		"/C/xampp/htdocs/gestor-re/top_ver.php",
 		"/C/xampp/htdocs/interfaz/index.php",
 		"/C/xampp/htdocs/interfaz/usuarios-nuevo2.php",
@@ -318,12 +291,7 @@
 		"/C/xampp/htdocs/gestor_liberado/compromisos_last.php",
 		"/C/xampp/htdocs/gestor_liberado/conformidad.php",
 		"/C/xampp/htdocs/gestor_liberado/contingencia_estadistica.php",
-		"/C/xampp/htdocs/gestor_liberado/contrato_garantia.php",
-		"/C/xampp/htdocs/gestor_liberado/contrato_garantia_last.php",
-		"/C/xampp/htdocs/gestor_liberado/control_parametros.php",
-		"/C/xampp/htdocs/gestor_liberado/control_parametros_mesa_M.php",
-		"/C/xampp/htdocs/gestor_liberado/control_parametros_sarc.php",
-		"/C/xampp/htdocs/gestor_liberado/control_usr2.php"
+		"/C/xampp/htdocs/gestor_liberado/contrato_garantia.php"
 	],
 	"find":
 	{
@@ -372,7 +340,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -442,8 +410,8 @@
 						"selection":
 						[
 							[
-								592,
-								539
+								538,
+								538
 							]
 						],
 						"settings":
@@ -481,53 +449,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 437.0,
+						"translation.y": 1724.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "ver_orden.php",
+					"file": "ver_admyaseg.php",
 					"settings":
 					{
-						"buffer_size": 17077,
+						"buffer_size": 6814,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9949,
-								9949
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3120.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "ver_usuario.php",
-					"settings":
-					{
-						"buffer_size": 4493,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1266,
-								1266
+								6177,
+								6149
 							]
 						],
 						"settings":
@@ -538,90 +478,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/C/xampp/htdocs/gestor_liberado/ver_orden.php",
-					"settings":
-					{
-						"buffer_size": 26747,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3021,
-								3021
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 897.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "ver_roles.php",
-					"settings":
-					{
-						"buffer_size": 7897,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5234,
-								5234
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 702.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "ver_solicproydatos.php",
-					"settings":
-					{
-						"buffer_size": 12964,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								571,
-								571
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2808.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -685,6 +541,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 241.0,
+	"side_bar_width": 225.0,
 	"status_bar_visible": true
 }
