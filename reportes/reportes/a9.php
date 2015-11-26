@@ -1,5 +1,8 @@
 <?php
 include ("../conexion.php");
+if(isset($_REQUEST['menu'])) $menu=$_REQUEST['menu']; else $menu="";
+
+
 $data="<chart caption='Tiempo de Ejecución de Ordenes desde el Ingreso de una Orden' shownames='1' showvalues='$show_values' showLabels='$show_lab' decimals='0' numberPrefix='Dias '>";
 $data.="<categories><category label='Asignación'/><category label='Solución - Fecha del Sistema'/><category label='Solución - Fecha introducida'/><category label='Conformidad'/></categories>";
 ////////////////////////////////////////////////
@@ -30,16 +33,16 @@ $data.="<categories><category label='Asignación'/><category label='Solución - Fe
 			{
 				if($i==0)
 				{
-					$max1=$tiempo_sol2[num];
-					$min1=$tiempo_sol2[num];
+					$max1=$tiempo_sol2['num'];
+					$min1=$tiempo_sol2['num'];
 				}
 				else
 				{
-					if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-					if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+					if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+					if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 				}
 				$i++;
-				$sol1_sum+=$tiempo_sol2[num];
+				$sol1_sum+=$tiempo_sol2['num'];
 			}
 		}
 		if($i==0) $prom1=0;
@@ -67,16 +70,16 @@ $data.="<categories><category label='Asignación'/><category label='Solución - Fe
 			{
 				if($i==0)
 				{
-					$max1=$tiempo_sol2[num];
-					$min1=$tiempo_sol2[num];
+					$max1=$tiempo_sol2['num'];
+					$min1=$tiempo_sol2['num'];
 				}
 				else
 				{
-					if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-					if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+					if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+					if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 				}
 				$i++;
-				$sol1_sum+=$tiempo_sol2[num];
+				$sol1_sum+=$tiempo_sol2['num'];
 			};
 		}
 		if($i==0) $prom1=0;
@@ -102,16 +105,16 @@ $data.="<categories><category label='Asignación'/><category label='Solución - Fe
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -139,16 +142,16 @@ $data.="<categories><category label='Asignación'/><category label='Solución - Fe
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -173,9 +176,9 @@ $data.="</dataset></chart>";
 
    <div id="chartdiv<?php $ra=rand(); echo $ra?>" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
-      var myChart = new FusionCharts("Charts/MSColumn3D.swf", "myChartId", "<?php=$tam1?>", "<?php=$tam2?>", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
-      myChart.render("chartdiv<?php=$ra?>");
+      var myChart = new FusionCharts("Charts/MSColumn3D.swf", "myChartId", "<?php echo $tam1;?>", "<?php echo $tam2;?>", "0", "0");
+      myChart.setDataXML("<?php echo $data;?>");
+      myChart.render("chartdiv<?php echo $ra;?>");
    </script>
 
 </body>

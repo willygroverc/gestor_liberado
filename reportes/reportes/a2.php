@@ -21,7 +21,7 @@
       Grafico.
    </div>
 <script type="text/javascript">
-      var myChart = new FusionCharts("Charts/AngularGauge.swf", "angular", "<?php=$tam1?>", "<?php=$tam2?>", "0", "0");
+      var myChart = new FusionCharts("Charts/AngularGauge.swf", "angular", "<?php echo $tam1;?>", "<?php echo $tam2;?>", "0", "0");
       myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv<?php echo $ra?>");
 </script></div>

@@ -1,7 +1,15 @@
 <?php 
 include("conexion.php");
-$cad = $dato;
-if ( $insertado == "1" )
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+$cad = $_GET['dato'];
+$dato=$_REQUEST['dato'];
+$id_minuta=$_REQUEST['id_minuta'];
+if(isset($_REQUEST['num_cod']))
+	$num_cod=$_REQUEST['num_cod'];
+$insertado=$_REQUEST['insertado'];
+//$verif=$_REQUEST['verif'];	
+if ( $_GET['insertado'] == "1" )
 {	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -15,7 +23,7 @@ if ( $insertado == "1" )
 	mysql_db_query($db,$sql,$link);												
 	$insertado = "2";
 }
-if ( $insertado == "0" )
+if ( $_GET['insertado'] == "0" )
 {	$fila = explode(":",$dato);
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -28,21 +36,24 @@ if ( $insertado == "0" )
 	mysql_db_query($db,$sql,$link);
 	$insertado = "2";
 }
-if ($Terminar){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
-if ($reg_form){
-	include("conexion.php");	
+if (isset($_REQUEST['Terminar'])){header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");}
+if (isset($_REQUEST['reg_form'])){
+	include("conexion.php");
+	$tema=$_REQUEST['tema'];
 	$sql = "SELECT * FROM temas WHERE id_tema='$tema' AND id_agenda='$var'";
 	$result=mysql_db_query($db,$sql,$link);
 	$row=mysql_fetch_array($result);
-	$responsable=$row[responsable];
-	$duracion=$row[duracion];
+	$responsable=$row['responsable'];
+	$duracion=$row['duracion'];
 	$sql2="SELECT MAX(id_tema) AS ntem FROM temad WHERE id_minuta='$var'";
 	$result2=mysql_db_query($db,$sql2,$link);
 	$row2=mysql_fetch_array($result2);
-	$id_tema=$row2[ntem]+1;		
+	$id_tema=$row2['ntem']+1;		
 	
 	$sql="INSERT INTO temad (tema,responsable,duracion,id_tema,id_minuta) ".
 	"VALUES ('$tema','$responsable','$duracion','$id_tema','$var')";
+	//echo $sql;
+	//exit;
 	mysql_db_query($db,$sql,$link);
 	header("location: vtema.php?id_minuta=$var&verif=2&dato=$dato&insertado=$insertado");
 }
@@ -68,7 +79,7 @@ function Form () {
 </script>
 
 <table width="80%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<input name="verif" type="hidden" value="<?php if ($_GET[verif]) {echo $_GET[verif];}else{echo "1";};?>">
 	<input name="dato" type="hidden" value="<?php echo $dato; ?>">
@@ -93,11 +104,11 @@ function Form () {
 		while($row=mysql_fetch_array($result)) 
   		{?>
           <tr align="center"> 
-            <td>&nbsp;<?php echo $row[id_tema]?></td>
+            <td>&nbsp;<?php echo $row['id_tema']?></td>
 			<?php 	$sql5 = "SELECT * FROM temas WHERE id_tema='$row[tema]' AND id_agenda='$id_minuta'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[id_tema])
+				if (!$row5['id_tema'])
 				{echo "<td>&nbsp;$row[tema]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[tema]</td>";}
@@ -105,12 +116,12 @@ function Form () {
 				$sql5 = "SELECT * FROM users WHERE login_usr='$row[responsable]'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[login_usr])
+				if (!$row5['login_usr'])
 				{echo "<td>&nbsp;$row[responsable]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";}
 			?>
-            <td>&nbsp;<?php echo $row[duracion]?></td>
+            <td>&nbsp;<?php echo $row['duracion']?></td>
           </tr>
           <?php 
 		 }
@@ -131,7 +142,7 @@ function Form () {
 				{$sql01 = "SELECT * FROM temad WHERE tema='$row0[id_tema]' AND id_minuta='$id_minuta'";
 			  	$result01=mysql_db_query($db,$sql01,$link);
 			  	$row01=mysql_fetch_array($result01);
-				if (!$row01[tema])
+				if (!$row01['tema'])
 				{echo "<option value=\"$row0[id_tema]\">$row0[tema]</option>";}
 				
                 }

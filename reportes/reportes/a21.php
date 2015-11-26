@@ -24,7 +24,7 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 		$rs19 = mysql_db_query($db,$sql9,$link);
 		$numAsig = 0;
 		while ($tmp = mysql_fetch_array($rs19))  {			
-				$total[$numAsig] = $tmp[id_orden];
+				$total[$numAsig] = $tmp['id_orden'];
 				$numAsig++;
 		}
 //NUMERO DE ORDNES CON CONFORMIDAD DEL CLIENTE 
@@ -32,24 +32,24 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 	for ($i=0; $i<$numAsig; $i++) {
 		$sql = "SELECT id_orden FROM conformidad WHERE id_orden='$total[$i]'";
 		$rsTmp3=mysql_fetch_array(mysql_db_query($db,$sql,$link));
-		if ($rsTmp3[id_orden]==$total[$i]){
+		if ($rsTmp3['id_orden']==$total[$i]){
 		$numConf++;}
 	}
-	$row5[conf]=$numConf;
+	$row5['conf']=$numConf;
 //NUMERO DE ORDNES CON disCONFORMIDAD DEL CLIENTE  DE LAS CULAES  EXISTE CONFOR.
 	$nfd = 0;
 	for ($i=0; $i<$numAsig; $i++) {
 		$sql = "SELECT * FROM conformidad WHERE id_orden='$total[$i]'";
 		$rsTmp3f=mysql_fetch_array(mysql_db_query($db,$sql,$link));
-		if ($rsTmp3f[id_orden]==$total[$i]){
-			if ($rsTmp3f[tipo_conf] == "2")
+		if ($rsTmp3f['id_orden']==$total[$i]){
+			if ($rsTmp3f['tipo_conf'] == "2")
 			{$nfd ++;}
 		}
 	}
 	$disconformidad=$nfd;
 
 //NUMERO DE ORDENES con CONFORMIDAD DEL CLIENTE real
-	$conformidad = $row5[conf] - $disconformidad;
+	$conformidad = $row5['conf'] - $disconformidad;
 
 //ENVIO DE DATOS
 	$dat1 = $conformidad;
@@ -66,7 +66,7 @@ $prom=$dat2;
    <div id="chartdiv" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
       var myChart = new FusionCharts("Charts/Pie3D.swf", "myChartId", "600", "300", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
+      myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv");
    </script>
 </body>

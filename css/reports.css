@@ -1,11 +1,15 @@
-
+body {
+	font-size: 1.3rem;
+	line-height: 1.5rem;
+}
 
 *, *:before, *:after {
     .box-sizing(border-box);
 }
-.container {
-	width: 840px;
+h5 {
+	margin-bottom: 3rem;
 }
+
 h6 {
 	font-size: 14px;
 	font-weight: bold;
@@ -23,6 +27,12 @@ ul li {
 strong {
 	font-weight: bold;
 }
+br {
+	margin-bottom: 1.5rem;
+}
+th, td {
+	font-size: 1.2rem;
+}
 .datos-generales {
 	background: #F6F6F6;
 	padding: 20px;
@@ -37,4 +47,37 @@ strong {
 }
 .right {
 	text-align: right;
+}
+/*
+.print-area .row:nth-child(even) {
+	background: #f2f2f2;
+}
+*/
+.print-area .columns, .print-area .column {
+	border-bottom: 1px dotted #999;
+}
+.signature {
+	margin-bottom: 2rem;
+	margin-top: 3rem;
+}
+.signature .columns {
+	border-bottom: 0;
+}
+.signature .three {
+	border-top: solid 1px black;
+}
+.logo {
+	margin-bottom: 2rem;
+}
+
+@media print {
+	@page {
+		margin: 15mm 15mm 15mm 15mm;
+	}
+	.container {
+		width: 800px;
+	}
+	.datos-generales {
+		display: none;
+	}
 }

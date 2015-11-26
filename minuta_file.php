@@ -11,18 +11,20 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
-if (isset($RETORNAR)){header("location: lista_agenda.php");}
+$num=$_REQUEST['num'];
+$id_agenda=$_REQUEST['id_agenda'];
+if (isset($_REQUEST['RETORNAR'])){header("location: lista_agenda.php");}
 require("conexion.php");
 $sql5="SELECT * FROM control_parametros";
 $result5=mysql_query($sql5);
 $row5=mysql_fetch_array($result5);
 
-if (isset($reg_form)) {
+if (isset($_REQUEST['reg_form'])) {
 	$number = $num;
 	$sql5="SELECT * FROM control_parametros";
 	$result5=mysql_query($sql5);
 	$row5=mysql_fetch_array($result5);
-
+    $archivo=$_POST['archivo'];
 	$extension = explode(".",$archivo_name); 
 	$num = count($extension)-1; 
 	$tam_max=1048576*$row5['tam_archivo'];
@@ -52,7 +54,10 @@ if (isset($reg_form)) {
 			$sCad=implode("*",$obs);
 		}
 		$sql="UPDATE agenda SET file='$cadena', observacion = '$sCad' WHERE num_codigo='$number' and id_agenda = $id_agenda";
+		echo $sql;
+		exit;
 		mysql_query($sql);
+		
 		copy($archivo,"archivos adjuntos/".$arch_nomb);
 		header("location: minuta_file.php?id_agenda=$id_agenda&num=$number");
 	}else{

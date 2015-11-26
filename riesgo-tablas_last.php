@@ -1,3 +1,4 @@
+
 <?php
 // Version: 	1.0
 // Objetivo: 	Modificacion funciones php obsoletas para version 5.3 en adelante.
@@ -11,6 +12,20 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
+if(isset($_REQUEST['op'])) $op=$_REQUEST['op']; else $op="";
+if(isset($_REQUEST['idproc'])) $idproc=$_REQUEST['idproc']; else $idproc="";
+if(isset($_REQUEST['pg'])) $pg=$_REQUEST['pg']; else $pg="";
+if(isset($_REQUEST['BUSCAR'])) $BUSCAR=$_REQUEST['BUSCAR']; else $BUSCAR="";
+if(isset($_REQUEST['menu'])) $menu=$_REQUEST['menu']; else $menu="";
+if(isset($_REQUEST['busc'])) $busc=$_REQUEST['busc']; else $busc="";
+if(isset($_REQUEST['modif'])) $modif=$_REQUEST['modif']; else $modif="";
+if(isset($_REQUEST['id_riesgo0'])) $id_riesgo0=$_REQUEST['id_riesgo0']; else $id_riesgo0="";
+if(isset($_REQUEST['id_riesgo0mod'])) $id_riesgo0mod=$_REQUEST['id_riesgo0mod']; else $id_riesgo0mod="";
+
+if(isset($_REQUEST['titulo'])) $titulo=$_REQUEST['titulo']; else $titulo="";
+if(isset($_REQUEST['descrip'])) $descrip=$_REQUEST['descrip']; else $descrip="";
+	
+	
 $login=$_SESSION["login"];
 if (isset($retornar)) { 
 header("location: riesgo-opciones.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
@@ -50,7 +65,7 @@ while($row1=mysql_fetch_array($result1)) {
 }
 
 $num=0;
-if(isset($guardar)){
+if(isset($_REQUEST['guardar'])){
 	if($modif=="si"){
 		$borr="DELETE FROM riesgo_resptabla WHERE id_riesgo0='$id_riesgo0mod'";
 		if ($op=="T" OR $op==""){$sql = "SELECT * FROM riesgo_pregunta ORDER BY tipo_r ASC";}
@@ -84,6 +99,7 @@ if(isset($guardar)){
 			mysql_query($sqlmod);
 		}
 	}
+	//exit;
 	header("location: riesgo-resultados1.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
 }
 
@@ -129,7 +145,7 @@ function multiplicar(){
 }
 //-->
 </script>
-<form name="form2" action="<?php=$PHP_SELF ?>" method="post">
+<form name="form2" action="" method="post">
 
 <table width="70%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg" bgcolor="#EAEAEA">
     <tr> 
@@ -156,17 +172,17 @@ function multiplicar(){
 	</table>
 
 </form>
-<form name="form1" method="post" action="<?php=$PHP_SELF ?>" onKeyPress="multiplicar()" onClick="multiplicar()">
+<form name="form1" method="post" action="" onKeyPress="multiplicar()" onClick="multiplicar()">
   <table width="70%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg" bgcolor="#EAEAEA">
     <tr align="center"> 
       <td height="24" colspan="2">TITULO: 
-        <input name="titulo" type="text" id="titulo" value="<?php=$row_mod['titulo'];?>"></td>
+        <input name="titulo" type="text" id="titulo" value="<?php echo $row_mod['titulo'];?>"></td>
       <td colspan="3" valign="top">
 <div align="center">
           <table width="100%" border="0">
             <tr>
               <td width="36%" valign="middle"><div align="right">DESCRIPCION: </div></td>
-              <td width="64%"><textarea name="descrip" cols="30" rows="2"><?php=$row_mod['descripcion'];?></textarea></td>
+              <td width="64%"><textarea name="descrip" cols="30" rows="2"><?php echo $row_mod['descripcion'];?></textarea></td>
             </tr>
           </table>
         </div></td>
@@ -214,16 +230,16 @@ function multiplicar(){
   </table>
   <br>
    <input type="submit" name="guardar" value="GUARDAR" <?php echo $valid->onSubmit(); ?>>
-  <input name="op" type="hidden" value="<?php echo @$op;?>">
-   <input name="idproc" type="hidden" id="idproc" value="<?php echo @$idproc;?>">
-   <input name="pg" type="hidden" id="pg" value="<?php echo @$pg;?>">
-   <input name="BUSCAR" type="hidden" value="<?php echo @$BUSCAR;?>">
-   <input name="menu" type="hidden" value="<?php echo @$menu;?>">
-   <input name="busc" type="hidden" value="<?php echo @$busc;?>">
+  <input name="op" type="hidden" value="<?php echo $op;?>">
+   <input name="idproc" type="hidden" id="idproc" value="<?php echo $idproc;?>">
+   <input name="pg" type="hidden" id="pg" value="<?php echo $pg;?>">
+   <input name="BUSCAR" type="hidden" value="<?php echo $BUSCAR;?>">
+   <input name="menu" type="hidden" value="<?php echo $menu;?>">
+   <input name="busc" type="hidden" value="<?php echo $busc;?>">
    
-  <input name="modif" type="hidden" id="modif" value="<?php=$modif;?>">
-  <input name="id_riesgo0" type="hidden" id="id_riesgo0" value="<?php=$id_riesgo0?>">
-  <input name="id_riesgo0mod" type="hidden" id="id_riesgo0mod" value="<?php=$id_riesgo0mod?>">
+  <input name="modif" type="hidden" id="modif" value="<?php echo $modif;?>">
+  <input name="id_riesgo0" type="hidden" id="id_riesgo0" value="<?php echo $id_riesgo0;?>">
+  <input name="id_riesgo0mod" type="hidden" id="id_riesgo0mod" value="<?php echo $id_riesgo0mod;?>">
 </form>
 <script language="JavaScript">
 <!--

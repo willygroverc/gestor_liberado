@@ -14,6 +14,10 @@ if (isset($_SESSION['login'])){
 }
 
 require_once("../funciones.php"); 
+if(isset($_REQUEST['login_usr']))
+	$login_usr=$_REQUEST['login_usr'];
+else
+	$login_usr="";
 //if (valida("pmi")=="bad") {header("location: ../pagina_error.php");}  ?>
 <style type="text/css">
 <!--
@@ -37,6 +41,6 @@ require_once("../funciones.php");
 <a href="inicio.php"><img src="Image/cabina.jpg" alt="PMI" border="0" longdesc="Panel de Mando Integral"></a>
 </div><br>
 <div align="center">
-<a href="inicio.php?login_usr=<?php echo $login_usr;?>"class=Estilo2>INGRESO >> </a>
+<a href="inicio.php?login_usr=<?php echo $login_usr;?>" class='Estilo2'>INGRESO >> </a>
 </div>
 </body>

@@ -1,6 +1,10 @@
 <?php
 session_start();
-$login_usr=$_SESSION['login_pmi'];
+//login user no existe en el sistema
+if(isset($_SESSION['login_pmi']))
+	$login_usr=$_SESSION['login_pmi'];
+
+//echo "user:".$login_usr;
 include("Includes/FusionCharts.php");
 include("../conexion.php");
 include("func_datos.php");
@@ -10,11 +14,12 @@ $tam1=250;
 $tam2=150;
 $tam3=25;
 $tam4=150;
-if(isset($cambiar)){
+if(isset($_REQUEST['cambiar'])){
+	$cambiar=$_REQUEST['cambiar'];
 	$sql_con="SELECT * FROM pmi_sao WHERE id_report='$cambiar'";
 	$res_con=mysql_db_query($db,$sql_con,$link);
 	$row_con=mysql_fetch_array($res_con);
-	if($row_con[ind]==1) $ind=0;
+	if($row_con['ind']==1) $ind=0;
 	else $ind=1;
 	$sql_con2="UPDATE pmi_sao SET ind='$ind' WHERE id_report='$cambiar'";
 	mysql_db_query($db,$sql_con2,$link);
@@ -78,10 +83,10 @@ $sql_sao="SELECT * FROM pmi_sao";
 $res_sao=mysql_db_query($db,$sql_sao,$link);
 while($row_sao=mysql_fetch_array($res_sao)){
 	echo "<TR style=\"Estilo1\"><TD>";
-	if($row_sao[ind]=='1') echo "<A href=\"sao_param_s.php?id_report=$row_sao[id_report]\">$row_sao[id_report]</a>";
-	else echo $row_sao[id_report];
+	if($row_sao['ind']=='1') echo "<A href=\"sao_param_s.php?id_report=$row_sao[id_report]\">$row_sao[id_report]</a>";
+	else echo $row_sao['id_report'];
 	echo "</TD><TD>$row_sao[nom]</TD><TD><INPUT type=\"checkbox\" ";
-	if($row_sao[ind]=='1') echo "checked";
+	if($row_sao['ind']=='1') echo "checked";
 	echo " name=\"check\" onchange=cambiar('$row_sao[id_report]')></TD></TR>";
 }
 ?>
@@ -93,7 +98,7 @@ $sql_rol="SELECT * FROM pmi_rol WHERE login_usr='$login_usr'";
 $result = mysql_db_query($db,"SHOW COLUMNS FROM pmi_rol",$link);
 $x=0;
 while($roww=mysql_fetch_array($result)){
-	$rowww[$x]=$roww[Field];
+	$rowww[$x]=$roww['Field'];
 	$x++;
 }
 $res_rol=mysql_db_query($db,$sql_rol,$link);
@@ -109,7 +114,7 @@ for($k=2;$k<$nume;$k++){
 		<input name="          AMPLIAR          " type="button" class="Estilo2" id="AMPLIAR" onClick="ampliar('<?php=$rowww[$k]?>','<?php=$fecha1?>','<?php=$fecha2?>')" value="                     AMPLIAR                     ">
 		<?php
 		echo "<td>";
-		if ($row_pmi[ind]<>0){
+		if ($row_pmi['ind']<>0){
 			include("reportes/a_i1.php");
 		}
 		echo "</td></tr></table></td>";
@@ -129,6 +134,7 @@ for($k=2;$k<$nume;$k++){
 </html>
 <script language="JavaScript" type="text/javascript">
 function cambiar(val){
+	//alert(val);
 	var pagina="sao_param.php?cambiar="+val;	
 	self.location=pagina;
 }

@@ -1,7 +1,15 @@
 <?php 
 include("conexion.php");
-$cad = $dato;
-if ( $insertado == "1" )
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+$cad = $_GET['dato'];
+$dato=$_REQUEST['dato'];
+$id_minuta=$_REQUEST['id_minuta'];
+$insertado=$_REQUEST['insertado'];
+//$verif=$_REQUEST['verif'];
+if(isset($_REQUEST['num_cod']))
+	$num_cod=$_REQUEST['num_cod'];
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "1" )
 {	$fila = explode(":",$dato);		
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -15,7 +23,7 @@ if ( $insertado == "1" )
 	mysql_db_query($db,$sql,$link);												
 	$insertado = "2";
 }
-if ( $insertado == "0" )
+if ( isset($_GET['insertado']) && $_GET['insertado'] == "0" )
 {	$fila = explode(":",$dato);
 	$enfecha  = explode("/", $fila[1]);
 	$en_fecha = "$enfecha[0]-$enfecha[1]-$enfecha[2]";
@@ -28,13 +36,17 @@ if ( $insertado == "0" )
 	mysql_db_query($db,$sql,$link);
 	$insertado = "2";
 }
-if ($Terminar)
+if (isset($_REQUEST['Terminar']))
 header("location: minuta.php?cad=$cad&id_minuta=$var&verif=$verif&insertado=$insertado");
 ?>
 <?php
-if ($reg_form)
+if (isset($_REQUEST['reg_form']))
 {   include("conexion.php");
-	$flimite="$eano-$emes-$edia";
+	$tema=$_REQUEST['tema'];
+	$accion=$_REQUEST['accion'];
+	$responsable=$_REQUEST['responsable'];
+		
+	$flimite=$_REQUEST['eano']."-".$_REQUEST['emes']."-".$_REQUEST['edia'];
 		$sql35 = "SELECT * FROM temad WHERE tema='$tema' AND id_minuta='$var'";
 		$result35=mysql_db_query($db,$sql35,$link);
 		$row35=mysql_fetch_array($result35);
@@ -62,9 +74,9 @@ print $valid->toHtml ();
 ?>  
   
 <table width="95%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
-	<input name="verif" type="hidden" value="<?php if ($_GET[verif]) {echo $_GET[verif];}else{echo "1";};?>">
+	<input name="verif" type="hidden" value="<?php if ($_GET['verif']) {echo $_GET['verif'];}else{echo "1";};?>">
 	<input name="dato" type="hidden" value="<?php echo $dato; ?>">
 	<input name="num_cod" type="hidden" value="<?php echo $num_cod; ?>">
 	<input name="insertado" type="hidden" value="<?php echo $insertado; ?>">
@@ -93,20 +105,20 @@ print $valid->toHtml ();
 		$cont=$cont+1;
 		 ?>	
           <tr align="center"> 
-            <td>&nbsp;<?php echo $row[id_tema]?></td>
+            <td>&nbsp;<?php echo $row['id_tema']?></td>
              <?php $sql5 = "SELECT * FROM temas WHERE id_tema='$row[tema]' AND id_agenda='$id_minuta'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[id_tema])
+				if (!$row5['id_tema'])
 				{echo "<td>&nbsp;$row[tema]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[tema]</td>";}?>
-            <td>&nbsp;<?php echo $row[accion]?></td>
+            <td>&nbsp;<?php echo $row['accion']?></td>
 			<?php	$sql5 = "SELECT * FROM users WHERE login_usr='$row[responsable]'";
 		    $result5 = mysql_db_query($db,$sql5,$link);
 		    $row5 = mysql_fetch_array($result5);
 			echo "<td>&nbsp;$row5[nom_usr] $row5[apa_usr] $row5[ama_usr]</td>";?>
-            <td>&nbsp;<?php echo $row[flimite]?></td>
+            <td>&nbsp;<?php echo $row['flimite']?></td>
           </tr>
           <?php 
 		 }
@@ -129,11 +141,11 @@ print $valid->toHtml ();
 					$sql01 = "SELECT * FROM atema WHERE id_tema='$row0[id_tema]' AND id_minuta='$id_minuta'";
 			  		$result01=mysql_db_query($db,$sql01,$link);
 			  		$row01=mysql_fetch_array($result01);
-					if (!$row01[tema])
+					if (!$row01['tema'])
 					{$sql5 = "SELECT * FROM temas WHERE id_tema='$row0[tema]'  AND id_agenda='$id_minuta'";
 		    		$result5 = mysql_db_query($db,$sql5,$link);
 		    		$row5 = mysql_fetch_array($result5);
-					if (!$row5[id_tema])
+					if (!$row5['id_tema'])
 					{echo "<option value=\"$row0[tema]\">$row0[tema] </option>";}
 					else
 					{echo "<option value=\"$row5[id_tema]\">$row5[tema] </option>";}}
@@ -152,7 +164,7 @@ print $valid->toHtml ();
 			  $result21 = mysql_db_query($db,$sql21,$link);
 			  while ($row21 = mysql_fetch_array($result21)) 
 				{
-				if ($row2[elab_por]==$row21[login_usr])
+				if ($row2['elab_por']==$row21['login_usr'])
 							echo "<option value=\"$row21[login_usr]\" selected>$row21[apa_usr] $row21[ama_usr] $row21[nom_usr]</option>";
 						else
 							echo "<option value=\"$row21[login_usr]\">$row21[apa_usr] $row21[ama_usr] $row21[nom_usr]</option>";
@@ -171,9 +183,9 @@ print $valid->toHtml ();
 				$d1=substr($vfecha,8,2);
   				
 				if($verif==1)
-				{	$a1=substr($row2[en_fecha],0,4);
-					$m1=substr($row2[en_fecha],5,2);
-					$d1=substr($row2[en_fecha],8,2);
+				{	$a1=substr($row2['en_fecha'],0,4);
+					$m1=substr($row2['en_fecha'],5,2);
+					$d1=substr($row2['en_fecha'],8,2);
 				}
 					for($i=1;$i<=31;$i++)
 					{

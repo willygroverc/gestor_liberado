@@ -24,7 +24,7 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 		$rs19 = mysql_db_query($db,$sql9,$link);
 		$numAsig = 0;
 		while ($tmp = mysql_fetch_array($rs19))  {			
-				$total[$numAsig] = $tmp[id_orden];
+				$total[$numAsig] = $tmp['id_orden'];
 				$numAsig++;
 		}
 //NUMERO DE ORDNES CON CONFORMIDAD DEL CLIENTE 
@@ -32,26 +32,26 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 	for ($i=0; $i<$numAsig; $i++) {
 		$sql = "SELECT id_orden FROM conformidad WHERE id_orden='$total[$i]'";
 		$rsTmp3=mysql_fetch_array(mysql_db_query($db,$sql,$link));
-		if ($rsTmp3[id_orden]==$total[$i]){
+		if ($rsTmp3['id_orden']==$total[$i]){
 		$numConf++;}
 	}
-	$row5[conf]=$numConf;
+	$row5['conf']=$numConf;
 	
 //NUMERO DE ORDENES ANIDADAS
 		$anid = 0;
 		for ($i=0; $i<$numAsig; $i++) {
 			$sql = "SELECT id_orden FROM ordenes WHERE id_orden='$total[$i]' AND  id_anidacion <>'0'";
 			$rsTmp3=mysql_fetch_array(mysql_db_query($db,$sql,$link));
-			if ($rsTmp3[id_orden]==$total[$i]){
+			if ($rsTmp3['id_orden']==$total[$i]){
 			$anid++;}
 		}
-		$rowa[anid]=$anid;
+		$rowa['anid']=$anid;
 		
 //NUMERO DE ORDENES NO ANIDADAS
-		$noanid=$row5[conf]-$anid;
+		$noanid=$row5['conf']-$anid;
 		
 //ENVIO DE DATOS
-	$dat1 = $rowa[anid];
+	$dat1 = $rowa['anid'];
 	$dat2 = $noanid;
 ///hasta aqui
 $data.="<set label='Anidadas' value='$dat1'/><set label='Sin Anidar' value='$dat2'/>";
@@ -65,7 +65,7 @@ $prom=$dat1;
    <div id="chartdiv" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
       var myChart = new FusionCharts("Charts/Pie3D.swf", "myChartId", "600", "300", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
+      myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv");
    </script>
 </body>

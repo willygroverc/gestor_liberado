@@ -9,21 +9,34 @@ $tam1=250;
 $tam2=150;
 $tam3=25;
 $tam4=150;
-if(isset($DA) && isset($MA)){
-if (strlen($DA) == 1){ $DA = "0".$DA; }
-if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
+if(isset($_REQUEST['prom'])) $prom=$_REQUEST['prom']; else $prom="";
+
+if(isset($_REQUEST['DA']) && isset($_REQUEST['MA'])){
+	if(isset($_REQUEST['DA'])) $DA=$_REQUEST['DA']; else $DA="";
+	if(isset($_REQUEST['MA'])) $MA=$_REQUEST['MA']; else $MA="";
+	if(isset($_REQUEST['AA'])) $AA=$_REQUEST['AA']; else $AA="";
+	if(isset($_REQUEST['DE'])) $DE=$_REQUEST['DE']; else $DE="";
+	if(isset($_REQUEST['ME'])) $ME=$_REQUEST['ME']; else $ME="";
+	if(isset($_REQUEST['AE'])) $AE=$_REQUEST['AE']; else $AE="";
+	if (strlen($DA) == 1){ $DA = "0".$DA; }
+	if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
 	$fecha1 = $AA."-".$MA."-".$DA;   
-if (strlen($DE) == 1){ $DE = "0".$DE; }
-if (strlen($ME) == 1){ $ME = "0".$ME; }
+	if (strlen($DE) == 1){ $DE = "0".$DE; }
+	if (strlen($ME) == 1){ $ME = "0".$ME; }
 	$fecha2 = $AE."-".$ME."-".$DE; 
 }
 //echo $val_area;
+if(isset($_REQUEST['val_area']))
+	$val_area=$_REQUEST['val_area'];
+else
+	$val_area="";
 ?>
 <html>
 <head>
 <script language="JavaScript">
 <!--
 function ampliar(rep,fecha1,fecha2) {	
+    //alert("report_amp.php?rep="+rep+"&fecha1="+fecha1+"&fecha2="+fecha2,'Reporte', 'width=950,height=700,status=no,resizable=no,top=0,left=50,dependent=yes,alwaysRaised=yes');
 	window.open("report_amp.php?rep="+rep+"&fecha1="+fecha1+"&fecha2="+fecha2,'Reporte', 'width=950,height=700,status=no,resizable=no,top=0,left=50,dependent=yes,alwaysRaised=yes');
 }
 -->
@@ -138,7 +151,7 @@ function ampliar(rep,fecha1,fecha2) {
 			   <?php
                            
 			    while($area=mysql_fetch_array($datos)){?>
-	    				<option value="<?php=$area['area_cod'];?>" <?php if($val_area==$area['area_cod']) echo "selected"?>><?php echo $area['area_nombre']; ?></option>
+	    				<option value="<?php echo $area['area_cod'];?>" <?php if($val_area==$area['area_cod']) echo "selected"?>><?php echo $area['area_nombre']; ?></option>
 				<?php
 				 }?>
 			   </select>
@@ -155,7 +168,7 @@ function ampliar(rep,fecha1,fecha2) {
 </script>
 	</form></td></tr>
 <?php
-if(isset($DA) && isset($MA)){
+if(isset($_REQUEST['DA']) && isset($_REQUEST['MA'])){
 $sql_pmi="SELECT * FROM pmi_sao WHERE id_report IN (1,2,3,4,6,7,8)";
 $res_pmi=mysql_db_query($db,$sql_pmi,$link);
 $flager=3;
@@ -163,7 +176,7 @@ while($row_pmi=mysql_fetch_array($res_pmi)){
 if ($flager % 3 == 0) echo "<tr>";
 echo "<td><table><tr><td>";
 include("reportes/".$row_pmi['nom_arch'].".php");?>
-<input name="          AMPLIAR          " type="button" class="Estilo2" id="AMPLIAR" onClick="ampliar('<?php=$row_pmi['nom_arch']?>','<?php=$fecha1?>','<?php=$fecha2?>')" value="                     AMPLIAR                     ">
+<input name="          AMPLIAR          " type="button" class="Estilo2" id="AMPLIAR" onClick="ampliar('<?php echo $row_pmi['nom_arch']?>','<?php echo $fecha1;?>','<?php echo $fecha2;?>')" value="                     AMPLIAR                     ">
 <?php
 echo "<td>";
 if ($row_pmi['ind']<>0){

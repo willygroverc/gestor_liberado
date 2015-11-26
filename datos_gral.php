@@ -21,6 +21,12 @@ $row_cons=mysql_fetch_array($res_cons);
       <li><strong>IP de origien: </strong><?php echo $_SERVER['REMOTE_ADDR'];?></li>
       <li><strong>Fecha y hora: </strong><?php echo date("Y-m-d")."&nbsp;&nbsp;".date("H:i:s");?></li>
     </ul>
+    <button onClick="window.print()">Imprimir</button>
+  </div>
+</div>
+<div class="row logo">
+  <div class="column">
+    <img src="images/imagen_ins.jpg">
   </div>
 </div>
 <?php

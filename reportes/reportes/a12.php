@@ -30,16 +30,16 @@ $data="<chart caption='SOLUCION A TIEMPO' shownames='1' showvalues='1' decimals=
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -62,16 +62,16 @@ $data="<chart caption='SOLUCION A TIEMPO' shownames='1' showvalues='1' decimals=
 		{
 			if($i==0)
 			{
-				$max1=$tiempo_sol2[num];
-				$min1=$tiempo_sol2[num];
+				$max1=$tiempo_sol2['num'];
+				$min1=$tiempo_sol2['num'];
 			}
 			else
 			{
-				if($tiempo_sol2[num]>$max1){$max1=$tiempo_sol2[num];}
-				if($tiempo_sol2[num]<$min1){$min1=$tiempo_sol2[num];}
+				if($tiempo_sol2['num']>$max1){$max1=$tiempo_sol2['num'];}
+				if($tiempo_sol2['num']<$min1){$min1=$tiempo_sol2['num'];}
 			}
 			$i++;
-			$sol1_sum+=$tiempo_sol2[num];
+			$sol1_sum+=$tiempo_sol2['num'];
 		}
 	}
 	if($i==0) $prom1=0;
@@ -89,7 +89,7 @@ $data.="</chart>";
    <div id="chartdiv" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
       var myChart = new FusionCharts("Charts/Column3D.swf", "myChartId", "600", "300", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
+      myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv");
    </script>
 </body>

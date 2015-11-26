@@ -2,12 +2,12 @@
   <?php $tit= "Niveles";
 		  $tipo="Column3D";
 		  if(isset($fecha1) && $fecha2)
-			{
+			{  
 				$sql_alt=" AND o.fecha BETWEEN '$fecha1' AND '$fecha2'";
 				$url="%26AA=$AA%26MA=$MA%26DA=$DA%26AE=$AE%26ME=$ME%26DE=$DE";
 			}
 				else
-			{
+			{    //echo "sin fecha";
 				$sql_alt="";
 				$url="";
 			}
@@ -28,11 +28,14 @@
 					list($dat, $prom)=datos($sql_dat,$tit."' showLabels='$show_lab'  showValues='$show_values' bgColor='#CCCCCC' baseFontColor='#000000");
 					break;*/
 				default :
-					$sql_dat="SELECT CONCAT('niveles.php?n=1%26area_cod=', area_cod, '$url') AS id, count(*) AS num, area_nombre AS nom FROM area a, ordenes o WHERE a.area_cod=o.area $sql_alt GROUP BY area;";				
+					$sql_dat="SELECT CONCAT('niveles.php?n=1%26area_cod=', area_cod, '$url') AS id, count(*) AS num, area_nombre AS nom FROM area a, ordenes o WHERE a.area_cod=o.area $sql_alt GROUP BY area;";	
+					//echo $sql_dat;
 					list($dat, $prom)=datos_link($sql_dat,$tit."' showLabels='$show_lab'  showValues='$show_values' bgColor='#CCCCCC' baseFontColor='#000000");
+					//echo $dat;
 					break;
 			}
-		  $sql_dat=ereg_replace("'", "ç", $sql_dat);
+		  //$sql_dat=ereg_replace("'", "ç", $sql_dat);
+		  //echo $sql_dat;
 echo renderChart("Charts/$tipo.swf", "", $dat, "FactorySum1", $tam1, $tam2, false, false);
 ?>
 </span></div>

@@ -1,0 +1,546 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"date_for",
+				"DATE_FORMAT"
+			],
+			[
+				"pistas",
+				"Pistas_fuentes"
+			],
+			[
+				"copia",
+				"Copia_trabajo"
+			],
+			[
+				"calen",
+				"Calen_cont"
+			],
+			[
+				"mysql_num",
+				"mysql_num_rows"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"top",
+				"top-bar"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"bor",
+				"border-bottom"
+			],
+			[
+				"inlin",
+				"inline-block"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "datos_gral.php",
+			"settings":
+			{
+				"buffer_size": 1081,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/reports.css",
+			"settings":
+			{
+				"buffer_size": 1062,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/interfaz/less/main.less",
+			"settings":
+			{
+				"buffer_size": 7978,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ver_orden2.php",
+			"settings":
+			{
+				"buffer_size": 11944,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ver_admyaseg.php",
+			"settings":
+			{
+				"buffer_size": 6814,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:i",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/gestor-re/ver_admyaseg.php",
+		"/C/xampp/htdocs/gestor-re/ver_orden.php",
+		"/C/xampp/htdocs/gestor-re/ver_usuario.php",
+		"/C/xampp/htdocs/gestor_liberado/ver_orden.php",
+		"/C/xampp/htdocs/gestor-re/ver_roles.php",
+		"/C/xampp/htdocs/gestor-re/ver_solicproydatos.php",
+		"/C/xampp/htdocs/gestor-re/ver_titulares.php",
+		"/C/xampp/htdocs/gestor-re/top_ver.php",
+		"/C/xampp/htdocs/interfaz/index.php",
+		"/C/xampp/htdocs/interfaz/usuarios-nuevo2.php",
+		"/C/xampp/htdocs/interfaz/listar_usuarios.php",
+		"/C/xampp/htdocs/interfaz/nuevo_usuario.php",
+		"/C/xampp/htdocs/interfaz/top-bar.php",
+		"/C/xampp/htdocs/interfaz/header.php",
+		"/C/xampp/htdocs/interfaz/footer.php",
+		"/C/xampp/htdocs/interfaz/main_menu.php",
+		"/C/xampp/htdocs/interfaz/nuevo_usuario.html",
+		"/G/thommys/index.html",
+		"/G/yanapti/less/main.less",
+		"/C/xampp/htdocs/interfaz/js/main.js",
+		"/G/thommys/js/plugins.js",
+		"/C/xampp/htdocs/interfaz/css/main.css",
+		"/C/Users/Programador/AppData/Roaming/Sublime Text 2/Packages/User/comment-html.sublime-snippet",
+		"/C/Users/Programador/AppData/Roaming/Sublime Text 2/Packages/Less2Css/less2css.sublime-settings",
+		"/C/Users/Programador/AppData/Roaming/Sublime Text 2/Packages/Less2Css/README.md",
+		"/C/Users/Programador/AppData/Roaming/Sublime Text 2/Packages/LESS/README.md",
+		"/C/xampp/htdocs/gestor_liberado/1ver_minuta1.php",
+		"/C/xampp/htdocs/gestor_liberado/2lista_reclamos.php",
+		"/C/xampp/htdocs/gestor_liberado/aasistente.php",
+		"/C/xampp/htdocs/gestor_liberado/aasistente_ext.php",
+		"/C/xampp/htdocs/gestor_liberado/aasistente_ext_last.php",
+		"/C/xampp/htdocs/gestor_liberado/aasistente_last.php",
+		"/C/xampp/htdocs/gestor_liberado/acciones.php",
+		"/C/xampp/htdocs/gestor_liberado/acciones_ant.php",
+		"/C/xampp/htdocs/gestor_liberado/acciones_last.php",
+		"/C/xampp/htdocs/gestor_liberado/acciones_tot.php",
+		"/C/xampp/htdocs/gestor_liberado/accionistas_print.php",
+		"/C/xampp/htdocs/gestor_liberado/acp_file.php",
+		"/C/xampp/htdocs/gestor_liberado/actividades.php",
+		"/C/xampp/htdocs/gestor_liberado/actividades_last.php",
+		"/C/xampp/htdocs/gestor_liberado/actividades_last_1.php",
+		"/C/xampp/htdocs/gestor_liberado/actividades_pre_last.php",
+		"/C/xampp/htdocs/gestor_liberado/adjuntar_prob.php",
+		"/C/xampp/htdocs/gestor_liberado/admi_fuentes.php",
+		"/C/xampp/htdocs/gestor_liberado/admi_fuentes1.php",
+		"/C/xampp/htdocs/gestor_liberado/AdmyAsegDatos.php.bac",
+		"/C/xampp/htdocs/gestor_liberado/agenda_estadisticas_asisf.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_estadisticas_prop_reuf.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_estadisticas_propf.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_estadisticas_recauf.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_impresion.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_impresion_asis.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_impresion_asisf.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_impresionf.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_last.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_M.php",
+		"/C/xampp/htdocs/gestor_liberado/agenda_ver_prop.php",
+		"/C/xampp/htdocs/gestor_liberado/anidar_orden.php",
+		"/C/xampp/htdocs/gestor_liberado/anidar_orden_2.php",
+		"/C/xampp/htdocs/gestor_liberado/anidar_ordenA.php",
+		"/C/xampp/htdocs/gestor_liberado/aprobUS_last.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/agenda.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/aprobUS.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/caracteristica.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/contrato1_last.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/control_usr1_CON_LISTA_XAJAX.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/controlinventario.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/controlinventario_destruc.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/controltemp.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/controltemp_last.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/implantUS.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/lista_contratos.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/lista_controlinvent_modi.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/lista_ficha.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/lista_proveed.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/lista_solicproyecto.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/llenadoUS.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/modulos_last.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/naccionista.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/naccionista_det.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/planifpru.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/prog_tareasdiariap.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/prog_tareasmensualp.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/prog_tareassemanalp.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/prog_tareastrimestralp.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/proveedor.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/repositorio_archivos.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/resprelac.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/revisionds.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/revisionds_last.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/sistema.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/sistema_last.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/solicproyecto2.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/telkey.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/ubicacionresp.php",
+		"/C/xampp/htdocs/gestor_liberado/archivos originales/ubicaionr_last.php",
+		"/C/xampp/htdocs/gestor_liberado/asignacion_last.php.ajax",
+		"/C/xampp/htdocs/gestor_liberado/asignacion_last1.php",
+		"/C/xampp/htdocs/gestor_liberado/asignacion_lastNO.php",
+		"/C/xampp/htdocs/gestor_liberado/ast.php",
+		"/C/xampp/htdocs/gestor_liberado/atema.php",
+		"/C/xampp/htdocs/gestor_liberado/atema_last.php",
+		"/C/xampp/htdocs/gestor_liberado/backups.php",
+		"/C/xampp/htdocs/gestor_liberado/calen_cont_resumen.php",
+		"/C/xampp/htdocs/gestor_liberado/calendariza_cont.php",
+		"/C/xampp/htdocs/gestor_liberado/calendariza_cont_last.php",
+		"/C/xampp/htdocs/gestor_liberado/calendarizacion.php",
+		"/C/xampp/htdocs/gestor_liberado/calendarizacion_agencia.php",
+		"/C/xampp/htdocs/gestor_liberado/calendarizacion_last.php",
+		"/C/xampp/htdocs/gestor_liberado/calendarizacion_modificado.php",
+		"/C/xampp/htdocs/gestor_liberado/calendarizacion_resumen.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru2.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru2_last.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru2_last_planif.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru2_planif.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru_last.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru_last_planif.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru_planif.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru_ver.php",
+		"/C/xampp/htdocs/gestor_liberado/cambio_pru_ver_planif.php",
+		"/C/xampp/htdocs/gestor_liberado/caracteristica1.php",
+		"/C/xampp/htdocs/gestor_liberado/caracteristica2_last.php",
+		"/C/xampp/htdocs/gestor_liberado/compromisos.php",
+		"/C/xampp/htdocs/gestor_liberado/compromisos_last.php",
+		"/C/xampp/htdocs/gestor_liberado/conformidad.php",
+		"/C/xampp/htdocs/gestor_liberado/contingencia_estadistica.php",
+		"/C/xampp/htdocs/gestor_liberado/contrato_garantia.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"C:\\xampp\\htdocs\\gestor_liberado"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"row5",
+			"p>",
+			"hr>",
+			"hr",
+			"fa ",
+			"fi-",
+			"calend",
+			"<? "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"br>",
+			"br",
+			"fa fa-fw ",
+			"fi_",
+			"<?php "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "datos_gral.php",
+					"settings":
+					{
+						"buffer_size": 1081,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								462,
+								462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "css/reports.css",
+					"settings":
+					{
+						"buffer_size": 1062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								926,
+								926
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 286.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/xampp/htdocs/interfaz/less/main.less",
+					"settings":
+					{
+						"buffer_size": 7978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								538,
+								538
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "ver_orden2.php",
+					"settings":
+					{
+						"buffer_size": 11944,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2138,
+								2138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1724.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "ver_admyaseg.php",
+					"settings":
+					{
+						"buffer_size": 6814,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6177,
+								6149
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 225.0,
+	"status_bar_visible": true
+}

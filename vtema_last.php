@@ -11,10 +11,15 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
-if (isset($Terminar))
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+	
+if(isset($_REQUEST['tema']))
+	$tema=$_REQUEST['tema'];
+if (isset($_REQUEST['Terminar']))
 header("location: minuta_last.php?id_minuta=$var&verif=1");
 
-if (isset($reg_form))
+if (isset($_REQUEST['reg_form']))
 {   require("conexion.php");
 	
 		$sql11 = "SELECT * FROM temas WHERE id_agenda='$var' AND id_tema='$tema'";
@@ -26,12 +31,14 @@ if (isset($reg_form))
 		$sql35 = "SELECT MAX(id_tema) AS ntem FROM temad WHERE id_minuta='$var'";
 		$result35=mysql_query($sql35);
 		$row35=mysql_fetch_array($result35);
-		$id_tema=$row35[ntem]+1;
+		$id_tema=$row35['ntem']+1;
 		
 	
 	$sql="INSERT INTO ".
 	"temad (tema,responsable,duracion,id_minuta,id_tema) ".
 	"VALUES ('$tema','$responsable','$duracion','$var','$id_tema')";
+	/*echo $sql;
+	exit;*/
 	mysql_query($sql);
 	header("location: vtema_last.php?id_minuta=$var");
 }
@@ -55,7 +62,7 @@ function Form () {
 -->
 </script>
 <table width="80%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-  <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+  <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<tr> 
       <td > 
@@ -80,7 +87,7 @@ function Form () {
 		$cont=$cont+1;
 		 ?>
           <tr> 
-            <td>&nbsp;<?php echo $row[id_tema]?></td>
+            <td>&nbsp;<?php echo $row['id_tema']?></td>
             	<?php $sql5 = "SELECT * FROM temas WHERE id_tema='$row[tema]' AND id_agenda='$id_minuta'";
 		    	$result5 = mysql_query($sql5);
 		    	$row5 = mysql_fetch_array($result5);

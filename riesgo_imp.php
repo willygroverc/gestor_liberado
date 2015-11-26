@@ -11,6 +11,9 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
+if(isset($_REQUEST['codigo']))
+	$codigo=$_REQUEST['codigo'];
+
 if (isset($impres))
 {	
 	session_start();

@@ -14,6 +14,7 @@ include("datos_gral.php");
 <body>
 <?php
 include ("conexion.php");
+$alarma=$_REQUEST["alarma"];
 $sql_tmp   = "SELECT *, DATE_FORMAT(fec_creacion, '%d/%m/%Y') AS fec_creacion FROM alarmas_riesgos WHERE id_alarma='$alarma'";
 $row_tmp   = mysql_fetch_array(mysql_db_query($db, $sql_tmp, $link));
 $sql4  = "SELECT id_riesgo, descripcion FROM riesgo_tipos WHERE id_riesgo='$row_tmp[tipo_alarma]'";
@@ -34,7 +35,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
     <td width="150" height="23"> <p align="left"><font size="2" face="Arial, Helvetica, sans-serif"><b>TIPO 
         DE ALARMA :</b></font></p>
     </td>
-    <td width="497"><p><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row4[descripcion];?></font></p> </td>
+    <td width="497"><p><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row4['descripcion'];?></font></p> </td>
   </tr>
   <tr> 
     <td height="2"></td>
@@ -47,7 +48,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
     <td width="151" height="23"><p align="left"><font size="2" face="arial, Helvetica, sans-serif"><strong> 
         ALARMA :</strong></font></p>
     </td>
-    <td width="496"><p><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row5[desc_riesgo]; ?></font></p> </td>
+    <td width="496"><p><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row5['desc_riesgo']; ?></font></p> </td>
   </tr>
   <tr> 
     <td height="2"></td>
@@ -60,7 +61,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
     <td width="151" height="23"><p align="left"><font size="2" face="arial, Helvetica, sans-serif"><strong> 
         FECHA DE CREACION :</strong></font></p>
     </td>
-    <td width="496"><p><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row_tmp[fec_creacion]; ?></font></p> </td>
+    <td width="496"><p><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row_tmp['fec_creacion']; ?></font></p> </td>
   </tr>
   <tr> 
     <td height="2"></td>
@@ -76,7 +77,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
 	<?php
 		$sql_tmp0  = "SELECT nom_usr,apa_usr,ama_usr FROM users WHERE login_usr='$row_tmp[login_creador]'";
 		$row_tmp0  = mysql_fetch_array(mysql_db_query($db, $sql_tmp0, $link));
-		echo $row_tmp0[nom_usr]." ".$row_tmp0[apa_usr]." ".$row_tmp0[ama_usr];
+		echo $row_tmp0['nom_usr']." ".$row_tmp0['apa_usr']." ".$row_tmp0['ama_usr'];
 	?></font></p></td>
   </tr>
   <tr> 
@@ -105,8 +106,8 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
 				$row_tmp2  = mysql_fetch_array(mysql_db_query($db, $sql_tmp2, $link));
 			
 			?>
-        <td><?php echo $row_tmp2[nom_usr]." ".$row_tmp2[apa_usr]." ".$row_tmp2[ama_usr];?></td>
-        <td>&nbsp;<?php echo $row_tmp2[area_usr];?></td>
+        <td><?php echo $row_tmp2['nom_usr']." ".$row_tmp2['apa_usr']." ".$row_tmp2['ama_usr'];?></td>
+        <td>&nbsp;<?php echo $row_tmp2['area_usr'];?></td>
         <?php 
 			echo "<tr>";
 			}?>
@@ -117,7 +118,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
           		<th bgcolor="#CCCCCC" class="titulo2">MENSAJE USUARIO</th>
         	</tr>
 			<tr>
-        		<td class='tit_form'><?php echo $row_tmp[mensaje_u];?></td>
+        		<td class='tit_form'><?php echo $row_tmp['mensaje_u'];?></td>
         	</tr>
    	  </table>
     </td>
@@ -141,7 +142,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
 				$row_tmp3  = mysql_fetch_array(mysql_db_query($db, $sql_tmp3, $link));
 			
 			?>
-        <td><?php echo $row_tmp3[NombProv];?></td>
+        <td><?php echo $row_tmp3['NombProv'];?></td>
         <?php 
 			echo "</tr>";
 			}?>
@@ -151,7 +152,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
           <th bgcolor="#CCCCCC" class="titulo2">MENSAJE proveedor</th>
         </tr>
         <tr> 
-          <td class='tit_form'><?php echo $row_tmp[mensaje_p];?></td>
+          <td class='tit_form'><?php echo $row_tmp['mensaje_p'];?></td>
         </tr>
       </table></td>
   </tr>
@@ -168,12 +169,15 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
         <?php
 			echo "<tr class='tit_form'>";
 			$sql4 = "SELECT * FROM alarma_entidad WHERE id_alarma='$alarma'";
+			
 			$res4 = mysql_db_query($db,$sql4,$link);
 			while ($row4 = mysql_fetch_array($res4)){			
-				$sql_tmp4  = "SELECT desc_dep FROM procesos_parametros WHERE id_dep='$row4[id_entidad]'";
+			  if($row4['id_entidad'])
+			  {	$sql_tmp4  = "SELECT desc_dep FROM procesos_parametros WHERE id_dep='$row4[id_entidad]'";
 				$row_tmp4  = mysql_fetch_array(mysql_db_query($db, $sql_tmp4, $link));			
-			?>
-        <td class='tit_form'><?php echo $row_tmp4[desc_dep];?></td>
+			  }
+				?>
+        <td class='tit_form'><?php  if($row4['id_entidad']) echo $row_tmp4['desc_dep']; else echo "N/A";?></td>
         <?php 
 			echo "</tr>";
 			}
@@ -184,7 +188,7 @@ $row5  = mysql_fetch_array(mysql_db_query($db, $sql5, $link));
           <th bgcolor="#CCCCCC" class="titulo2">MENSAJE ENTIDAD</th>
         </tr>
         <tr> 
-          <td class='tit_form'><?php echo $row_tmp[mensaje_e];?></td>
+          <td class='tit_form'><?php echo $row_tmp['mensaje_e'];?></td>
         </tr>
       </table></td>
   </tr>

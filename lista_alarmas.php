@@ -11,20 +11,23 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
-if (!session_is_registered("login")) { header("location: index_2.php"); }
+if (!$_SESSION["login"]) { header("location: index_2.php"); }
 $login=$_SESSION["login"];
 
 require("conexion.php");
-if (isset($RETORNAR2)) header("location: riesgo-opciones.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
+if (isset($_REQUEST['RETORNAR2'])) header("location: riesgo-opciones.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
 
-if ( isset($NUEVO) ) header("location: riesgo_alarmas.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
+if ( isset($_REQUEST['NUEVO']) ) header("location: riesgo_alarmas.php?idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
 
-if (isset($ejecutar) && $ejecutar=="eliminar")
+if (isset($_REQUEST['ejecutar']) && $_REQUEST['ejecutar']=="eliminar")
 {	$sql_delete = "DELETE FROM alarmas_riesgos WHERE id_alarma='$id_alar'";
 	$res_delete = mysql_query($sql_delete);
 }
-if (isset($ejecutar) && $ejecutar=="enviar_alarma")
-{	
+
+if (isset($_REQUEST['ejecutar']) && $_REQUEST['ejecutar']=="enviar_alarma")
+{	//echo "ALARMA ENVIADA MAIL";
+	if(isset($_REQUEST['id_alar']))
+	$id_alar=$_REQUEST['id_alar'];
 	ini_set("error_reporting", "E_ALL & ~E_NOTICE & ~E_WARNING");
 	$sql_tmp   = "SELECT *, DATE_FORMAT(fec_creacion, '%d/%m/%Y') AS fec_creacion FROM alarmas_riesgos WHERE id_alarma='$id_alar'";
 	$row_tmp   = mysql_fetch_array(mysql_query( $sql_tmp));
@@ -41,6 +44,7 @@ if (isset($ejecutar) && $ejecutar=="enviar_alarma")
 		{	
 			$sql_ord="INSERT INTO ordenes (fecha, time, cod_usr, desc_inc, tipo,id_riesgo) ".
 			"VALUES('".date("Y-m-d")."','".date("H:i:s")."','$login','$row_tmp[mensaje_u]','L','$id_alar')"; 
+			
 			mysql_query($sql_ord); 
 					
 			$sql_max="SELECT MAX(id_orden) AS max_orden FROM ordenes";
@@ -51,11 +55,12 @@ if (isset($ejecutar) && $ejecutar=="enviar_alarma")
 			"fechaestsol_asig,reg_asig,diagnos) ".
 			"VALUES('$row_max[max_orden]','3','1','1','$row2[usuario]','".date("Y-m-d")."','".date("H:i:s")."',".
 			"'".date("Y-m-d")."','$login','$row6[desc_riesgo]')";
+			
 			mysql_query($sql_asig);
 		}		
 	$msg="Se crearon correctamente las Ordenes de Trabajo";
 	
-	if ($row_tmp[msn_mail]==1)
+	if ($row_tmp['msn_mail']==1)
 	{	
 		$sql2 = "SELECT * FROM alarma_usuarios WHERE id_alarma='$id_alar'";
 		$res2 = mysql_query($sql2);		
@@ -171,7 +176,7 @@ Para mayores detalles, consulte el Sistema GesTor F1.";
 		{	
 			$sql = "SELECT nom_usr,apa_usr,ama_usr, area_usr, ext_usr, id_dat_tel_movil FROM users WHERE login_usr='$row2[usuario]'";
 			$userData = mysql_fetch_array(mysql_query( $sql));			
-			$userData['movilEmail']="591".$userData[ext_usr]."@".$movilLst[$userData['id_dat_tel_movil']];
+			$userData['movilEmail']="591".$userData['ext_usr']."@".$movilLst[$userData['id_dat_tel_movil']];
 			$mensaje = substr($row_tmp['mensaje_u'],0, 50);
 			$mensaje1 = substr($row6['desc_riesgo'],0, 20);	
 			$clienteNombre = $userData['apa_usr']." ".$userData['ama_usr']." ".$userData['nom_usr'];					

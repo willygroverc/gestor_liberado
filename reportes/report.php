@@ -1,13 +1,23 @@
 <?php
-if(isset($VER)){
+if(isset($_REQUEST['var'])) $var=$_REQUEST['var']; else $var="";
+if(isset($_REQUEST['VER'])){
+	if(isset($_REQUEST['report'])) $report=$_REQUEST['report']; else $report="";
+	if(isset($_REQUEST['ord'])) $ord=$_REQUEST['ord']; else $ord="";
 	$graph="reportes/a".$report.".php";
+	//echo $graph;
 	if($ord=='1'){
+		if(isset($_REQUEST['DA'])) $DA=$_REQUEST['DA']; else $DA="";
+		if(isset($_REQUEST['MA'])) $MA=$_REQUEST['MA']; else $MA="";
+		if(isset($_REQUEST['AA'])) $AA=$_REQUEST['AA']; else $AA="";
+		if(isset($_REQUEST['DE'])) $DE=$_REQUEST['DE']; else $DE="";
+		if(isset($_REQUEST['ME'])) $ME=$_REQUEST['ME']; else $ME="";
+		if(isset($_REQUEST['AE'])) $AE=$_REQUEST['AE']; else $AE="";
 		if (strlen($DA) == 1){ $DA = "0".$DA; }
 		if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
-			$fecha1 = $AA."-".$MA."-".$DA;   
+		$fecha1 = $AA."-".$MA."-".$DA;   
 		if (strlen($DE) == 1){ $DE = "0".$DE; }
 		if (strlen($ME) == 1){ $ME = "0".$ME; }
-			$fecha2 = $AE."-".$ME."-".$DE; 
+		$fecha2 = $AE."-".$ME."-".$DE; 
 	}
 }
 include("Includes/FusionCharts.php");
@@ -47,7 +57,7 @@ $tam4=300;
 function cambiaTexto(valor){
 	//alert(valor);
 	var indice=document.form1.report.options[document.form1.report.selectedIndex].value;
-	var texto=new Array(<?php=$var?>);
+	var texto=new Array(<?php echo $var;?>);
 	document.form1.Desc.value=texto[indice];
 } 
 var flag=true;
@@ -58,6 +68,7 @@ document.form1.DE.disabled=1;
 document.form1.ME.disabled=1;
 document.form1.AE.disabled=1;
 function activar2(form){
+	//alert("fadfadsf");
 	if(flag){
 		document.form1.DA.disabled=0;
 		document.form1.MA.disabled=0;
@@ -117,8 +128,8 @@ echo $valid->toHtml ();
 <table width="100%" border="0">
 <tr> <td width="70%" colspan="2" height="550"><table border="2" width="100%" height="350">
   <tr align="center">
-    <td valign="middle" width="610">&nbsp;<?php if(isset($VER)){ include($graph);}?></td>
-    <td valign="middle" width="90">&nbsp;<?php if(isset($VER)){ include('reportes/i_a26.php');}?></td>
+    <td valign="middle" width="610">&nbsp;<?php if(isset($_REQUEST['VER'])){ include($graph);}?></td>
+    <td valign="middle" width="90">&nbsp;<?php if(isset($_REQUEST['VER'])){ include('reportes/i_a26.php');}?></td>
   </tr>
 </table>
   </td>
@@ -137,7 +148,7 @@ Del:</b></font>&nbsp;
 				$mes=substr($fsist,5,2);
 				$dia=substr($fsist,8,2);
 				for($i=1;$i<=31;$i++)
-				{	if ( isset ($DA) ){echo "<option value=\"$i\""; if($DA=="$i") echo "selected"; echo">$i</option>";}						
+				{	if ( isset ($_REQUEST['DA']) ){echo "<option value=\"$i\""; if($_REQUEST['DA']=="$i") echo "selected"; echo">$i</option>";}						
 					else {echo "<option value=\"$i\""; if($dia=="$i") echo "selected"; echo">$i</option>";}
 				}
 				?>
@@ -145,7 +156,7 @@ Del:</b></font>&nbsp;
 				<select name="MA" id="select9" class="Estilo3" disabled="true">
                 <?php
 				for($i=1;$i<=12;$i++)
-				{	if ( isset($MA) )  {echo "<option value=\"$i\""; if($MA=="$i") echo "selected"; echo">$i</option>";}
+				{	if ( isset($_REQUEST['MA']) )  {echo "<option value=\"$i\""; if($_REQUEST['MA']=="$i") echo "selected"; echo">$i</option>";}
 					else  {echo "<option value=\"$i\""; if($mes=="$i") echo "selected"; echo">$i</option>";
 					}
 				}
@@ -154,7 +165,7 @@ Del:</b></font>&nbsp;
                <select name="AA" id="select6" class="Estilo3" disabled="true">
                <?php
 				for( $i=2003;$i<=2020;$i++ ) 
-				{	if ( isset($AA) ) {echo "<option value=\"$i\""; if($AA=="$i") echo "selected"; echo">$i</option>";}
+				{	if ( isset($_REQUEST['AA']) ) {echo "<option value=\"$i\""; if($_REQUEST['AA']=="$i") echo "selected"; echo">$i</option>";}
 					else {echo "<option value=\"$i\""; if($ano=="$i") echo "selected"; echo">$i</option>";}
 				}
 				?>
@@ -168,7 +179,7 @@ Del:</b></font>&nbsp;
 				$mes=substr($fsist,5,2);
 				$dia=substr($fsist,8,2);				
 				for($i=1;$i<=31;$i++)
-				{	if (isset($DE)) {echo "<option value=\"$i\""; if($DE=="$i") echo "selected"; echo">$i</option>";}
+				{	if (isset($_REQUEST['DE'])) {echo "<option value=\"$i\""; if($_REQUEST['DE']=="$i") echo "selected"; echo">$i</option>";}
 					else {echo "<option value=\"$i\""; if($dia=="$i") echo "selected"; echo">$i</option>";}
 				}
 				?>
@@ -176,7 +187,7 @@ Del:</b></font>&nbsp;
                 <select name="ME" id="select2" class="Estilo3" disabled="true">
                 <?php
 				for($i=1;$i<=12;$i++)
-				{	if (isset($ME)) {echo "<option value=\"$i\""; if($ME=="$i") echo "selected"; echo">$i</option>";}
+				{	if (isset($_REQUEST['ME'])) {echo "<option value=\"$i\""; if($_REQUEST['ME']=="$i") echo "selected"; echo">$i</option>";}
 					else {echo "<option value=\"$i\""; if($mes=="$i") echo "selected"; echo">$i</option>";}
 				}
 				?>
@@ -184,7 +195,7 @@ Del:</b></font>&nbsp;
                 <select name="AE" id="select4" class="Estilo3" disabled="true">
                 <?php
 				for($i=2003;$i<=2020;$i++)
-				{	if (isset($AE)) {echo "<option value=\"$i\""; if( $AE=="$i" ) echo "selected"; echo">$i</option>";}
+				{	if (isset($_REQUEST['AE'])) {echo "<option value=\"$i\""; if( $_REQUEST['AE']=="$i" ) echo "selected"; echo">$i</option>";}
 					else {echo "<option value=\"$i\""; if( $ano=="$i" ) echo "selected"; echo">$i</option>";}
 				}
 				?>

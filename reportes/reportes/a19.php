@@ -19,7 +19,7 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 		$rs19 = mysql_db_query($db,$sql9,$link);
 		$numAsig = 0;
 		while ($tmp = mysql_fetch_array($rs19))  {			
-				$total[$numAsig] = $tmp[id_orden];
+				$total[$numAsig] = $tmp['id_orden'];
 				$numAsig++;
 		}
 
@@ -31,22 +31,22 @@ $data="<chart caption='ORDENES DE TRABAJO' shownames='1' showvalues='1' decimals
 
 	$sql1 = "SELECT DISTINCT(asignacion.id_orden), MAX(asignacion.id_asig) FROM ordenes, asignacion 
 	WHERE ordenes.id_orden=asignacion.id_orden AND ordenes.cod_usr<>'SISTEMA' $sql_alt GROUP BY asignacion.id_orden";
-	$row1[asig] = mysql_num_rows(mysql_db_query($db,$sql1,$link));
+	$row1['asig'] = mysql_num_rows(mysql_db_query($db,$sql1,$link));
 
 //NUMERO DE ORDENES CON SOLUCION  
 	$solu=0;
 	for ($i=0; $i<$numAsig; $i++) {
 		$sql4 = "SELECT id_orden FROM solucion WHERE id_orden='$total[$i]'";  //=============HERE VIC
 		$row4 = mysql_fetch_array(mysql_db_query($db,$sql4,$link));
-		if ($row4[id_orden]==$total[$i]) {
+		if ($row4['id_orden']==$total[$i]) {
 		$solu++;}
 	}
-	$row4[solu]=$solu;		
+	$row4['solu']=$solu;		
 	
 //NUMERO DE ORDENES SIN SOLUCION
-	$nosolu=$row1[asig]-$row4[solu];
+	$nosolu=$row1['asig']-$row4['solu'];
 //ENVIO DE DATOS
-	$dat1=$row4[solu];
+	$dat1=$row4['solu'];
 	$dat2=$nosolu;
 //hasta aqui
 $data.="<set label='Con Solucion' value='$dat1'/><set label='Sin Solucion' value='$dat2'/>";
@@ -60,7 +60,7 @@ $prom=$dat2;
    <div id="chartdiv" align="center">The chart will appear within this DIV. This text will be replaced by the chart.</div>
    <script type="text/javascript">
       var myChart = new FusionCharts("Charts/Pie3D.swf", "myChartId", "600", "300", "0", "0");
-      myChart.setDataXML("<?php=$data?>");
+      myChart.setDataXML("<?php echo $data;?>");
       myChart.render("chartdiv");
    </script>
 </body>

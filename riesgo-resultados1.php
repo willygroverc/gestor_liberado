@@ -1,15 +1,54 @@
 <?php 
+
+if(isset($_REQUEST['idproc']))
+	$idproc=$_REQUEST['idproc'];
+else
+	$idproc=0;
+if(isset($_REQUEST['pg']))
+	$pg=$_REQUEST['pg'];
+else
+	$pg=0;
+if(isset($_REQUEST['i']))
+	$i=$_REQUEST['i'];
+else
+	$i=0;	
+if(isset($_REQUEST['var2'])) $var2=$_REQUEST['var2']; else $var2="";
+if(isset($_REQUEST['idproc'])) $idproc=$_REQUEST['idproc']; else $idproc="";
+if(isset($_REQUEST['pg'])) $pg=$_REQUEST['pg']; else $pg="";
+if(isset($_REQUEST['BUSCAR'])) $BUSCAR=$_REQUEST['BUSCAR']; else $BUSCAR="";
+if(isset($_REQUEST['menu'])) $menu=$_REQUEST['menu']; else $menu="";
+if(isset($_REQUEST['busc'])) $busc=$_REQUEST['busc']; else $busc="";
+if(isset($_REQUEST['variable1']))
+		$variable1=$_REQUEST['variable1'];
+	else
+		$variable1="";
+
 if(isset($_REQUEST['GUARDAR'])){
 	include("conexion.php");
+	
+	$obs=$_REQUEST['obs'];
+	$id_riesgo=$_REQUEST['id_riesgo'];
+	$titulo=$_REQUEST['titulo'];
+	
 	for($k=0;$k<$i;$k++){
 		$sql_modif="UPDATE riesgo_resptabla SET obs='$obs[$k]' WHERE id_riesgo='$id_riesgo[$k]' AND titulo='$titulo'";
+		/*echo $sql_modif;
+	    exit;*/
 		mysql_db_query($db,$sql_modif,$link);
 	}
+	//echo "location: riesgo-resultados1.php?variable1=$variable1&var2=$var2&idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc";
+	//exit;
+	//
 	header("location: riesgo-resultados1.php?variable1=$variable1&var2=$var2&idproc=$idproc&pg=$pg&BUSCAR=$BUSCAR&menu=$menu&busc=$busc");
 }
+if(isset($_REQUEST['cons']))
+	$cons=$_REQUEST['cons'];
 require_once("funciones.php");
 //if (valida("Riesgo")=="bad") {header("location: pagina_error.php");}
-if(!isset($cons) && isset($_REQUEST['consolidar'])) header ("location: riesgo-resultados1.php?msg=1");
+if(!isset($cons) && isset($_REQUEST['consolidar'])) 
+{	//echo "ENTRO";
+	header("location: riesgo-resultados1.php?msg=1");
+}
 if (isset($_REQUEST['retornar'])) {header("location: riesgo-opciones.php?pg=$pg&idproc=$idproc&BUSCAR=$BUSCAR&menu=$menu&busc=$busc"); }
 //if (isset($terminar)) { header("location: riesgo-opciones.php"); }
 if (!isset($orden)){ $orden="val3";}
@@ -66,7 +105,7 @@ function chcol() {
 
 
 
-<form name="form1" method="post" action="<?php=$_SERVER['PHP_SELF'] ?>" onKeyPress="return Form()">
+<form name="form1" method="post" action="" onKeyPress="return Form()">
 <input name="idproc" type="hidden" value="<?php echo $_REQUEST['idproc'];?>">
 <input name="pg" type="hidden" value="<?php echo $_REQUEST['pg'];?>">
 <input name="BUSCAR" type="hidden" value="<?php echo $_REQUEST['BUSCAR'];?>">
@@ -89,7 +128,9 @@ function chcol() {
     </tr>
     <?php
 		if (!isset($_REQUEST['idproc'])) { $sql = "SELECT DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1,fecha,titulo,id_riesgo0 FROM riesgo_resptabla WHERE proceso='0' GROUP BY id_riesgo0 ORDER BY id_riesgo0 DESC"; }
-		else { $sql = "SELECT DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1,fecha, titulo FROM riesgo_resptabla WHERE proceso='$_REQUEST[idproc]' GROUP BY id_riesgo0 ORDER BY id_riesgo0 DESC"; }
+		else { $sql = "SELECT DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1,fecha, titulo,id_riesgo0 FROM riesgo_resptabla WHERE proceso='$_REQUEST[idproc]' GROUP BY id_riesgo0 ORDER BY id_riesgo0 DESC"; }
+		/*echo $sql;
+		exit;*/
 		$result=mysql_db_query($db,$sql,$link);
 		$num=0;
 		$xxx=0;
@@ -97,8 +138,9 @@ function chcol() {
 			$num++;			
 			echo "<tr align=\"center\">";
 			if (!isset($_REQUEST['idproc'])){
-			echo "<td><input name=\"cons[$row[id_riesgo0]]\" type=\"checkbox\" id=\"cons\" value=\"$row[id_riesgo0]\"></td><td><a href=\"riesgo-resultados1.php?variable1=$row[id_riesgo0]&var2=$row[fecha1]\">$num</a></td>";}
-			else { echo " <td><input name=\"cons[$row[id_riesgo0]]\" type=\"checkbox\" id=\"cons\" value=\"$row[id_riesgo0]\"><td><a href=\"riesgo-resultados1.php?variable1=$row[id_riesgo0]&var2=$row[fecha1]&idproc=$idproc&pg=$pg\">$num</a></td>"; }
+			echo "<td><input name=\"cons[$row[id_riesgo0]]\" type=\"checkbox\" id=\"cons\" value='$row[id_riesgo0]'></td><td><a href=\"riesgo-resultados1.php?variable1=$row[id_riesgo0]&var2=$row[fecha1]\">$num</a></td>";}
+			
+			else { echo " <td><input name=\"cons[$row[id_riesgo0]]\" type=\"checkbox\" id=\"cons\" value='$row[id_riesgo0]'><td><a href=\"riesgo-resultados1.php?variable1=$row[id_riesgo0]&var2=$row[fecha1]&idproc=$idproc&pg=$pg\">$num</a></td>"; }
 			$xxx++;
 			$sql5 = "SELECT realizado_por FROM riesgo_resptabla WHERE id_riesgo0='$row[id_riesgo0]' limit 1";
 		  	$result5 = mysql_db_query($db,$sql5,$link);
@@ -128,20 +170,22 @@ function chcol() {
     <input name="consolidar" type="submit" id="consolidar" value="CONSOLIDAR">
     <br><br>
     <?php 
-	if(isset($_REQUEST['variable1'])) $sql = "SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1 FROM riesgo_resptabla WHERE id_riesgo0='$_REQUEST[variable1] LIMIT 1";
+	if(isset($_REQUEST['variable1'])) $sql = "SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1 FROM riesgo_resptabla WHERE id_riesgo0='$_REQUEST[variable1]' LIMIT 1";
   	if(isset($_REQUEST['consolidar'])){
 		unset($_REQUEST['variable1']);
 		$var=implode(", ",$cons);
 		$sql = "SELECT *,DATE_FORMAT(fecha,'%d/%m/%Y') as fecha1 FROM riesgo_resptabla WHERE id_riesgo0 IN ($var) LIMIT 1";
-	} 
-  	if(isset($_REQUEST['variable1']) || isset($_REQUEST['consolidar'])){ 
-		$result=mysql_fetch_array(mysql_db_query($db,$sql,$link));
+	} //isset($_REQUEST['variable1'])
+  	if( $variable1!="" || isset($_REQUEST['consolidar'])){ 
+		//echo "VAR:".$variable1;
+		$res=mysql_db_query($db,$sql,$link);
+		$result=mysql_fetch_array($res);
   ?>
   </div>
   <table width="85%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg" bgcolor="#EAEAEA">
     <tr> 
       <th colspan="6">RESULTADOS DE EVALUACION
-      <input name="variable1" type="hidden" id="variable1" value="<?php echo $_REQUEST['variable1'];?>">
+      <input name="variable1" type="hidden" id="variable1" value="<?php echo $variable1;?>">
       <input name="var2" type="hidden" id="var2" value="<?php echo $var2;?>">      </th>
     </tr>
 	<tr align="center"> 
@@ -196,8 +240,11 @@ function chcol() {
 		
 		if(isset($_REQUEST['consolidar'])) $sql = "SELECT * FROM riesgo_resptabla WHERE id_riesgo0 IN ($var) ORDER BY '$orden' DESC";
 		else $sql = "SELECT * FROM riesgo_resptabla WHERE id_riesgo0='$_REQUEST[variable1]' ORDER BY '$orden' DESC";
+		//echo "ES:".$sql;
+		//exit;
 		$result=mysql_db_query($db,$sql,$link);
 		$i=0;
+		$titulox="";
 		while($row=mysql_fetch_array($result)) {
 			if ($row['val3']>=1 AND $row['val3']<$stotal){$color="bgcolor=#00FF00";}
 			if ($row['val3']>=$stotal AND $row['val3']<$stotal*2){$color="bgcolor=#E2FD86";}
@@ -232,7 +279,10 @@ function chcol() {
 	  else $sql8 = "SELECT COUNT(*) AS num,SUM(val3)AS suma FROM riesgo_resptabla WHERE id_riesgo0='$_REQUEST[variable1]'";
 	  $result8 = mysql_db_query($db,$sql8,$link);
 	  $row8 = mysql_fetch_array($result8);
-	  $prom=round($row8['suma']/$row8['num'],2);
+	  if($row8['num']>0)
+	  	$prom=round($row8['suma']/$row8['num'],2);
+	  else
+	  	$prom=0;
 	  echo "&nbsp;$prom";
 	  ?>
         </font></td>
@@ -241,7 +291,7 @@ function chcol() {
   <input name="i" type="hidden" id="i" value="<?php echo $i;?>">
   <?php } ?>
   <br>
-  <?php if(isset($_REQUEST['variable1'])!=""){?>
+  <?php if($variable1!=""){?>
   <input type="button" name="imprimir" value="IMPRIMIR" onClick="riesgo_imp()">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;
@@ -257,12 +307,15 @@ function chcol() {
   <input name="pg" type="hidden" id="pg" value="<?php echo $pg;?>">
 </form>
 <br>
-<?php include("top_.php");?>
+
+<?php include("top_.php");
+//echo "wwwwwwwwww".$_REQUEST['variable1'];
+?>
 <script language="JavaScript">
 <!--
 <?php if($_REQUEST['variable1']!=""){?>
 function riesgo_imp()
-{
+{   // alert("ffff");
 	var hola="<?php echo $_REQUEST['variable1'];?>";
 	window.open("riesgo_imp.php?codigo="+hola, "Estadisticas", 'width=500,height=190,status=no,resizable=no,top=250,left=250,dependent=yes,alwaysRaised=yes,Scrollbars=no');
 }
@@ -273,7 +326,12 @@ function riesgo_imp2()
 	window.open("riesgo_imp.php?cons="+hola, "Estadisticas", 'width=500,height=190,status=no,resizable=no,top=250,left=250,dependent=yes,alwaysRaised=yes,Scrollbars=no');
 }
 <?php }?>
-<?php if ($msg==1) {
+<?php 
+if(isset($_GET['msg']))
+	$msg=$_GET['msg'];
+else
+	$msg=0;
+if ($msg==1) {
 	print "var msg=\"Debe seleccionar por lo menos una evaluacion\";\n";
 	print "alert ( msg + \"\\n \\nMensaje generado por GesTor F1.\");\n";
 } ?>

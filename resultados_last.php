@@ -1,28 +1,41 @@
-<?php if ($Terminar)
+<?php 
+if(isset($_REQUEST['var']))
+	$var=$_REQUEST['var'];
+if (isset($_REQUEST['Terminar']))
 header("location: minuta_last.php?id_minuta=$var&verif=1");
-?>
-<?php
-if ($reg_form)
+
+
+if (isset($_REQUEST['reg_form']))
 {   include("conexion.php");
+	$tema=$_REQUEST['tema'];
+		$resultado=$_REQUEST['resultado'];
 	 	$sql2 = "SELECT * FROM rtema WHERE tema='$tema' AND id_minuta='$var'";
 		$result2=mysql_db_query($db,$sql2,$link);
 		$row2=mysql_fetch_array($result2);
-	if (!$row2[tema])
+		
+		
+	if (!$row2['tema'])
 		{$sql0 = "SELECT * FROM temad WHERE id_minuta='$var' AND tema='$tema'";
 		$result0=mysql_db_query($db,$sql0,$link);
 		$row0=mysql_fetch_array($result0);
 		$sql="INSERT INTO rtema (id_tema,resultado,id_minuta,tema) VALUES ('$row0[id_tema]','$resultado','$var','$tema')";
 		mysql_db_query($db,$sql,$link);
-		header("location: resultados_last.php?id_minuta=$var");}
+		}
 	else
 	{$sql="UPDATE rtema SET resultado='$resultado' WHERE id_minuta='$var' AND tema='$tema'";
 	mysql_db_query($db,$sql,$link);
-	header("location: resultados_last.php?id_minuta=$var");}
+	}
+	/*echo $sql;
+	exit;*/
+	header("location: resultados_last.php?id_minuta=$var");
 }
 else { 
 include("top.php");
 $id_minuta=($_GET['id_minuta']);
-$id_tema=($_GET['id_tema']);
+if(isset($_GET['id_tema']))
+	$id_tema=($_GET['id_tema']);
+else
+	$id_tema=0;
 ?>
 <?php
 require_once ( "ValidatorJs.php" );
@@ -42,7 +55,7 @@ function Form () {
 </script>
 
   <table width="71%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
-    <form name="form2" method="post" action="<?php echo $PHP_SELF?>" onKeyPress="return Form()">
+    <form name="form2" method="post" action="" onKeyPress="return Form()">
 	<input name="var" type="hidden" value="<?php echo $id_minuta;?>">
 	<tr> 
       <td > 
@@ -64,16 +77,16 @@ function Form () {
   		{
 		 ?>
           <tr align="center"> 
-            <?php echo "<td><a href=\"resultados_last.php?id_minuta=$id_minuta&id_tema=".$row[id_tema]."\">".$row[id_tema]."</a></td>";
+            <?php echo "<td><a href=\"resultados_last.php?id_minuta=$id_minuta&id_tema=".$row['id_tema']."\">".$row['id_tema']."</a></td>";
 			 	$sql5 = "SELECT * FROM temas WHERE id_tema='$row[tema]' AND id_agenda='$id_minuta'";
 		    	$result5 = mysql_db_query($db,$sql5,$link);
 		    	$row5 = mysql_fetch_array($result5);
-				if (!$row5[id_tema])
+				if (!$row5['id_tema'])
 				{echo "<td>&nbsp;$row[tema]</td>";}
 				else
 				{echo "<td>&nbsp;$row5[tema]</td>";}?>
 			
-           <td>&nbsp;<?php echo $row[resultado]?></td>
+           <td>&nbsp;<?php echo $row['resultado']?></td>
           </tr>
           <?php 
 		 }
@@ -98,13 +111,13 @@ function Form () {
 					{$sql5 = "SELECT * FROM temas WHERE id_tema='$row0[tema]' AND id_agenda='$id_minuta'";
 		    		$result5 = mysql_db_query($db,$sql5,$link);
 		    		$row5 = mysql_fetch_array($result5);
-					if (!$row5[id_tema])
-						{if ($row0[id_tema]==$id_tema)
+					if (!$row5['id_tema'])
+						{if ($row0['id_tema']==$id_tema)
 						{echo "<option value=\"$row0[tema]\"selected>$row0[tema] </option>";}
 						else
 						{echo "<option value=\"$row0[tema]\">$row0[tema] </option>";}}
 					else
-						{if ($row0[id_tema]==$id_tema)
+						{if ($row0['id_tema']==$id_tema)
 						{echo "<option value=\"$row5[id_tema]\"selected>$row5[tema] </option>";}	
 						else
 						{echo "<option value=\"$row5[id_tema]\">$row5[tema] </option>";}}	
@@ -114,7 +127,7 @@ function Form () {
 			                  
                 </strong></div></td>
             <td width="189" nowrap><strong>
-              <textarea name="resultado" cols="30"><?php echo $row3[resultado]?></textarea>
+              <textarea name="resultado" cols="30"><?php echo $row3['resultado']?></textarea>
               </strong></td>
           </tr>
           <tr> 
