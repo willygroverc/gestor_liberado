@@ -136,6 +136,7 @@ echo '<form name="frm_temp" id="frm_temp" method="POST" action="" />
 			<div style="display: block;" class="error_box" id="error_box">Los campos estan validados</div>
 		</div>
   </form>';
+  
   ?>
 </body>
 </html>
