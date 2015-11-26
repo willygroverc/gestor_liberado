@@ -52,6 +52,8 @@ new FormValidator('frm_diaria', [{
 	if (document.forms[0].onsubmit()==true){
 	
 		if (confirm('Desea registrar los datos introducidos?')){
+			//IdProgTarea
+			var IdProgTarea=document.getElementById('IdProgTarea');
 			var FechaProceso=document.getElementById('FechaProceso');
 			var Actividad=document.getElementById('Actividad');
 			var Observaciones=document.getElementById('Observaciones');
@@ -70,7 +72,8 @@ new FormValidator('frm_diaria', [{
 				}
 			}
 			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			ajax.send("FechaProceso="+FechaProceso.value+"&Actividad="+Actividad.value+"&Observaciones="+Observaciones.value+"&HoraDe="+HoraDe.value+"&HoraA="+HoraA.value+"&lista="+lista.value);
+			
+			ajax.send("IdProgTarea="+IdProgTarea.value+"&FechaProceso="+FechaProceso.value+"&Actividad="+Actividad.value+"&Observaciones="+Observaciones.value+"&HoraDe="+HoraDe.value+"&HoraA="+HoraA.value+"&lista="+lista.value);
 		}
 	}
 }

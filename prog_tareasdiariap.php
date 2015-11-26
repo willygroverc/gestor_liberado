@@ -12,6 +12,8 @@ if($_SESSION['tipo']=="C") {
 	header("location:pagina_inicio.php");
 	return;
 }
+if(isset($_REQUEST['IdProgTarea'])) $IdProgTarea=$_REQUEST['IdProgTarea']; else $IdProgTarea='';
+if(isset($_REQUEST['do'])) $do=$_REQUEST['do']; else $do='';
 ?>
 <html>
 <head>
@@ -149,7 +151,7 @@ function showFlatCalendar() {
 }
 </script>
 </head>
-<body onload="document.getElementById('Actividad').focus();">
+<body onLoad="document.getElementById('Actividad').focus();">
 <?php
 if(isset($_GET["do"]) && $_GET["do"]=="editar"){
 	$sql="SELECT * FROM progtareasdiaria WHERE IdProgTarea=".$_GET["IdProgTarea"];
@@ -157,7 +159,7 @@ if(isset($_GET["do"]) && $_GET["do"]=="editar"){
 }
 echo '<form name="frm_diaria" id="frm_diaria" action="#" method="POST">
 <input name="IdProgTarea" type="hidden" id="IdProgTarea" value="'; echo $IdProgTarea; echo '">
-    <input name="action" type="hidden" id="action" value="'; echo $_GET["do"]; echo '">
+    <input name="action" type="hidden" id="action" value="'; echo $do; echo '">
     <table width="70%" border="1" align="center" cellpadding="2" cellspacing="0" background="images/fondo.jpg">
       <tr>
         

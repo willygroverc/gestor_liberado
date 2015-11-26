@@ -213,6 +213,23 @@ $xajax->processRequests();
 <meta http-equiv="expires"content="0">
 <head>
 <?php $xajax->printJavascript("xajax"); include('top.php');?>
+<link rel="stylesheet" href="css/jquery-ui.css" />
+	<link rel="stylesheet" href="css/calendar.css" />
+<script language="javascript" src="js/jquery.js"></script>
+<script language="javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function() {
+	$( "#fecha_ubica" ).datepicker({
+	dateFormat: 'yy-mm-dd',
+	showOn: 'both',
+	changeMonth: true,
+	changeYear: true,
+	buttonImage: 'images/cal.gif',
+	buttonImageOnly: true,
+	buttonText: 'Selecciona una fecha'
+	});
+});
+</script>
 </head>
 <body>
 <form name="proyecto" id="proyecto" action="" method="post">
@@ -293,10 +310,10 @@ $xajax->processRequests();
 </div>
 <div class="button_div"> 
 	</br>
-    <input type="reset" id="btnCancel" name="btnCancel" value="Limpiar Campos" class="buttons_CANCEL" onclick="xajax_cancelar();" />
-    <input type="button" id="btnAgregar" name="btnAgregar" value="Agregar Registro" class="buttons_aplicar" onclick="xajax_agregarFila(xajax.getFormValues('proyecto'));" />
-	<input type="button" id="btnAgregar" name="btnAgregar" value="Guardar Todo" class="buttons_aplicar" onclick="xajax_guardar(xajax.getFormValues('proyecto'));" />
-	<input type="button" id="btnRetornar" name="btnRetornar" value="Retornar" class="buttons_aplicar" onclick="xajax_retornar(xajax.getFormValues('proyecto'));" />
+    <input type="reset" id="btnCancel" name="btnCancel" value="Limpiar Campos" class="buttons_CANCEL" onClick="xajax_cancelar();" />
+    <input type="button" id="btnAgregar" name="btnAgregar" value="Agregar Registro" class="buttons_aplicar" onClick="xajax_agregarFila(xajax.getFormValues('proyecto'));" />
+	<input type="button" id="btnAgregar" name="btnAgregar" value="Guardar Todo" class="buttons_aplicar" onClick="xajax_guardar(xajax.getFormValues('proyecto'));" />
+	<input type="button" id="btnRetornar" name="btnRetornar" value="Retornar" class="buttons_aplicar" onClick="xajax_retornar(xajax.getFormValues('proyecto'));" />
 </div>
     <div class="clear"></div>
     <div id="form3" class="form-horiz">

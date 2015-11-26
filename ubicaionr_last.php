@@ -2,6 +2,7 @@
 include('top.php');
 include('conexion.php');
 require_once('funciones.php');
+if(isset($_REQUEST['codub'])) $codub=$_REQUEST['codub']; else $codub=NULL;
 $codub=SanitizeString($codub);
 @session_start();
 ?>
@@ -17,7 +18,7 @@ $codub=SanitizeString($codub);
 	<script>
 $(function() {
 	$( "#fecha_ctrl" ).datepicker({
-	dateFormat: 'Y-m-d',
+	dateFormat: 'yy-m-d',
 	showOn: 'both',
 	changeMonth: true,
 	changeYear: true,
@@ -53,7 +54,7 @@ $(function() {
 			document.captureEvents(Event.KEYDOWN) ; 
 	</script>
 </head>
-<body onload="document.getElementById('codigo').focus();">
+<body onLoad="document.getElementById('codigo').focus();">
 <?php
 echo '<table width="90%" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#006699"  background="images/fondo.jpg" bgcolor="#EAEAEA">
   <form name="frm_respaldos" id="frm_respaldos" method="post" action="#" />

@@ -12,33 +12,50 @@ if (isset($_SESSION['login'])){
 		header('location:pagina_inicio.php');
 	}
 }
-if (isset($Terminar))
-header("location: lista_progtareas.php");
+//echo "SESION LOGIN:".$_SESSION['login'];
+if (isset($_REQUEST['Terminar'])) header("location: lista_progtareas.php");
+
+if(isset($_REQUEST['IdProgTarea'])) $IdProgTarea=$_REQUEST['IdProgTarea']; else $IdProgTarea='';
+
+if(isset($_REQUEST['IdProgTarea1'])) $IdProgTarea1=$_REQUEST['IdProgTarea1']; else $IdProgTarea1='';
+if(isset($_REQUEST['action'])) $action=$_REQUEST['action']; else $action=NULL;
+
 include("top.php");
 require_once('funciones.php');
 $IdProgTarea=SanitizeString($IdProgTarea);
 $IdProgTarea1=SanitizeString($IdProgTarea1);
-if (isset($INSERTAR))
+if (isset($_REQUEST['INSERTAR']))
 {   //$sw = 0;
 	if(isset($action) && $action=="revisar")
 	{	$sql = "UPDATE progtareasdiaria1 SET RevisadoPor='$_SESSION[login]', RevisadoPorFecha='".date("Y-m-d H:i:s")."', Aprobacion='$Aprobacion', RevisadoPorObs='$Observaciones', Revisado=1 WHERE IdProgTarea1=$IdProgTarea1";
 		mysql_query( $sql);
 	}
 	else 	
-	{	$sql = "SELECT *,  DATE_FORMAT(FechaProceso, '%d/%m/%Y') AS FechaProceso FROM progtareasdiaria1 WHERE IdProgTarea='$IdProgTarea'";			
+	{	//datos de realizacion
+		$Aprobacion=$_REQUEST['Aprobacion']; 
+		$Observaciones =$_REQUEST['Observaciones'];
+		$archivo =$_REQUEST['archivo'];
+		
+		$sql = "SELECT *,  DATE_FORMAT(FechaProceso, '%d/%m/%Y') AS FechaProceso FROM progtareasdiaria1 WHERE IdProgTarea='$IdProgTarea'";
+	    //echo $sql."---------".$sw;
+		//exit;
+		$sw = 0; //colocado por rgct
 		$res = mysql_query($sql);		
 		while ($fila = mysql_fetch_array($res))
 		{	$str = date("d/m/Y");			
 			if ( $str == $fila['FechaProceso'] and $_SESSION['login']== $fila['RealizadoPor'])
-			{  $sw = 1; }			
+			{  $sw = 1; }	
 		}			
 		if ($sw == 0 )		
 		{	$sql = "INSERT INTO progtareasdiaria1 (IdProgTarea, FechaProceso, RealizadoPor, Realizacion, RealizadoPorObs,adjunto) VALUES ($IdProgTarea, '".date("Y-m-d H:i:s")."', '$_SESSION[login]', '$Aprobacion', '$Observaciones','$archivo')";
+			echo $sql;
 		    mysql_query( $sql);
-			$data = file_get_contents($archivo);
-			$handle = fopen("adjuntos/".$archivo, "w");
-			fwrite($handle, $data);
-			fclose($handle);
+			if(!empty($archivo))
+			{	$data = file_get_contents($archivo);
+				$handle = fopen("adjuntos/".$archivo, "w");
+				fwrite($handle, $data);
+				fclose($handle);
+			}
 		}
 	}
 	//if(mysql_affected_rows()!=1) $errorMsg="Precaucion, no se ha registrado los datos. Por favor, intentelo nuevamente. \\n\\nMensaje generado por GesTor F1.";
@@ -57,6 +74,7 @@ require_once ( "ValidatorJs.php" );
 $valid = new Validator ( "form2" );
 $valid->addLength ( "Observaciones",  "Observaciones, $errorMsgJs[length]" );
 echo $valid->toHtml ();
+
 ?>
 <script language="JavaScript" src="calendar.js"></script>
 <script language="JavaScript">
@@ -86,11 +104,12 @@ function Form () {
   </tr>
   <?php
 		$sql = "SELECT *, DATE_FORMAT(FechaDe, '%d/%m/%Y') AS FechaDe FROM progtareasdiaria WHERE IdProgTarea='$IdProgTarea'";
+		//echo $sql;
 		$result=mysql_query($sql);
 		$row=mysql_fetch_array($result);
   		 ?>
   	<tr align="center"> <?php echo "<td><font size=\"1\" face=\"Arial, Helvetica, sans-serif\">".$row['IdProgTarea']."</font></td>";?>
-      <td><?php=$row['FechaDe'];?></td>
+      <td><?php echo $row['FechaDe'];?></td>
       <td><div align="center">&nbsp;<?php echo $row['HoraDe'];?></div></td>
       <td><div align="center">&nbsp;<?php echo $row['HoraA'];?></div></td>
       <td><div align="center">&nbsp;<?php echo $row['Actividad'];?></div></td>
@@ -101,12 +120,12 @@ function Form () {
 		if($tam == 1)
 		{ 	
 	  ?>
-	  <td><div align="center">&nbsp;<?php=getname($variable[0])?></div></td>
+	  <td><div align="center">&nbsp;<?php echo getname($variable[0])?></div></td>
 	  <?php }else{?>
 	  	<td>
 		<table>
 		<?php for($i=0; $i<=$tam; $i++){?>
-			<tr><td><?php=getname($variable[$i])?></td></tr>
+			<tr><td><?php echo getname($variable[$i])?></td></tr>
 		<?php }?>
 		</table>
 		</td>

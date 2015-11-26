@@ -15,6 +15,7 @@ if (isset($_SESSION['login'])){
 
 include ("top_ver.php");
 include ('funciones.inc.php');
+
 ?>
 <html>
 <head>
@@ -50,12 +51,24 @@ include("datos_gral.php");
     <td width="11%"><div align="center"><font size="2" face="Arial, Helvetica, sans-serif"><strong>EXTERNO1</strong></font></div></td>
     <td width="11%"><div align="center"><font size="2" face="Arial, Helvetica, sans-serif"><strong>EXTERNO2</strong></font></div></td>
   </tr>
-  <?php   $general=$_REQUEST['general'];
+  <?php   /*$general=$_REQUEST['general'];
           $sistema=$_REQUEST['sistema'];
           $negocio=$_REQUEST['negocio'];
           $SE1=$_REQUEST['SE1'];
-          $SE2=$_REQUEST['SE2'];
-  		if ($general=="1" or ($general=="0" and $sistema=="0" and $negocio=="0" and $SE1=="0" and $SE2=="0"))
+          $SE2=$_REQUEST['SE1'];*/
+		if(isset($_REQUEST['general'])) $general=$_REQUEST['general']; else $general=0;
+		if(isset($_REQUEST['sistema'])) $sistema=$_REQUEST['sistema']; else $sistema=0;
+		if(isset($_REQUEST['negocio'])) $negocio=$_REQUEST['negocio']; else $negocio=0;
+		//if(isset($_REQUEST['codigo'])) $codigo=$_REQUEST['codigo']; else $codigo=0;
+		if(isset($_REQUEST['SE1'])) $SE1=$_REQUEST['SE1']; else $SE1=0;
+  		if(isset($_REQUEST['SE2'])) $SE2=$_REQUEST['SE2']; else $SE2=0;
+		
+        /*echo "<br>GENERAL=".$general;
+		echo "<br>SISTEMA=".$sistema;
+		 echo "<br>NEGOCIO=".$negocio;
+		 echo "<br>SE!=".$SE1;
+		echo "<br>SE2=".$SE2;*/
+		if ($general=="1" or ($general=="0" and $sistema=="0" and $negocio=="0" and $SE1=="0" and $SE2=="0"))
 		{	
 			$sql2 = "SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM ubicacionresp ORDER BY codigo DESC";
 		}
@@ -129,7 +142,7 @@ include("datos_gral.php");
 				WHERE ubi_SE2='$SE2' AND ubi_SE1='$SE1' AND ubi_Negocio='$negocio' ORDER BY codigo DESC";											
 			
 		}
-
+        // echo $sql2;
 		$result2=mysql_query($sql2);
 		
 		while($row2=mysql_fetch_array($result2)) 
@@ -141,7 +154,9 @@ include("datos_gral.php");
 					$result0=mysql_query($sql0);
 					$row0=mysql_fetch_array($result0);
 					?>
-					<td><div align="center"><font size="1" face="Arial, Helvetica, sans-serif"><strong>&nbsp;<?php echo $row0['Tipo'];?></strong></font></div></td>
+					<td><div align="center"><font size="1" face="Arial, Helvetica, sans-serif"><strong>&nbsp;<?php 
+					//******ERRPR. la coluna Tipo no existe en la tabla contorlinvt
+					if(isset($row0['Tipo'])) echo $row0['Tipo'];?></strong></font></div></td>
 					<td><div align="center"><strong><font size="1" face="Arial, Helvetica, sans-serif">&nbsp;<?php echo $row2['fecha'];?></font></strong></div></td>
 					<td><div align="center"><font size="1" face="Arial, Helvetica, sans-serif"><strong>&nbsp;<?php echo $row2['contenido'];?></strong></font></div></td>
 					<?php

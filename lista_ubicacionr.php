@@ -18,6 +18,14 @@ if (valida("UbicacRespal")=="bad") {header("location: pagina_error.php");}
 //if (isset($RETORNAR)){header("location: lista_produccion.php?Naveg=Produccion");}
 if (isset($_REQUEST['NAcuerdo'])){  header("location: ubicacionresp.php");}
 include ("top.php");
+if(isset($_REQUEST['enviar'])) $enviar=$_REQUEST['enviar']; else $enviar=NULL;
+if(isset($_REQUEST['Sistema'])) $Sistema=$_REQUEST['Sistema']; else $Sistema=NULL;
+if(isset($_REQUEST['Negocio'])) $Negocio=$_REQUEST['Negocio']; else $Negocio=NULL;
+if(isset($_REQUEST['SE1'])) $SE1=$_REQUEST['SE1']; else $SE1=NULL;
+if(isset($_REQUEST['SE2'])) $SE2=$_REQUEST['SE2']; else $SE2=NULL;
+if(isset($_REQUEST['General'])) $General=$_REQUEST['General']; else $General=NULL;
+
+
 ?>
 
 <form action="lista_ubicacionr.php" name="frmu" method="post">
@@ -107,7 +115,8 @@ include ("top.php");
 		else{$_pagi_actual = $_GET['pg'];}
 		
 	if (isset($enviar))
-	{		if (!isset($Sistema)) {$Sistema = "0";}
+	{		
+			if (!isset($Sistema)) {$Sistema = "0";}
 			if (!isset($Negocio)) {$Negocio = "0";}
 			if (!isset($SE1)) {$SE1 = "0";}
 			if (!isset($SE2)) {$SE2 = "0";}

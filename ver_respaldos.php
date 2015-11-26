@@ -57,11 +57,17 @@ include("datos_gral.php");
 <table width="637" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr><?php 			
 	$sql0="SELECT * FROM controlinvent WHERE Codigo='$row2[codigo]'";
+	
 	$result0=mysql_query($sql0);
 	$row0=mysql_fetch_array($result0);
 	?>
     <td width="200"><font size="2" face="Arial, Helvetica, sans-serif"><strong>TIPO : </strong></font></td>
-    <td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font><font size="1" face="Arial, Helvetica, sans-serif"><strong><?php echo $row0['Tipo'];?></strong></font><font size="2" face="Arial, Helvetica, sans-serif"><strong></strong></font></td>
+    <td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font><font size="1" face="Arial, Helvetica, sans-serif"><strong><?php 
+	//******ERRPR. la coluna Tipo no existe en la tabla contorlinvt
+	if(isset($row0['Tipo']))
+	echo $row0['Tipo'];?>
+    
+    </strong></font><font size="2" face="Arial, Helvetica, sans-serif"><strong></strong></font></td>
   </tr>
   <tr>
     <td height="2"></td>
