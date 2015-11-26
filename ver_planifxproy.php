@@ -13,13 +13,15 @@ if (isset($_SESSION['login'])){
 }
 
 include("datos_gral.php");
+$variable1=$_REQUEST['variable1'];
+$numer=$_REQUEST['numer'];
 $sql="SELECT * FROM planif_estrategica WHERE TipoPlanifica='$variable1' AND NumPlanif='$numer' ORDER BY NumPlanif ASC LIMIT 1";
 $res=mysql_query($sql);
 $row=mysql_fetch_array($res);
 ?>
 <html>
 <head>
-<title> GesTor F1 - GESTION-PRODAT - PLANIFICACIÓN ESTRATÉGICA</title>
+<title> GesTor F1 - GESTION-PRODAT - PLANIFICACIï¿½N ESTRATï¿½GICA</title>
 <style> 
 .let { FONT-FAMILY: ARIAL, VERDANA; FONT-SIZE: 9 pt;}
 </style>
@@ -67,14 +69,14 @@ while($row=mysql_fetch_array($res))
 	$num=count($cos)-1;
 ?>
     <tr> 
-      <td rowspan="<?php=$num?>"> <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp; 
-          <?php=$row['ObjTi']?>
+      <td rowspan="<?php echo $num?>"> <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp; 
+          <?php echo $row['ObjTi']?>
           </font></div></td>
-      <td rowspan="<?php=$num?>"> <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp; 
-          <?php=$row['nombre']?>
+      <td rowspan="<?php echo $num?>"> <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp; 
+          <?php echo $row['nombre']?>
           </font></div></td>
-      <td rowspan="<?php=$num?>"> <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp; 
-          <?php=$row['FechaPlanifica2']?>
+      <td rowspan="<?php echo $num?>"> <div align="center"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp; 
+          <?php echo $row['FechaPlanifica2']?>
           </font></div></td>
           <?php
 		if($num=="0")

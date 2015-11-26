@@ -194,7 +194,7 @@ function Form () {
                 </select>                <strong><font color="#FFFFFF" size="1" face="Arial, Helvetica, sans-serif"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Arial, Helvetica, sans-serif"><a href="javascript:cal1.popup();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Haga click para seleccionar una fcha"></a></font></strong></font></strong></font></strong></font></strong> 
                 </font></strong></div></td>
 			<td nowrap align="center">
-				<strong><textarea name="ausencia" id="ausen" rows="3"><?php=$motivo?></textarea></strong>
+				<strong><textarea name="ausencia" id="ausen" rows="3"><?php echo $motivo?></textarea></strong>
 			</td>
           </tr>
           <tr> 

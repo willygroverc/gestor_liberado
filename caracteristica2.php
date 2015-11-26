@@ -7,7 +7,17 @@ if (isset($_REQUEST['reg_form']))
 	if($_REQUEST['soft'] == "0"){$_REQUEST['soft'] = $_REQUEST['soft1'];}
 	include("conexion.php");
 	require_once('funciones.php');
-	$var1=_clean($var1);
+        if (empty($_REQUEST['var2'])) { $_REQUEST['var2']="";} else { $_REQUEST['var2']=$_REQUEST['var2'];}
+        $var2=$_REQUEST['var2'];
+        $var1=$_REQUEST['var1'];
+        $tipo=$_REQUEST['tipo'];
+        $plataforma=$_REQUEST['plataforma'];
+        $comp=$_REQUEST['comp'];
+        $ver=$_REQUEST['ver'];
+        $adicio=$_REQUEST['adicio'];
+        $soft=$_REQUEST['soft'];
+	
+        $var1=_clean($var1);
 	$tipo=_clean($tipo);
 	$plataforma=_clean($plataforma);
 	$comp=_clean($comp);
@@ -25,7 +35,7 @@ if (isset($_REQUEST['reg_form']))
 	$sql="INSERT INTO ".
 	"ficha_software (IdFicha,tipo,plataforma,comp,ver,adicio,soft) ".
 	"VALUES ('$var1','$tipo','$plataforma','$comp','$ver','$adicio','$soft')";
-        print_r($sql);exit;
+        //print_r($sql);exit;
 	mysql_db_query($db,$sql,$link);
 	header("location: caracteristica2.php?variable1=$var1&variable2=$var2");
 }
@@ -106,7 +116,10 @@ function redirect(x){
             <td width="160" height="7" valign="middle"><strong> 
 			<select name="soft" id="soft" onChange="cambiar(this.value)">
 				<option value="0"></option>
-				<?php $id=$_REQUEST['id'];
+				<?php 
+                                
+if (empty($_REQUEST['id'])) { $_REQUEST['id']="";} else { $_REQUEST['id']=$_REQUEST['id'];}
+                                $id=$_REQUEST['id'];
 				$sql_sel="SELECT * FROM sistemas";
 				$res_sel=mysql_db_query($db,$sql_sel,$link);
 				while($row_sel=mysql_fetch_array($res_sel)){
@@ -129,7 +142,7 @@ function redirect(x){
 			$valor=$row_du['Id_Tipo'];
 			?>
               <?php if(isset($_REQUEST['id']) <> "otros"){?>
-				 <input name="tipo" type="text" readonly="yes" id="tipo" value="<?php=$valor?>">
+				 <input name="tipo" type="text" readonly="yes" id="tipo" value="<?php echo $valor?>">
 			  <?php }else{?>
                  <select name="tipo">
 					<option value="APLICACION">APLICACION</option>
@@ -176,7 +189,7 @@ function redirect(x){
 <script language="JavaScript" type="text/JavaScript">
     function cambiar(id){
 //	dir= document.location.href+"&id="+id;
-	dir="caracteristica2.php?variable1=<?php=$_REQUEST['variable1']?>&variable2=<?php=$_REQUEST['variable2']?>&id="+id
+	dir="caracteristica2.php?variable1=<?php echo $_REQUEST['variable1']?>&variable2=<?php echo $_REQUEST['variable2']?>&id="+id
 	self.location=dir
 }
 </script>

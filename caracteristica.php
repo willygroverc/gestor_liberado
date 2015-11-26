@@ -26,7 +26,7 @@ if (isset($_REQUEST['reg_form']))
 	$sql="INSERT INTO ".
 	"caracfichtec (IdFicha,Accesorio,Capacid,Veloc,Marca,ModSerie,Adicio, Costo) ".
 	"VALUES ('$var1','$Accesorio','$Capacid','$Veloc','$Marca','$ModSerie','$Adicio','$Costo')";
-//print_r($sql);exit;
+//print_r($sql);//exit;
 	mysql_db_query($db,$sql,$link);
 	header("location: caracteristica.php?variable1=$var1&variable2=$var2");
 }

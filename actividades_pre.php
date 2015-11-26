@@ -15,7 +15,10 @@ require_once('funciones.php');
 $ObjNegocio=$_REQUEST['ObjNegocio'];
 $ObjNegocio=_clean($ObjNegocio);
 $ObjNegocio=SanitizeString($ObjNegocio);
-if(isset($terminar)) header("location: planif_estrategica.php?varia2=$planc");
+$varia2=$_REQUEST['varia2'];
+$numer=$_REQUEST['numer'];
+$plan=$_REQUEST['plan'];
+if(isset($_REQUEST['terminar'])) header("location: planif_estrategica.php?varia2=$plan");
 include("conexion.php");
 if (isset($varia) && $varia3=="creacion"){	
 	$login=$_SESSION['login'];
@@ -46,7 +49,8 @@ if (isset($varia) && $varia3=="creacion"){
 	$sql4="UPDATE planif_estrategica SET orden='$ord' WHERE TipoPlanifica='$tip' AND NumPlanif='$numplan' AND ObjTi='$objti'"; 
 	mysql_query($sql4);	
 }
-if(isset($guardar)){
+if(isset($_REQUEST['guardar'])){
+        $ObjTi=$_REQUEST['ObjTi'];
 	$str = $ObjNegocio.":".$ObjTi.":".$Accion.":".$RespPlanifica.":".$Dia."/".$Mes."/".$Ano.":".$costo;
 	$fila = explode(":", $str);
 	$fecha = explode("/",$fila[4]);
@@ -69,7 +73,8 @@ if(isset($guardar)){
 	$FechaPlanifica=SanitizeString($FechaPlanifica);
 	$sql2= "INSERT INTO planif_estrategica (TipoPlanifica,NumPlanif,ObjNegocio,ObjTi,Accion,RespPlanifica,FechaPlanifica,orden,costo) ".
 	"VALUES ('$plan','$numer','$fila[0]','$fila[1]','','$fila[3]','$FechaPlanifica','','')";	
-	//echo $sql2;
+print_r($sql2);exit;
+        //echo $sql2;
 	//mysql_query($sql2) or die("Error en consulta <br>MySQL dice: ".mysql_error());
 	// =========MAIL
 	if (mysql_query($sql2))
@@ -134,8 +139,8 @@ print $valid->toHtml ();
 <script language="JavaScript" src="calendar.js"></script>
 <body>
 <form name="form1" method="post" action="" onKeyPress="return Form()">
-  <input name="ObjNegocio" type="hidden" id="ObjNegocio" value="<?php=$ObjNegocio?>">
-  <input name="planc" type="hidden" id="planc" value="<?php=$plan?>">
+  <input name="ObjNegocio" type="hidden" id="ObjNegocio" value="<?php echo $ObjNegocio?>">
+  <input name="planc" type="hidden" id="planc" value="<?php echo $plan?>">
   <table width="95%" border="1" align="center" background="images/fondo.jpg">
     <tr> 
       <th colspan="8" >PLANIFICACION ESTRATEGICA - <?php echo $plan;?></th>
@@ -147,7 +152,7 @@ print $valid->toHtml ();
               <td width="18%" valign="top"><font size="2" face="Arial, Helvetica, sans-serif"><strong>&nbsp;&nbsp;&nbsp;Objetivo 
                 del Negocio</strong></font><strong>:<font size="2" face="Arial, Helvetica, sans-serif"></font></strong></td>
               <td width="82%"><font size="2" face="Arial, Helvetica, sans-serif">
-                <?php=$ObjNegocio?>
+                <?php echo $ObjNegocio?>
                 </font></td>
             </tr>
           </table>

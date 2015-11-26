@@ -161,7 +161,7 @@ function Form () {
             <td align="center">&nbsp; 
               <?php if($mesd=="12"){if($mesd==$mesa) echo $fechac; else{echo $diad; $mesd="$mesa"; $mesa="13"; $diad="$diaa";}}?>
             </td>
-			<td align="center">&nbsp;<?php=$row['ausencia'];?></td>
+			<td align="center">&nbsp;<?php echo $row['ausencia'];?></td>
           </tr>
           <?php 
 				$motivo = $row['ausencia'];
@@ -253,7 +253,7 @@ function Form () {
                 </font><font color="#FFFFFF" size="1" face="Arial, Helvetica, sans-serif"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Arial, Helvetica, sans-serif"><a href="javascript:cal1.popup();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Haga click para seleccionar una fcha"></a></font></strong></font></strong></font></strong></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
                 </font></strong></font></strong></p></td>
   			<td width="53"  nowrap align="center">
-				<strong><textarea name="ausencia" id="ausen" rows="3"><?php=$motivo?></textarea></strong>
+				<strong><textarea name="ausencia" id="ausen" rows="3"><?php echo $motivo?></textarea></strong>
 			</td>
 
           </tr>

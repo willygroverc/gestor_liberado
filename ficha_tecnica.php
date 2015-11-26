@@ -158,7 +158,7 @@ print $valid->toHtml();
                                             ?>
                                             <select name="dia1" tabindex="58" >
                                                 <?php
-                                                if ($_REQUEST['GUARDATOS']) {
+                                                if (isset($_REQUEST['GUARDATOS'])) {
                                                     $a1 = $ano1;
                                                     $m1 = $mes1;
                                                     $d1 = $dia1;
@@ -219,7 +219,7 @@ while ($row = mysql_fetch_array($result)) {
                                                 ?>
                                             <select name="dia2" tabindex="60" >
                                                 <?php
-                                                if ($_REQUEST['GUARDATOS']) {
+                                                if (isset($_REQUEST['GUARDATOS'])) {
                                                     $a2 = $ano2;
                                                     $m2 = $mes3;
                                                     $d2 = $dia2;
@@ -270,7 +270,7 @@ for ($i = 1; $i <= 12; $i++) {
                                                 ?>
                                             <select name="dia3" tabindex="63">
                                                 <?php
-                                                if ($_REQUEST['GUARDATOS']) {
+                                                if (isset($_REQUEST['GUARDATOS'])) {
                                                     $a3 = $ano3;
                                                     $m3 = $mes3;
                                                     $d3 = $dia3;
@@ -415,7 +415,7 @@ $j = 0;
          mat[i] ="<?php echo $vector[$j]; ?>";	
 <?php $j++; ?>
          }*/
-        mat = "<?php echo $vector; ?>";
+        mat = "<?php //echo $vector; ?>";
         c = "<?php echo $c; ?>";
         for (i = 0; i < c; i++)
         {

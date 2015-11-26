@@ -15,8 +15,10 @@ if (isset($_SESSION['login'])){
 else{
 	header('location:login.php');
 }
+if (empty($_REQUEST['codigo'])) { $_REQUEST['codigo']="";} else { $_REQUEST['codigo']=$_REQUEST['codigo'];}
+if (empty($_REQUEST['cod_act'])) { $_REQUEST['cod_act']="";} else { $_REQUEST['cod_act']=$_REQUEST['cod_act'];}
 	require("conexion.php");
-	if(isset($_REQUEST['codigo'])){
+	if($_REQUEST['codigo']){
 	$sql="SELECT CodActFijo FROM datfichatec WHERE CodActFijo='$_REQUEST[codigo]'";
 	$result=mysql_query($sql);
 	$row=mysql_fetch_array($result);
@@ -63,7 +65,7 @@ else{
             
           <td width="40%"> 
             <form name="form">
-              <input name="codigo" type="text" id="codigo" value="<?php if (isset($_REQUEST['cod_act']))echo $_REQUEST['cod_act']?>">
+              <input name="codigo" type="text" id="codigo" value="<?php if ($_REQUEST['cod_act'])echo $_REQUEST['cod_act']?>">
             </form></td>
           </tr>
         </table>
@@ -90,7 +92,7 @@ else{
 		 	irapagina("comprobar.php?codigo="+form.codigo.value);
 		 };
 		function ir_a2(){
-		    var varia2="<?php echo isset($_REQUEST['cod_act']); ?>";
+		    var varia2="<?php echo $_REQUEST['cod_act']; ?>";
 			opener.document.form1.CodActFijo.value = varia2;
 			close(); 
 		};

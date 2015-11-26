@@ -47,12 +47,6 @@ include("datos_gral.php");
     <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">E 
     - MAIL</font></strong></div></td>
     <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">ENCARGADO</font></strong></div></td>
-    <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">CLASIFICACION</font></strong></div></td>
-    <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">SERVICIO</font></strong></div></td>
-    <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">N. RIESGO</font></strong></div></td>
-    <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">DESC. RIESGO</font></strong></div></td>
-    <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">N. CALIDAD</font></strong></div></td>
-    <td width="14%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">DESC. CALIDAD</font></strong></div></td>
     <td width="22%"><div align="center"><strong><font size="2" face="Arial, Helvetica, sans-serif">OBSERVACIONES</font></strong></div></td>
   </tr>
 <?php
@@ -68,18 +62,7 @@ while ($row=mysql_fetch_array($result))
 	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['Fono2Prov'].'</font></td>';
 	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['EmailProv'].'</font></td>';
 	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['EncProv'].'</font></td>';
-	$sqlT="SELECT servicio_nombre FROM t_servicio where servicio_cod='$row[nivel1]'";
-	$resultT=mysql_query($sqlT);
-	$filaT=mysql_fetch_array($resultT);
-	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$filaT['servicio_nombre'].'</font></td>';
-	$sqlT2="SELECT servicio2 FROM t_servicio2 where id_serv2='$row[nivel2]'";
-	$resultT2=mysql_query($sqlT2);
-	$filaT2=mysql_fetch_array($resultT2);
-	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$filaT2['servicio2'].'</font></td>';
-	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['nivelRiesgo'].'</font></td>';
-	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['descRiesgo'].'</font></td>';
-	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['nivelCalidad'].'</font></td>';
-	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['descCalidad'].'</font></td>';
+	
 	echo '<td><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;'.$row['ObsProv'].'</font></td>';
 	echo '</tr>';
 }

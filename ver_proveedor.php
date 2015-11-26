@@ -87,56 +87,9 @@ include("datos_gral.php");
     <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row['EmailProv']; ?></font></td>
     <td class="line">&nbsp;</td>
   </tr>
-  
-  <tr> 
-    <td><strong><font size="2" face="Arial, Helvetica, sans-serif">CLASIFICACION :</font></strong></td>
-    <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif">
-	<?php
-	/*$sqlT="SELECT servicio_nombre FROM t_servicio where servicio_cod='$row[nivel1]'";
-	$resultT=mysql_query($sqlT);
-	$filaT=mysql_fetch_array($resultT);
-		echo $filaT['servicio_nombre']; 
-	*/
-	?></font>
-	</td>
-    <td class="line">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td><strong><font size="2" face="Arial, Helvetica, sans-serif">SERVICIO:</font></strong></td>
-    <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif">
-	<?php
-	/*$sqlT2="SELECT servicio2 FROM t_servicio2 where id_serv2='$row[nivel2]'";
-	$resultT2=mysql_query($sqlT2);
-	$filaT2=mysql_fetch_array($resultT2);
-		echo $filaT2['servicio2']; 
-	*/
-	?></font>
-	</td>
-    <td class="line">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td><strong><font size="2" face="Arial, Helvetica, sans-serif">NIVEL DE RIESGO:</font></strong></td>
-    <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php //echo $row['nivelRiesgo']; ?></font></td>
-    <td class="line">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td><strong><font size="2" face="Arial, Helvetica, sans-serif">DESCRIPCION DE RIESGO:</font></strong></td>
-    <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php //echo $row['descRiesgo']; ?></font></td>
-    <td class="line">&nbsp;</td>
-  </tr>  
-  <tr> 
-    <td><strong><font size="2" face="Arial, Helvetica, sans-serif">NIVEL DE CALIDAD:</font></strong></td>
-    <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php //echo $row['nivelCalidad']; ?></font></td>
-    <td class="line">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td><strong><font size="2" face="Arial, Helvetica, sans-serif">DESCRIPCION DE CALIDAD:</font></strong></td>
-    <td colspan="2" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php //echo $row['descCalidad']; ?></font></td>
-    <td class="line">&nbsp;</td>
-  </tr>
   <tr> 
     <td><strong><font size="2" face="Arial, Helvetica, sans-serif">OBSERVACIONES : </font></strong></td>
-    <td colspan="3" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php //echo $row['ObsProv']; ?></font></td>
+    <td colspan="3" class="line"><font size="2" face="Arial, Helvetica, sans-serif"><?php echo $row['ObsProv']; ?></font></td>
   </tr>
 </table>
 </body>
