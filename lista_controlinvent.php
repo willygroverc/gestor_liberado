@@ -16,6 +16,13 @@ require_once("funciones.php");
 //if (isset($RETORNAR)){header("location:lista_produccion.php?Naveg=Produccion");}
 if (valida("ControlInvent")=="bad") {header("location:pagina_error.php");}   
    
+if(isset($_REQUEST['varia2'])) $varia2=$_REQUEST['varia2']; else $varia2=NULL;
+if(isset($_REQUEST['varia3'])) $varia3=$_REQUEST['varia3']; else $varia3=NULL;
+if(isset($_REQUEST['varia4'])) $varia4=$_REQUEST['varia4']; else $varia4=NULL;
+if(isset($_REQUEST['tipos'])) $tipos=$_REQUEST['tipos']; else $tipos=NULL;
+if(isset($_REQUEST['fece'])) $fece=$_REQUEST['fece']; else $fece=NULL;
+if(isset($_REQUEST['obse'])) $obse=$_REQUEST['obse']; else $obse=NULL;
+if(isset($_REQUEST['cadena'])) $cadena=$_REQUEST['cadena']; else $cadena=NULL;
 if (isset($_REQUEST['NAcuerdo']))   
 {   include("conexion.php");   
     $sql5="SELECT MAX(Codigo) AS Id FROM controlinvent";   
@@ -36,9 +43,7 @@ select {FONT-SIZE: 8pt; Font-Family: Arial, Verdana;}
 </BODY>
 <?php
 	require_once ( "ValidatorJs.php"); 
-	if(isset($_REQUEST['varia2'])) $varia2=$_REQUEST['varia2']; else $varia2="";
-	if(isset($_REQUEST['varia3'])) $varia3=$_REQUEST['varia3']; else $varia3="";
-	if(isset($_REQUEST['varia4'])) $varia4=$_REQUEST['varia4']; else $varia4="";
+	
 	
 	$valid = new Validator ( "formfiltro" );
 	$valid->addIsDate   ( "DA", "MA", "AA", "Fecha Al, $errorMsgJs[date]" );
@@ -91,11 +96,11 @@ if(isset($fece) OR isset($obse)){$varia2="G"; $varia3="G"; $varia4="G";}
           <option value="PER" <?php if(isset($varia4) && $varia4=="PER"){echo "selected";}?>>PER</option>
           <option value="VAR" <?php if(isset($varia4) && $varia4=="VAR"){echo "selected";}?>>VAR</option>
           <?php }?>
-        </select> 
+        </select>
         <input type="submit" name="tipos" value="Buscar"></td>      
        
       <td width="37%" class="menu" background="windowsvista-assets1/main-button-tile2.jpg">&nbsp;&nbsp;<font size=1 face="Verdana, Arial, Helvetica, sans-serif">Fecha 
-        de Alta Del:</font> 
+        de Alta<br> Del:</font> 
         <script language="JavaScript" src="calendar.js"></script>
         <select name="DA" id="select5">
           <?php
@@ -133,9 +138,8 @@ if(isset($fece) OR isset($obse)){$varia2="G"; $varia3="G"; $varia4="G";}
         </select>
         <strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><strong><font color="#FFFFFF" size="1" face="Arial, Helvetica, sans-serif"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font size="2" face="Arial, Helvetica, sans-serif"> 
         <a href="javascript:cal.popup();"><img src="images/cal.gif" width="16" height="16" border="0" alt="Haga click para seleccionar una fcha"></a></font></strong></font></strong></font></strong></font></strong></strong></font></strong></strong></font></strong> 
-        <br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Al: 
+       
+      
         <select name="DE" id="select7">
                 <?php
 				$fsist=date("Y-m-d");
@@ -197,7 +201,7 @@ if(isset($fece) OR isset($obse)){$varia2="G"; $varia3="G"; $varia4="G";}
         <tr> 
           <th colspan="8" background="windowsvista-assets1/main-button-tile.jpg" height="30">LISTA DE INVENTARIO DE MEDIOS<br>
             <?php if (isset($tipos)) $tituloc = " BUSQUEDA POR CODIGO";
-		     if (isset($fece)) $tituloc = " BUSQUEDA POR FECHA:&nbsp;&nbsp;&nbsp;DEL".$DA."-".$MA."-".$AA."&nbsp;&nbsp;AL: ".$DE."-".$ME."-".$AE;
+		     if (isset($fece)) $tituloc = " BUSQUEDA POR FECHA:&nbsp;&nbsp;&nbsp;DEL".$_REQUEST['DA']."-".$_REQUEST['MA']."-".$_REQUEST['AA']."&nbsp;&nbsp;AL: ".$_REQUEST['DE']."-".$_REQUEST['ME']."-".$_REQUEST['AE'];
 			 if (isset($obse)) $tituloc = "BUSQUEDA POR OBSERVACIONES";
 			 if (isset($tituloc))
 				echo "<font face=arial size=1>".$tituloc."</font>";
@@ -236,36 +240,56 @@ if(isset($fece) OR isset($obse)){$varia2="G"; $varia3="G"; $varia4="G";}
 	
 $sql = "SELECT * , DATE_FORMAT(FechaAlta, '%d/%m/%Y') AS FechaAlta, DATE_FORMAT(FechaBaja, '%d/%m/%Y') AS FechaBaja, DATE_FORMAT(FechaDestruc, '%d/%m/%Y') AS FechaDestruc   
 	FROM controlinvent ORDER BY Codigo DESC LIMIT $_pagi_inicial,$_pagi_cuantos";         
-
+//echo "<br>VARIA2:".$varia2;
+//echo "<br>VARIA3:".$varia3;
+//echo "<br>VARIA4:".$varia4;
+$var_t='';
+$and='';
 if (isset($tipos)){
-	if($varia2!="G"){$var1="codigo_usu='$varia2' AND ";}
-	if($varia3!="G"){$var2="tipo_medio='$varia3' AND ";}
-	if($varia4!="G"){$var3="tipo_dato='$varia4' AND ";}
-	if(!empty($var2)) $var_t=$var1.$var2.$var3." 1=1";
+	if($varia2!="G"){$var_t=$var_t." codigo_usu='$varia2'";
+		if($var_t=='') $and=''; else $and=' AND';
+	}
+	if($varia3!="G"){$var_t=$var_t.$and." tipo_medio='$varia3'";
+		if($var_t=='') $and=''; else $and=' AND';
+	}
+	if($varia4!="G"){$var_t=$var_t.$and." tipo_dato='$varia4'";
+		;
+	}
+	if($var_t=='') $var_t='1';
 
 		$_pagi_sqlConta = "SELECT count(*) AS pagi_totalReg FROM controlinvent WHERE $var_t";
+		//echo $_pagi_sqlConta;	
 		$result9 = mysql_query($_pagi_sqlConta);
 		$row9 = mysql_fetch_array($result9);
 		$_pagi_totalPags = ceil($row9['pagi_totalReg'] / $_pagi_cuantos);
 		$_pagi_inicial = ($_pagi_actual-1) * $_pagi_cuantos;    
 		$sql = "SELECT * , DATE_FORMAT(FechaAlta, '%d/%m/%Y') AS FechaAlta, DATE_FORMAT(FechaBaja, '%d/%m/%Y') AS FechaBaja, DATE_FORMAT(FechaDestruc, '%d/%m/%Y') AS FechaDestruc   
-				FROM controlinvent WHERE $var_t ORDER BY codigo_usu ASC, tipo_medio ASC, tipo_dato ASC, nro_corre DESC, Codigo DESC LIMIT $_pagi_inicial,$_pagi_cuantos";          
+				FROM controlinvent WHERE $var_t ORDER BY codigo_usu ASC, tipo_medio ASC, tipo_dato ASC, nro_corre DESC, Codigo DESC LIMIT $_pagi_inicial,$_pagi_cuantos";   
+			
 }
-if ( isset( $fece ) )               
-	{	if (strlen($DA) == 1){ $DA = "0".$DA; }
-		 if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
-         $fec_al = $AA."-".$MA."-".$DA;   
-		 if (strlen($DE) == 1){ $DE = "0".$DE; }
-		 if (strlen($ME) == 1){ $ME = "0".$ME; }
-		 $fec_del = $AE."-".$ME."-".$DE; 
-		  $_pagi_sqlConta = "SELECT count(*) AS pagi_totalReg FROM controlinvent  WHERE FechaAlta BETWEEN '$fec_al' AND '$fec_del'";
-		  $result9=mysql_query($_pagi_sqlConta);
-		  $row9=mysql_fetch_array($result9);
 
-		  $_pagi_totalPags = ceil($row9['pagi_totalReg'] / $_pagi_cuantos);
-		  $_pagi_inicial = ($_pagi_actual-1) * $_pagi_cuantos;   
+if ( isset( $fece ) ){	
+		if(isset($_REQUEST['DA'])) $DA=$_REQUEST['DA']; else $DA="";
+		if(isset($_REQUEST['MA'])) $MA=$_REQUEST['MA']; else $MA="";
+		if(isset($_REQUEST['AA'])) $AA=$_REQUEST['AA']; else $AA="";
+		if(isset($_REQUEST['DE'])) $DE=$_REQUEST['DE']; else $DE="";
+		if(isset($_REQUEST['ME'])) $ME=$_REQUEST['ME']; else $ME="";
+		if(isset($_REQUEST['AE'])) $AE=$_REQUEST['AE']; else $AE="";
+		if (strlen($DA) == 1){ $DA = "0".$DA; }
+		if (strlen($MA) == 1){ $MA = "0".$MA; }	 	 
+        $fec_al = $AA."-".$MA."-".$DA;   
+		if (strlen($DE) == 1){ $DE = "0".$DE; }
+		if (strlen($ME) == 1){ $ME = "0".$ME; }
+		$fec_del = $AE."-".$ME."-".$DE; 
+		$_pagi_sqlConta = "SELECT count(*) AS pagi_totalReg FROM controlinvent  WHERE FechaAlta BETWEEN '$fec_al' AND '$fec_del'";
+		echo $_pagi_sqlConta;
+		$result9=mysql_query($_pagi_sqlConta);
+		$row9=mysql_fetch_array($result9);
+
+		$_pagi_totalPags = ceil($row9['pagi_totalReg'] / $_pagi_cuantos);
+		$_pagi_inicial = ($_pagi_actual-1) * $_pagi_cuantos;   
 		  
-          $sql = "SELECT * , DATE_FORMAT(FechaAlta, '%d/%m/%Y') AS FechaAlta, DATE_FORMAT(FechaBaja, '%d/%m/%Y') AS FechaBaja, DATE_FORMAT(FechaDestruc, '%d/%m/%Y') AS FechaDestruc   
+        $sql = "SELECT * , DATE_FORMAT(FechaAlta, '%d/%m/%Y') AS FechaAlta, DATE_FORMAT(FechaBaja, '%d/%m/%Y') AS FechaBaja, DATE_FORMAT(FechaDestruc, '%d/%m/%Y') AS FechaDestruc   
           FROM controlinvent WHERE FechaAlta BETWEEN '$fec_al' AND '$fec_del'  ORDER BY Codigo DESC LIMIT $_pagi_inicial,$_pagi_cuantos";                
 }   
 if ( isset($obse) )               
