@@ -36,6 +36,10 @@ select {FONT-SIZE: 8pt; Font-Family: Arial, Verdana;}
 </BODY>
 <?php
 	require_once ( "ValidatorJs.php"); 
+	if(isset($_REQUEST['varia2'])) $varia2=$_REQUEST['varia2']; else $varia2="";
+	if(isset($_REQUEST['varia3'])) $varia3=$_REQUEST['varia3']; else $varia3="";
+	if(isset($_REQUEST['varia4'])) $varia4=$_REQUEST['varia4']; else $varia4="";
+	
 	$valid = new Validator ( "formfiltro" );
 	$valid->addIsDate   ( "DA", "MA", "AA", "Fecha Al, $errorMsgJs[date]" );
 	$valid->addIsDate   ( "DE", "ME	", "AE", "Fecha Del , $errorMsgJs[date]" );

@@ -22,7 +22,7 @@ include('top.php');
 	<script>
 $(function() {
 	$( "#fecha_ant" ).datepicker({
-	dateFormat: 'Y-m-d',
+	dateFormat: 'yy-m-d',
 	showOn: 'both',
 	changeMonth: true,
 	changeYear: true,
