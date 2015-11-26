@@ -115,17 +115,20 @@ $sql_ordenes="SELECT o.id_orden, o.fecha, o.time, o.cod_usr, o.desc_inc, o.tipo,
 //echo $sql_ordenes;
 $recordset_ordenes=mysql_query($sql_ordenes);
 $num_filas=mysql_num_rows($recordset_ordenes);
-
+$p=20;
 //Paginacion
-$num_paginas=$num_filas/20;
+$num_paginas=$num_filas/$p;
+if(($num_paginas/2)==0){$num_paginas=$num_paginas;}else{$num_paginas=$num_paginas+1;}
 settype($num_paginas,'integer');
-$pagina_fin=20*$pg;
-$pagina_ini=($pagina_fin-20);
-$sql_ordenes.=" LIMIT $pagina_ini, 20";
+$pagina_fin=$p*$pg;
+$pagina_ini=($pagina_fin-$p);
+$sql_ordenes.=" LIMIT $pagina_ini, $p";
 // Fin paginacion
 
 $recordset_ordenes=mysql_query($sql_ordenes);
 //echo '<table cellpadding="0" cellspacing="0" border="0" class="display" id="tbl_ordenes" name="tbl_ordenes">
+echo '<table width="100%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg">		
+			<tr><th>'.'REGISTROS ENCONTRADOS: '.$num_filas.'</th></tr></table>';
 echo '<table width="100%" border="1" align="center" cellpadding="0" cellspacing="2"  background="images/fondo.jpg">
 		<thead>
 			<tr><th colspan="17" align="center">ORDENES DE TRABAJO</th></tr>';
@@ -285,18 +288,20 @@ else
 /*PAGINACION*/
 echo '<center><b><font size="2">Pagina(s): ';
 
-if ($pg>=20){
+if ($pg>$p){
+        echo '<a href="javascript:pag_lista(1,1)">&nbsp;<-PRIMER</a>';
+        echo '&nbsp;&nbsp;';
 	echo '<a href="javascript:pag_lista(3,0);">Anterior,&nbsp</a>';
-	$pagina_ini=$pg-20+5;
-	$pagina_fin=$pg+4;
-	
+
+	$pagina_ini=$pg-$p+1;
+	$pagina_fin=$pg;
 }
 else{
 	$pagina_ini=1;
-	if ($num_paginas<=20)
+	if ($num_paginas<=$p)
 		$pagina_fin=$num_paginas;
 	else
-		$pagina_fin=20;
+		$pagina_fin=$p;
 }
 
 for ($i=$pagina_ini;$i<=$pagina_fin;$i++){
@@ -304,13 +309,15 @@ for ($i=$pagina_ini;$i<=$pagina_fin;$i++){
 		echo $i;
 	else{
 		echo '<a href="javascript:pag_lista(1,'.$i.');">'.$i.'</a>';
-		
 	}	
 	if ($i!=$num_paginas)
 		echo ',';
 }
-if ($i>20 && $i<=$num_paginas){
+if ($i>$p & $i<=$num_paginas){
+    //$num_filas
 	echo '<a href="javascript:pag_lista(2,0)">&nbsp;Siguiente</a>';
+        echo '&nbsp;&nbsp;';
+        echo '<a href="javascript:pag_lista(1,'.$num_paginas.')">ULTIMO-></a>';
 }
 /*FIN PAGINACION*/
 echo '</font></b></center><br>';

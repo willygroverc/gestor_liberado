@@ -1,10 +1,10 @@
 <?php
-if (isset($Terminar)) 
+if (isset($_REQUEST['Terminar'])) 
 	header("location: actividades_pre_last.php?tip=$varia2&varia2=$varia2&numer=$NumPlanif&ObjNegocio=$objnegocioaux&actividad=1");	
   session_start();
   $login=$_SESSION["login"];
 
-if (isset($Terminar)) 
+if (isset($_REQUEST['Terminar'])) 
 	header("location: actividades_pre_last.php?tip=$varia2&varia2=$varia2&numer=$NumPlanif&ObjNegocio=$objnegocioaux&actividad=1");	
   session_start();
   $login=$_SESSION["login"];
@@ -68,9 +68,9 @@ while ($row2=mysql_fetch_array($resul2))
 	$num_filas=count(explode("|",$row2['costo']));
 	$num_filas=$num_filas-1;
 ?>
-  <td rowspan="<?php=$num_filas;?>" align="center" class="let"><?php=$row2['NumPlanif']?>&nbsp;</td>
-  <td rowspan="<?php=$num_filas;?>" align="center" class="let"><?php=$row2['ObjNegocio']?>&nbsp;</td>
-  <td rowspan="<?php=$num_filas;?>" align="center" class="let"><?php=$row2['ObjTi']?>&nbsp;</td>
+  <td rowspan="<?php echo $num_filas;?>" align="center" class="let"><?php echo $row2['NumPlanif']?>&nbsp;</td>
+  <td rowspan="<?php echo $num_filas;?>" align="center" class="let"><?php echo $row2['ObjNegocio']?>&nbsp;</td>
+  <td rowspan="<?php echo $num_filas;?>" align="center" class="let"><?php echo $row2['ObjTi']?>&nbsp;</td>
 <?php 
   $matriz_a=explode("|",$row2['Accion']);
   $matriz_c=explode("|",$row2['costo']);
@@ -78,13 +78,13 @@ while ($row2=mysql_fetch_array($resul2))
   $s=1;
 ?>
   <td align="left" class="let"><?php if($num_filas>0){echo "$s. ";} echo $matriz_a[0];?>&nbsp;</td>
-  <td align="center" class="let"><?php=$matriz_c[0]?>&nbsp;</td>  
+  <td align="center" class="let"><?php echo $matriz_c[0]?>&nbsp;</td>  
 <?php 
 	$sql5 = "SELECT * FROM users WHERE login_usr='$row2[RespPlanifica]'";
 	$result5 = mysql_query($sql5);
 	$row5 = mysql_fetch_array($result5);
 	echo '<td rowspan="'.$num_filas.'">&nbsp;'.$row5['apa_usr'].' '.$row5['ama_usr'].' '.$row5['nom_usr'].'</td>';?>
-  <td rowspan="<?php echo $num_filas;?>" align="center" class="let"><?php=$row2['FechaPlanifica']?>&nbsp;</td>
+  <td rowspan="<?php echo $num_filas;?>" align="center" class="let"><?php echo $row2['FechaPlanifica']?>&nbsp;</td>
   </tr>
 <?php 
   if(count($matriz_c)>1){

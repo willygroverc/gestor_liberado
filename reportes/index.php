@@ -6,6 +6,7 @@
 // Autor: 		Cesar Cuenca
 //_____________________________________________________________________________
 session_start();
+$login_usr=$_SESSION["login"];
 if (isset($_SESSION['login'])){
 	if ($_SESSION['tipo']=='C'){
 		header('location:../pagina_inicio.php');

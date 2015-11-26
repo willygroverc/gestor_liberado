@@ -2,6 +2,7 @@
 include("Includes/FusionCharts.php");
 include("../conexion.php");
 include("func_datos.php");
+$val_area=$_REQUEST['val_area'];
 $show_values=0;
 $show_lab=0;
 $tam1=250;
@@ -148,6 +149,7 @@ function ampliar(rep,fecha1,fecha2) {
 					$datos=mysql_query($sql);
 			   ?>
 			   <?php
+                           
 			    while($area=mysql_fetch_array($datos)){?>
 	    				<option value="<?php echo $area['area_cod'];?>" <?php if($val_area==$area['area_cod']) echo "selected"?>><?php echo $area['area_nombre']; ?></option>
 				<?php
